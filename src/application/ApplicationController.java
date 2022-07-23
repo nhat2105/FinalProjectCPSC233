@@ -1,15 +1,28 @@
 package application;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 public class ApplicationController {
+	Stage applicationStage;
 	
 	private double userWeight, userHeight;
 	double userBMI;
+    
+	@FXML
+    private Label BMILabel;
 	
-    @FXML
+	@FXML
     private TextField userWeightInput;
 
     @FXML
@@ -19,11 +32,20 @@ public class ApplicationController {
     private TextField userHeightInput;
     
     @FXML
-    public void getUserInfo(ActionEvent e) {
+    public void switchScene(ActionEvent e) throws FileNotFoundException, IOException {
     	setUserHeight(userHeightInput.getText());
     	setUserWeight(userWeightInput.getText());
     	userBMI = userWeight/ ((userHeight/100)*(userHeight/100));
-    	System.out.format("Your BMI is: %.1f", userBMI);
+    	System.out.println(String.format("Your BMI is: %.1f", userBMI));
+  
+    	
+    	//Switch to health tracker screen
+    	FXMLLoader loader = new FXMLLoader();
+		VBox root = loader.load(new FileInputStream("src/application/ApplicationView.fxml"));
+		Scene scene = new Scene(root, 600, 400);
+    	applicationStage.setScene(scene);
+    	applicationStage.show();
+    	
     }
 
 	double getUserWeight() {

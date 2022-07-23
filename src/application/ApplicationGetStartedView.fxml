@@ -53,7 +53,7 @@
             </TextField>
          </children>
       </HBox>
-      <Button fx:id="startButton" mnemonicParsing="false" onAction="#getUserInfo" prefHeight="34.0" prefWidth="115.0" text="Let's Get Started!">
+      <Button fx:id="startButton" mnemonicParsing="false" onAction="#switchScene" prefHeight="34.0" prefWidth="115.0" text="Let's Get Started!">
          <VBox.margin>
             <Insets left="250.0" />
          </VBox.margin>

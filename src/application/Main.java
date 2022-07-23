@@ -13,11 +13,11 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			int WIDTH = 600;
-			int HEIGHT = 400;
 			FXMLLoader loader = new FXMLLoader();
 			VBox root = loader.load(new FileInputStream("src/application/ApplicationGetStartedView.fxml"));
-			Scene scene = new Scene(root, WIDTH, HEIGHT);
+			ApplicationController controller = (ApplicationController)loader.getController();
+			controller.applicationStage = primaryStage;
+			Scene scene = new Scene(root, 600, 400);
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("CPSC233 Final Project");
 			primaryStage.show();
