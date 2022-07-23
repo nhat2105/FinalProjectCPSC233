@@ -7,8 +7,7 @@
 <?import javafx.scene.text.*?>
 <?import javafx.scene.layout.VBox?>
 
-
-<VBox prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+<VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ApplicationController">
    <children>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Health Tracker" textAlignment="CENTER" wrappingWidth="371.13671875">
          <font>
@@ -54,7 +53,7 @@
             </TextField>
          </children>
       </HBox>
-      <Button fx:id="startButton" mnemonicParsing="false" prefHeight="34.0" prefWidth="115.0" text="Let's Get Started!">
+      <Button fx:id="startButton" mnemonicParsing="false" onAction="#getUserInfo" prefHeight="34.0" prefWidth="115.0" text="Let's Get Started!">
          <VBox.margin>
             <Insets left="250.0" />
          </VBox.margin>
