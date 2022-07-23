@@ -18,9 +18,19 @@ public class ApplicationController {
 	
 	private double userWeight, userHeight;
 	double userBMI;
-    
+	
 	@FXML
-    private Label BMILabel;
+	private Label BMILabel;
+	
+	@FXML
+	private Button mealsButton;
+	
+	
+	@FXML
+	private Button sleepTrackerButton;
+	
+	@FXML
+	private Button exerciseButton;	
 	
 	@FXML
     private TextField userWeightInput;
@@ -32,22 +42,23 @@ public class ApplicationController {
     private TextField userHeightInput;
     
     @FXML
-    public void switchScene(ActionEvent e) throws FileNotFoundException, IOException {
-    	setUserHeight(userHeightInput.getText());
-    	setUserWeight(userWeightInput.getText());
-    	userBMI = userWeight/ ((userHeight/100)*(userHeight/100));
+    public void getStart(ActionEvent e) throws FileNotFoundException, IOException {
+    	calculateUserBMI();
     	System.out.println(String.format("Your BMI is: %.1f", userBMI));
-  
     	
+    	switchToMainScene();
+    	
+    }
+    private void switchToMainScene() throws FileNotFoundException, IOException {
     	//Switch to health tracker screen
     	FXMLLoader loader = new FXMLLoader();
 		VBox root = loader.load(new FileInputStream("src/application/ApplicationView.fxml"));
 		Scene scene = new Scene(root, 600, 400);
     	applicationStage.setScene(scene);
     	applicationStage.show();
-    	
-    }
+	}
 
+    
 	double getUserWeight() {
 		return userWeight;
 	}
@@ -62,5 +73,11 @@ public class ApplicationController {
 
 	void setUserHeight(String userHeight) {
 		this.userHeight = Double.parseDouble(userHeight);
+	}
+	
+	void calculateUserBMI() {
+		setUserHeight(userHeightInput.getText());
+    	setUserWeight(userWeightInput.getText());
+    	userBMI = getUserWeight()/ ((getUserHeight()/100)*(getUserHeight()/100));
 	}
 }

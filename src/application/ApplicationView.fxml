@@ -9,7 +9,7 @@
 
 <VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ApplicationController">
    <children>
-      <Label fx:id="BMILabel" prefHeight="34.0" prefWidth="146.0" text="Your BMI is: " textAlignment="CENTER">
+      <Label fx:id="BMILabel" prefHeight="34.0" prefWidth="146.0" text="Your BMI is: " textAlignment="CENTER" textFill="#1e43fa">
          <VBox.margin>
             <Insets left="220.0" top="50.0" />
          </VBox.margin>
