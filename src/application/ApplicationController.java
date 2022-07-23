@@ -5,8 +5,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
 public class ApplicationController {
-	private double userWeight, userHeight;
 	
+	private double userWeight, userHeight;
 	double userBMI;
 	
     @FXML
@@ -32,7 +32,6 @@ public class ApplicationController {
 
 	void setUserWeight(String userWeight) {
 		this.userWeight = Double.parseDouble(userWeight);
-		
 	}
 
 	double getUserHeight() {
