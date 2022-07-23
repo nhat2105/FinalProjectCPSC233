@@ -9,17 +9,17 @@
 
 <VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ApplicationController">
    <children>
-      <Label fx:id="BMILabel" prefHeight="34.0" prefWidth="146.0" text="Your BMI is: " textAlignment="CENTER" textFill="#1e43fa">
-         <VBox.margin>
-            <Insets left="220.0" top="50.0" />
-         </VBox.margin>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Choose a feature that you would like to use" textAlignment="CENTER" wrappingWidth="447.927734375">
          <font>
-            <Font size="15.0" />
+            <Font size="20.0" />
          </font>
-      </Label>
-      <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="160.0" text="Sleep Tracker">
          <VBox.margin>
-            <Insets left="220.0" top="50.0" />
+            <Insets left="70.0" top="30.0" />
+         </VBox.margin>
+      </Text>
+      <Button mnemonicParsing="false" onAction="#openSleepTracker" prefHeight="45.0" prefWidth="160.0" text="Sleep Tracker">
+         <VBox.margin>
+            <Insets left="220.0" top="60.0" />
          </VBox.margin>
       </Button>
       <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="160.0" text="Meals Suggestion">
