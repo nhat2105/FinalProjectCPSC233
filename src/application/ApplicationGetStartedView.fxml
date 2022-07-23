@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.VBox?>
+
+
+<VBox prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+   <children>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Health Tracker" textAlignment="CENTER" wrappingWidth="371.13671875">
+         <font>
+            <Font size="43.0" />
+         </font>
+         <VBox.margin>
+            <Insets left="115.0" top="20.0" />
+         </VBox.margin>
+      </Text>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to the health tracker app, here we make sure your habits are overall healthy for you. Want to check whether you are a healthy folk?" textAlignment="CENTER" wrappingWidth="601.13671875">
+         <font>
+            <Font size="16.0" />
+         </font>
+         <VBox.margin>
+            <Insets top="15.0" />
+         </VBox.margin>
+      </Text>
+      <HBox prefHeight="89.0" prefWidth="602.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Enter your height (in cm)" wrappingWidth="147.13671875">
+               <HBox.margin>
+                  <Insets left="100.0" top="30.0" />
+               </HBox.margin>
+            </Text>
+            <TextField fx:id="userHeightInput" prefHeight="25.0" prefWidth="130.0">
+               <HBox.margin>
+                  <Insets left="20.0" top="25.0" />
+               </HBox.margin>
+            </TextField>
+         </children>
+      </HBox>
+      <HBox layoutX="10.0" layoutY="146.0" prefHeight="64.0" prefWidth="602.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Enter your weight (in kg)" wrappingWidth="147.13671875">
+               <HBox.margin>
+                  <Insets left="100.0" top="5.0" />
+               </HBox.margin>
+            </Text>
+            <TextField fx:id="userWeightInput" prefHeight="25.0" prefWidth="130.0">
+               <HBox.margin>
+                  <Insets left="20.0" />
+               </HBox.margin>
+            </TextField>
+         </children>
+      </HBox>
+      <Button fx:id="startButton" mnemonicParsing="false" prefHeight="34.0" prefWidth="115.0" text="Let's Get Started!">
+         <VBox.margin>
+            <Insets left="250.0" />
+         </VBox.margin>
+      </Button>
+   </children>
+</VBox>
