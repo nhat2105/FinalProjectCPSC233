@@ -21,6 +21,9 @@ public class ApplicationController {
 	private double userWeight, userHeight;
 	double userBMI;
 
+	@FXML
+	private Text sleepResult;
+	
     @FXML
     private Text sleepTrackerText;
 
@@ -105,15 +108,23 @@ public class ApplicationController {
 	}
     
 	void calculateUserBMI() {
-    	
     	userBMI = getUserWeight()/ ((getUserHeight()/100)*(getUserHeight()/100));
     	System.out.println(String.format("BMI: %.1f", userBMI));
 
     }
+	
+	@FXML
+	public void getSleepResult(ActionEvent e) {
+		SleepTracker sleepTrack = new SleepTracker();
+		String sleepHoursTrack = sleepTrack.getSleepResult(sleepInput.getText());
+		sleepResult.setText(sleepHoursTrack);
+		sleepResult.setVisible(true);
+	}
 
 
 	@FXML
 	public void openSleepTracker(ActionEvent e) throws FileNotFoundException, IOException  {
+		//The below code open the interface of sleep tracker
 		appName.setText("Sleep Tracker");
 		appPane.setStyle(""
 				+ "-fx-background-color:lightgray; "
@@ -122,7 +133,6 @@ public class ApplicationController {
 		sleepTrackerText.setVisible(true);
 		sleepTrackerResultButton.setVisible(true);
 		sleepTrackerInstructionText.setVisible(true);
-		
 	}
 
 

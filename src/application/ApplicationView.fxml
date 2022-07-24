@@ -88,7 +88,7 @@
                      <children>
                         <Text fx:id="sleepTrackerText" layoutX="14.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hours of sleep" visible="false" wrappingWidth="85.13671875" />
                         <TextField fx:id="sleepInput" layoutX="110.0" layoutY="49.0" visible="false" />
-                        <Button fx:id="sleepTrackerResultButton" layoutX="99.0" layoutY="96.0" mnemonicParsing="false" text="Get Result" visible="false" />
+                        <Button fx:id="sleepTrackerResultButton" layoutX="99.0" layoutY="96.0" mnemonicParsing="false" onAction="#getSleepResult" text="Get Result" visible="false" />
                         <Text fx:id="sleepTrackerInstructionText" layoutX="17.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter your sleep hours of the past week" visible="false" wrappingWidth="235.13671875" />
                         <Text fx:id="sleepResult" layoutX="53.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="165.0" />
                      </children>
