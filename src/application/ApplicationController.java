@@ -1,4 +1,5 @@
 package application;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -10,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class ApplicationController {
@@ -19,58 +21,89 @@ public class ApplicationController {
 	double userBMI;
 	
 	@FXML
-	private Button mealsButton;
+	private Button calculateBMIButton;
 	
 	@FXML
-	private Button sleepTrackerButton;
-	
-	@FXML
-	private Button exerciseButton;	
-	
-	@FXML
-    private TextField userWeightInput;
+    private Text weightDisplay;
 
     @FXML
-    private Button startButton;
+    private Text heightDisplay;
 
+    @FXML
+    private Text appName;
+
+    @FXML
+    private Button mealsButton;
+
+    @FXML
+    private Text BMIDisplay;
+
+    @FXML
+    private Button sleepTrackerButton;
+
+    @FXML
+    private Button exerciseButton;
+    
+    @FXML
+    private TextField userWeightInput;
+    
     @FXML
     private TextField userHeightInput;
-    
-    /**
+
     @FXML
-    public void getStart(ActionEvent e) throws FileNotFoundException, IOException {
+    private Button BMIButton;
+
+    @FXML
+    void getStart(ActionEvent event) throws FileNotFoundException, IOException {
     	calculateUserBMI();
-    	System.out.println(String.format("Your BMI is: %.1f", userBMI));
-    	
-    	//Switch to main scene
-    	switchScene("src/application/ApplicationView.fxml");
-    	
+    	switchScene("Main View");
     }
-    */
-	@FXML
-	public void openSleepTracker(ActionEvent e) throws FileNotFoundException, IOException {
-		System.out.println("Worked");
-		switchScene("src/application/SleepTrackerView.fxml");
+
+
+    private void switchScene(String view) throws FileNotFoundException, IOException {
+		if (view.equalsIgnoreCase("Main View")) {
+			FXMLLoader loader = new FXMLLoader();
+			VBox root = loader.load(new FileInputStream("src/application/ApplicationView.fxml"));
+			Scene scene = new Scene(root, 600, 400);
+	    	applicationStage.setScene(scene);
+	    	applicationStage.show();
+		}
 		
 	}
-	
-    private void switchScene(String fileInputStream) throws FileNotFoundException, IOException {
-    	//Switch screen
-    	FXMLLoader loader = new FXMLLoader();
-		VBox root = loader.load(new FileInputStream(fileInputStream));
-		Scene scene = new Scene(root, 600, 400);
-    	applicationStage.setScene(scene);
-    	applicationStage.show();
+
+	void calculateUserBMI() {
+    	setUserHeight(userHeightInput.getText());
+    	setUserWeight(userWeightInput.getText());
+    	userBMI = getUserWeight()/ ((getUserHeight()/100)*(getUserHeight()/100));
+    	System.out.println(String.format("BMI: %.1f", userBMI));
+
     	
+    	/**
+    	BMIDisplay.setText(String.format("BMI: %.1f", userBMI));
+		heightDisplay.setText("Height: " + String.valueOf(getUserHeight()) + " cm");
+		weightDisplay.setText("Weight: " + String.valueOf(getUserWeight()) + " kg");
+		*/
+    }
+
+   
+	@FXML
+	public void openSleepTracker(ActionEvent e) throws FileNotFoundException, IOException  {
+		//switchScene("Sleep Tracker");
+		appName.setText("Sleep Tracker");
 	}
 
-    
+
 	double getUserWeight() {
 		return userWeight;
 	}
 
 	void setUserWeight(String userWeight) {
-		this.userWeight = Double.parseDouble(userWeight);
+		if (userWeight != null) {
+			this.userWeight = Double.parseDouble(userWeight);
+		}
+		else {
+			this.userWeight = 0;
+		}
 	}
 
 	double getUserHeight() {
@@ -78,12 +111,12 @@ public class ApplicationController {
 	}
 
 	void setUserHeight(String userHeight) {
-		this.userHeight = Double.parseDouble(userHeight);
+		if (userHeight != null) {
+			this.userHeight = Double.parseDouble(userHeight);
+		}
+		else {
+			this.userHeight = 0;
+		}
 	}
 	
-	void calculateUserBMI() {
-		setUserHeight(userHeightInput.getText());
-    	setUserWeight(userWeightInput.getText());
-    	userBMI = getUserWeight()/ ((getUserHeight()/100)*(getUserHeight()/100));
-	}
 }
