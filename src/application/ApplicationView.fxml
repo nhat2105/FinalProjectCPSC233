@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.media.*?>
@@ -44,53 +45,55 @@
                         <Cursor fx:constant="DEFAULT" />
                      </cursor>
                      <children>
-                        <Text fill="#2c13b9" strokeType="OUTSIDE" strokeWidth="0.0" text="Your data" textAlignment="CENTER" wrappingWidth="141.13671875">
+                        <Line endX="58.0" startX="-100.0" />
+                        <Text fill="#2c13b9" strokeType="OUTSIDE" strokeWidth="0.0" text="Your data collected" textAlignment="CENTER" wrappingWidth="141.13671875">
                            <font>
                               <Font size="15.0" />
                            </font>
                         </Text>
-                        <HBox prefHeight="31.0" prefWidth="145.0">
-                           <children>
-                              <Text fx:id="heightDisplay" strokeType="OUTSIDE" strokeWidth="0.0" text="Height (cm):" wrappingWidth="70.0">
-                                 <HBox.margin>
-                                    <Insets top="5.0" />
-                                 </HBox.margin>
-                              </Text>
-                              <Pane prefHeight="310.0" prefWidth="300.0">
-                                 <children>
-                                    <Text fx:id="appName" layoutX="92.0" layoutY="16.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Feature app name" />
-                                 </children>
-                              </Pane>
-                           </children>
-                           <VBox.margin>
-                              <Insets left="5.0" />
-                           </VBox.margin>
-                        </HBox>
-                        <HBox layoutX="10.0" layoutY="30.0" prefHeight="31.0" prefWidth="145.0">
-                           <children>
-                              <Text fx:id="weightDisplay" strokeType="OUTSIDE" strokeWidth="0.0" text="Weight (kg):" wrappingWidth="70.0">
-                                 <HBox.margin>
-                                    <Insets left="5.0" top="5.0" />
-                                 </HBox.margin>
-                              </Text>
-                           </children>
-                        </HBox>
-                        <HBox layoutX="10.0" layoutY="30.0" prefHeight="31.0" prefWidth="145.0">
-                           <children>
-                              <Text fx:id="BMIDisplay" strokeType="OUTSIDE" strokeWidth="0.0" text="BMI:" wrappingWidth="30.0">
-                                 <HBox.margin>
-                                    <Insets left="5.0" top="5.0" />
-                                 </HBox.margin>
-                              </Text>
-                           </children>
-                        </HBox>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Health Status:" wrappingWidth="145.0">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Weight" textAlignment="CENTER" wrappingWidth="145.0">
                            <VBox.margin>
                               <Insets left="5.0" top="5.0" />
                            </VBox.margin>
                         </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Height" textAlignment="CENTER" wrappingWidth="145.0">
+                           <VBox.margin>
+                              <Insets left="5.0" top="5.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text fx:id="eatingData" strokeType="OUTSIDE" strokeWidth="0.0" text="Eating Habit" textAlignment="CENTER" wrappingWidth="145.0">
+                           <VBox.margin>
+                              <Insets left="5.0" top="5.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text fx:id="sleepData" strokeType="OUTSIDE" strokeWidth="0.0" text="Sleep Hours" textAlignment="CENTER" wrappingWidth="145.0">
+                           <VBox.margin>
+                              <Insets left="5.0" top="5.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text fx:id="exerciseData" layoutX="10.0" layoutY="128.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Exercise" textAlignment="CENTER" wrappingWidth="145.0">
+                           <VBox.margin>
+                              <Insets left="5.0" top="5.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Line endX="58.0" layoutX="111.0" layoutY="11.0" startX="-100.0">
+                           <VBox.margin>
+                              <Insets top="6.0" />
+                           </VBox.margin>
+                        </Line>
                      </children>
                   </VBox>
+                  <Line endX="20.0" layoutX="73.0" layoutY="68.0" rotate="90.0" startX="153.0" />
+                  <Pane fx:id="appPane" layoutX="160.0" layoutY="1.0" prefHeight="289.0" prefWidth="271.0">
+                     <children>
+                        <Text fx:id="sleepTrackerText" layoutX="14.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hours of sleep" visible="false" wrappingWidth="85.13671875" />
+                        <TextField fx:id="sleepInput" layoutX="110.0" layoutY="49.0" visible="false" />
+                        <Button fx:id="sleepTrackerResultButton" layoutX="99.0" layoutY="96.0" mnemonicParsing="false" text="Get Result" visible="false" />
+                        <Text fx:id="sleepTrackerInstructionText" layoutX="17.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter your sleep hours of the past week" visible="false" wrappingWidth="235.13671875" />
+                        <Text fx:id="sleepResult" layoutX="53.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="165.0" />
+                     </children>
+                  </Pane>
+                  <Text fx:id="appName" layoutX="181.0" layoutY="14.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Main Screen" textAlignment="CENTER" wrappingWidth="235.13671875" />
                </children>
             </Pane>
             <VBox prefHeight="278.0" prefWidth="281.0">

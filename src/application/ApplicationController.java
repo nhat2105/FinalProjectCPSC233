@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -19,6 +20,31 @@ public class ApplicationController {
 	
 	private double userWeight, userHeight;
 	double userBMI;
+
+    @FXML
+    private Text sleepTrackerText;
+
+    @FXML
+    private Button sleepTrackerResultButton;
+
+    @FXML
+    private TextField sleepInput;
+
+    @FXML
+    private Text sleepTrackerInstructionText;
+
+	
+	@FXML
+	private Pane appPane;
+	
+	@FXML
+	private Text sleepData;
+	
+	@FXML
+	private Text eatingData;
+	 
+	@FXML
+	private Text exerciseData;
 	
 	@FXML
 	private Button calculateBMIButton;
@@ -55,41 +81,48 @@ public class ApplicationController {
 
     @FXML
     void getStart(ActionEvent event) throws FileNotFoundException, IOException {
-    	calculateUserBMI();
+    	
+    	setUserHeight(userHeightInput.getText());
+    	setUserWeight(userWeightInput.getText());
     	switchScene("Main View");
+    	calculateUserBMI();
     }
 
 
+    //After scene switched data collected will be lost, need fix for that
+    
     private void switchScene(String view) throws FileNotFoundException, IOException {
 		if (view.equalsIgnoreCase("Main View")) {
 			FXMLLoader loader = new FXMLLoader();
 			VBox root = loader.load(new FileInputStream("src/application/ApplicationView.fxml"));
 			Scene scene = new Scene(root, 600, 400);
+			
 	    	applicationStage.setScene(scene);
 	    	applicationStage.show();
+	    	
 		}
 		
 	}
-
+    
 	void calculateUserBMI() {
-    	setUserHeight(userHeightInput.getText());
-    	setUserWeight(userWeightInput.getText());
+    	
     	userBMI = getUserWeight()/ ((getUserHeight()/100)*(getUserHeight()/100));
     	System.out.println(String.format("BMI: %.1f", userBMI));
 
-    	
-    	/**
-    	BMIDisplay.setText(String.format("BMI: %.1f", userBMI));
-		heightDisplay.setText("Height: " + String.valueOf(getUserHeight()) + " cm");
-		weightDisplay.setText("Weight: " + String.valueOf(getUserWeight()) + " kg");
-		*/
     }
 
-   
+
 	@FXML
 	public void openSleepTracker(ActionEvent e) throws FileNotFoundException, IOException  {
-		//switchScene("Sleep Tracker");
 		appName.setText("Sleep Tracker");
+		appPane.setStyle(""
+				+ "-fx-background-color:lightgray; "
+						);
+		sleepInput.setVisible(true);
+		sleepTrackerText.setVisible(true);
+		sleepTrackerResultButton.setVisible(true);
+		sleepTrackerInstructionText.setVisible(true);
+		
 	}
 
 
