@@ -61,17 +61,17 @@
                               <Insets left="5.0" top="5.0" />
                            </VBox.margin>
                         </Text>
-                        <Text fx:id="eatingData" strokeType="OUTSIDE" strokeWidth="0.0" text="Eating Habit" textAlignment="CENTER" wrappingWidth="145.0">
+                        <Text fx:id="eatingData" strokeType="OUTSIDE" strokeWidth="0.0" text="Eating Habit" textAlignment="CENTER" visible="false" wrappingWidth="145.0">
                            <VBox.margin>
                               <Insets left="5.0" top="5.0" />
                            </VBox.margin>
                         </Text>
-                        <Text fx:id="sleepData" strokeType="OUTSIDE" strokeWidth="0.0" text="Sleep Hours" textAlignment="CENTER" wrappingWidth="145.0">
+                        <Text fx:id="sleepData" strokeType="OUTSIDE" strokeWidth="0.0" text="Sleep Hours" textAlignment="CENTER" visible="false" wrappingWidth="145.0">
                            <VBox.margin>
                               <Insets left="5.0" top="5.0" />
                            </VBox.margin>
                         </Text>
-                        <Text fx:id="exerciseData" layoutX="10.0" layoutY="128.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Exercise" textAlignment="CENTER" wrappingWidth="145.0">
+                        <Text fx:id="exerciseData" layoutX="10.0" layoutY="128.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Exercise" textAlignment="CENTER" visible="false" wrappingWidth="145.0">
                            <VBox.margin>
                               <Insets left="5.0" top="5.0" />
                            </VBox.margin>
@@ -90,7 +90,7 @@
                         <TextField fx:id="sleepInput" layoutX="110.0" layoutY="49.0" visible="false" />
                         <Button fx:id="sleepTrackerResultButton" layoutX="99.0" layoutY="96.0" mnemonicParsing="false" onAction="#getSleepResult" text="Get Result" visible="false" />
                         <Text fx:id="sleepTrackerInstructionText" layoutX="17.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter your sleep hours of the past week" visible="false" wrappingWidth="235.13671875" />
-                        <Text fx:id="sleepResult" layoutX="53.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="165.0" />
+                        <Text fx:id="sleepResult" layoutX="53.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="165.0" />
                      </children>
                   </Pane>
                   <Text fx:id="appName" layoutX="181.0" layoutY="14.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Main Screen" textAlignment="CENTER" wrappingWidth="235.13671875" />

@@ -36,7 +36,6 @@ public class ApplicationController {
     @FXML
     private Text sleepTrackerInstructionText;
 
-	
 	@FXML
 	private Pane appPane;
 	
@@ -88,17 +87,23 @@ public class ApplicationController {
     	setUserHeight(userHeightInput.getText());
     	setUserWeight(userWeightInput.getText());
     	switchScene("Main View");
-    	calculateUserBMI();
     }
 
 
-    //After scene switched data collected will be lost, need fix for that
     
     private void switchScene(String view) throws FileNotFoundException, IOException {
 		if (view.equalsIgnoreCase("Main View")) {
 			FXMLLoader loader = new FXMLLoader();
 			VBox root = loader.load(new FileInputStream("src/application/ApplicationView.fxml"));
+			
+			ApplicationController mainController = loader.getController();
+			//The below codes pass data between scenes
+			mainController.setUserHeight(String.valueOf(getUserHeight()));
+			mainController.setUserWeight(String.valueOf(getUserWeight()));
+			userBMI = getUserWeight()/ ((getUserHeight()/100)*(getUserHeight()/100));
+	    	mainController.setUserBMI(userBMI);
 			Scene scene = new Scene(root, 600, 400);
+			
 			
 	    	applicationStage.setScene(scene);
 	    	applicationStage.show();
@@ -107,23 +112,24 @@ public class ApplicationController {
 		
 	}
     
-	void calculateUserBMI() {
-    	userBMI = getUserWeight()/ ((getUserHeight()/100)*(getUserHeight()/100));
-    	System.out.println(String.format("BMI: %.1f", userBMI));
-
-    }
-	
+	private void setUserBMI(double BMI) {
+		this.userBMI = BMI;
+	}
 	@FXML
 	public void getSleepResult(ActionEvent e) {
 		SleepTracker sleepTrack = new SleepTracker();
 		String sleepHoursTrack = sleepTrack.getSleepResult(sleepInput.getText());
 		sleepResult.setText(sleepHoursTrack);
 		sleepResult.setVisible(true);
+		sleepData.setVisible(true);
 	}
 
 
 	@FXML
 	public void openSleepTracker(ActionEvent e) throws FileNotFoundException, IOException  {
+		System.out.println(String.format("BMI: %.1f", userBMI));
+		System.out.println(userHeight);
+		System.out.println(userWeight);
 		//The below code open the interface of sleep tracker
 		appName.setText("Sleep Tracker");
 		appPane.setStyle(""
