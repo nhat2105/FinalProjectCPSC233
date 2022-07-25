@@ -22,31 +22,16 @@ public class ApplicationController {
 	double userBMI;
 
 	@FXML
-	private Text sleepResult;
+	private Text sleepResult, BMIDisplay;
 	
-    @FXML
-    private Text sleepTrackerText;
 
     @FXML
     private Button sleepTrackerResultButton;
 
     @FXML
-    private TextField sleepInput;
-
-    @FXML
-    private Text sleepTrackerInstructionText;
-
+    private TextField sleepInput, userWeightInput, userHeightInput;	
 	@FXML
-	private Pane appPane;
-	
-	@FXML
-	private Text sleepData;
-	
-	@FXML
-	private Text eatingData;
-	 
-	@FXML
-	private Text exerciseData;
+	private Text sleepData, eatingData, exerciseData;	
 	
 	@FXML
 	private Button calculateBMIButton;
@@ -63,23 +48,33 @@ public class ApplicationController {
     @FXML
     private Button mealsButton;
 
-    @FXML
-    private Text BMIDisplay;
 
     @FXML
-    private Button sleepTrackerButton;
+    private Button sleepTrackerButton, exerciseButton, BMIButton;
 
     @FXML
-    private Button exerciseButton;
-    
-    @FXML
-    private TextField userWeightInput;
-    
-    @FXML
-    private TextField userHeightInput;
+    private Pane exercisePane, sleepTrackerPane;
 
     @FXML
-    private Button BMIButton;
+    private Button squatButton;
+
+    @FXML
+    private Button joggingButton;
+
+    @FXML
+    private Button cyclingButton;
+
+    @FXML
+    private Text healthStatusText;
+
+    @FXML
+    private Button swimmingButton;
+
+    @FXML
+    private Button runningButton;
+
+    @FXML
+    private Button pushUpButton;
 
     @FXML
     void getStart(ActionEvent event) throws FileNotFoundException, IOException {
@@ -104,7 +99,6 @@ public class ApplicationController {
 	    	mainController.setUserBMI(userBMI);
 			Scene scene = new Scene(root, 600, 400);
 			
-			
 	    	applicationStage.setScene(scene);
 	    	applicationStage.show();
 	    	
@@ -123,22 +117,66 @@ public class ApplicationController {
 		sleepResult.setVisible(true);
 		sleepData.setVisible(true);
 	}
+	
+    @FXML
+    void openExercise(ActionEvent event) {
+    	Exercise exercises = new Exercise();
+    	turnOnScene(exercises.getSuitableExercises(userBMI));
+    }
+
+	private void turnOnScene(String sceneCode) {
+		sleepTrackerPane.setStyle(""
+				+ "-fx-background-color:lightgray; "
+				);
+		if (sceneCode.equals("Sleep Tracker")) {
+			//The below code turn off other feature's interface
+			exercisePane.setVisible(false);
+			
+			//The below code open the interface of sleep tracker
+			appName.setText("Sleep Tracker");
+			sleepTrackerPane.setVisible(true);
+		}
+		else if (sceneCode.contains("Exercises")) {
+			appName.setText("Exercise Recommendation");
+			exercisePane.setVisible(true);
+			exerciseData.setVisible(true);
+			
+			//Turn off other features
+			sleepTrackerPane.setVisible(false);
+			
+			//This feature is turned on based on the BMI result
+			if (sceneCode.contains("over")) {
+				healthStatusText.setText("Health status: You are overweight");
+				
+				swimmingButton.setVisible(true);
+				cyclingButton.setVisible(true);
+				runningButton.setVisible(true);
+			}
+			else if (sceneCode.contains("under")) {
+				healthStatusText.setText("Health status: You are underweight");
+				
+				squatButton.setVisible(true);
+				joggingButton.setVisible(true);
+				pushUpButton.setVisible(true);
+			}
+			else {
+				healthStatusText.setText("Health status: You are normal");
+				swimmingButton.setVisible(true);
+				cyclingButton.setVisible(true);
+				runningButton.setVisible(true);
+				squatButton.setVisible(true);
+				joggingButton.setVisible(true);
+				pushUpButton.setVisible(true);
+			}
+		}
+		
+	}
+
 
 
 	@FXML
-	public void openSleepTracker(ActionEvent e) throws FileNotFoundException, IOException  {
-		System.out.println(String.format("BMI: %.1f", userBMI));
-		System.out.println(userHeight);
-		System.out.println(userWeight);
-		//The below code open the interface of sleep tracker
-		appName.setText("Sleep Tracker");
-		appPane.setStyle(""
-				+ "-fx-background-color:lightgray; "
-						);
-		sleepInput.setVisible(true);
-		sleepTrackerText.setVisible(true);
-		sleepTrackerResultButton.setVisible(true);
-		sleepTrackerInstructionText.setVisible(true);
+	public void openSleepTracker(ActionEvent e)  throws FileNotFoundException, IOException{
+		turnOnScene("Sleep Tracker");
 	}
 
 
@@ -156,6 +194,7 @@ public class ApplicationController {
 	}
 
 	double getUserHeight() {
+		
 		return userHeight;
 	}
 

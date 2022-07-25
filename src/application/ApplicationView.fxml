@@ -36,6 +36,11 @@
             <Insets left="425.0" top="20.0" />
          </VBox.margin>
       </Text>
+      <Text fx:id="appName" strokeType="OUTSIDE" strokeWidth="0.0" text="Main Screen" textAlignment="CENTER" wrappingWidth="235.13671875">
+         <VBox.margin>
+            <Insets left="180.0" />
+         </VBox.margin>
+      </Text>
       <HBox prefHeight="310.0" prefWidth="600.0">
          <children>
             <Pane prefHeight="310.0" prefWidth="538.0">
@@ -84,21 +89,86 @@
                      </children>
                   </VBox>
                   <Line endX="20.0" layoutX="73.0" layoutY="68.0" rotate="90.0" startX="153.0" />
-                  <Pane fx:id="appPane" layoutX="160.0" layoutY="1.0" prefHeight="289.0" prefWidth="271.0">
+                  <Pane fx:id="sleepTrackerPane" layoutX="160.0" layoutY="1.0" prefHeight="289.0" prefWidth="271.0" visible="false">
                      <children>
-                        <Text fx:id="sleepTrackerText" layoutX="14.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hours of sleep" visible="false" wrappingWidth="85.13671875" />
-                        <TextField fx:id="sleepInput" layoutX="110.0" layoutY="49.0" visible="false" />
-                        <Button fx:id="sleepTrackerResultButton" layoutX="99.0" layoutY="96.0" mnemonicParsing="false" onAction="#getSleepResult" text="Get Result" visible="false" />
-                        <Text fx:id="sleepTrackerInstructionText" layoutX="17.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter your sleep hours of the past week" visible="false" wrappingWidth="235.13671875" />
+                        <Text layoutX="14.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hours of sleep" wrappingWidth="85.13671875" />
+                        <TextField fx:id="sleepInput" layoutX="110.0" layoutY="49.0" />
+                        <Button fx:id="sleepTrackerResultButton" layoutX="99.0" layoutY="96.0" mnemonicParsing="false" onAction="#getSleepResult" text="Get Result" />
+                        <Text layoutX="17.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter your sleep hours of the past week" wrappingWidth="235.13671875" />
                         <Text fx:id="sleepResult" layoutX="53.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="165.0" />
                      </children>
                   </Pane>
-                  <Text fx:id="appName" layoutX="181.0" layoutY="14.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Main Screen" textAlignment="CENTER" wrappingWidth="235.13671875" />
+                  <Pane fx:id="exercisePane" layoutX="159.0" layoutY="-4.0" prefHeight="304.0" prefWidth="271.0">
+                     <children>
+                        <Text layoutX="13.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Recommended Exercises:" textAlignment="CENTER" wrappingWidth="244.13671875" />
+                        <Text fx:id="healthStatusText" layoutX="16.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Health Status:" textAlignment="CENTER" wrappingWidth="235.13671875" />
+                        <VBox layoutX="7.0" layoutY="54.0" prefHeight="220.0" prefWidth="256.0">
+                           <children>
+                              <HBox prefHeight="31.0" prefWidth="256.0">
+                                 <children>
+                                    <Button fx:id="runningButton" mnemonicParsing="false" prefHeight="18.0" prefWidth="75.0" text="Running" visible="false">
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                       <HBox.margin>
+                                          <Insets left="10.0" top="15.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="swimmingButton" layoutX="20.0" layoutY="40.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="75.0" text="Swimming" visible="false">
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                       <HBox.margin>
+                                          <Insets left="5.0" top="15.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="cyclingButton" layoutX="108.0" layoutY="40.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="75.0" text="Cycling" visible="false">
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                       <HBox.margin>
+                                          <Insets left="5.0" top="15.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                              <HBox layoutX="10.0" layoutY="66.0" prefHeight="35.0" prefWidth="256.0">
+                                 <children>
+                                    <Button fx:id="joggingButton" mnemonicParsing="false" prefHeight="18.0" prefWidth="75.0" text="Jogging" visible="false">
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                       <HBox.margin>
+                                          <Insets left="10.0" top="15.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="pushUpButton" layoutX="20.0" layoutY="40.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="75.0" text="Push up" visible="false">
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                       <HBox.margin>
+                                          <Insets left="5.0" top="15.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="squatButton" layoutX="108.0" layoutY="40.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="75.0" text="Squat" visible="false">
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                       <HBox.margin>
+                                          <Insets left="5.0" top="15.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </Pane>
                </children>
             </Pane>
             <VBox prefHeight="278.0" prefWidth="281.0">
                <children>
-                  <Button fx:id="exerciseButton" mnemonicParsing="false" prefHeight="17.0" prefWidth="165.0" text="Exercise Recommendation">
+                  <Button fx:id="exerciseButton" mnemonicParsing="false" onAction="#openExercise" prefHeight="17.0" prefWidth="165.0" text="Exercise Recommendation">
                      <VBox.margin>
                         <Insets right="5.0" top="20.0" />
                      </VBox.margin>
