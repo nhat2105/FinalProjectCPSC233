@@ -41,6 +41,7 @@
             <Insets left="180.0" />
          </VBox.margin>
       </Text>
+      <Text fx:id="healthStatusText" strokeType="OUTSIDE" strokeWidth="0.0" text="Health Status:" visible="false" wrappingWidth="235.13671875" />
       <HBox prefHeight="310.0" prefWidth="600.0">
          <children>
             <Pane prefHeight="310.0" prefWidth="538.0">
@@ -101,7 +102,6 @@
                   <Pane fx:id="exercisePane" layoutX="159.0" layoutY="-4.0" prefHeight="304.0" prefWidth="271.0">
                      <children>
                         <Text fx:id="recommendActText" layoutX="13.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Recommended Exercises:" textAlignment="CENTER" visible="false" wrappingWidth="244.13671875" />
-                        <Text fx:id="healthStatusText" layoutX="16.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Health Status:" textAlignment="CENTER" visible="false" wrappingWidth="235.13671875" />
                         <VBox layoutX="7.0" layoutY="54.0" prefHeight="220.0" prefWidth="256.0">
                            <children>
                               <HBox prefHeight="31.0" prefWidth="256.0">
@@ -162,6 +162,191 @@
                               </HBox>
                            </children>
                         </VBox>
+                        <VBox layoutX="14.0" layoutY="-56.0" prefHeight="220.0" prefWidth="256.0">
+                           <children>
+                              <HBox prefHeight="31.0" prefWidth="256.0">
+                                 <children>
+                                    <Button fx:id="runningButton1" mnemonicParsing="false" prefHeight="18.0" prefWidth="75.0" text="Running" visible="false">
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                       <HBox.margin>
+                                          <Insets left="10.0" top="15.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="swimmingButton1" layoutX="20.0" layoutY="40.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="75.0" text="Swimming" visible="false">
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                       <HBox.margin>
+                                          <Insets left="5.0" top="15.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="cyclingButton1" layoutX="108.0" layoutY="40.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="75.0" text="Cycling" visible="false">
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                       <HBox.margin>
+                                          <Insets left="5.0" top="15.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                              <HBox layoutX="10.0" layoutY="66.0" prefHeight="35.0" prefWidth="256.0">
+                                 <children>
+                                    <Button fx:id="joggingButton1" mnemonicParsing="false" prefHeight="18.0" prefWidth="75.0" text="Jogging" visible="false">
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                       <HBox.margin>
+                                          <Insets left="10.0" top="15.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="pushUpButton1" layoutX="20.0" layoutY="40.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="75.0" text="Push up" visible="false">
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                       <HBox.margin>
+                                          <Insets left="5.0" top="15.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="squatButton1" layoutX="108.0" layoutY="40.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="75.0" text="Squat" visible="false">
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                       <HBox.margin>
+                                          <Insets left="5.0" top="15.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </Pane>
+                  <Pane fx:id="mealPane" layoutX="160.0" layoutY="1.0" prefHeight="304.0" prefWidth="271.0">
+                     <children>
+                        <Text fx:id="mealSuggestionText" layoutX="13.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Meal Suggestion:" textAlignment="CENTER" visible="false" wrappingWidth="244.13671875" />
+                        <VBox layoutX="7.0" layoutY="54.0" prefHeight="220.0" prefWidth="256.0">
+                           <children>
+                              <HBox prefHeight="31.0" prefWidth="256.0">
+                                 <children>
+                                    <Button fx:id="vegetableButton" mnemonicParsing="false" prefHeight="18.0" prefWidth="75.0" text="Vegetable" visible="false">
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                       <HBox.margin>
+                                          <Insets left="10.0" top="15.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="soupButton" layoutX="20.0" layoutY="40.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="75.0" text="Soup" visible="false">
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                       <HBox.margin>
+                                          <Insets left="5.0" top="15.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="salmonButton" layoutX="108.0" layoutY="40.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="75.0" text="Salmon" visible="false">
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                       <HBox.margin>
+                                          <Insets left="5.0" top="15.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                              <HBox layoutX="10.0" layoutY="66.0" prefHeight="35.0" prefWidth="256.0">
+                                 <children>
+                                    <Button fx:id="chickenButton" mnemonicParsing="false" prefHeight="18.0" prefWidth="75.0" text="Chicken" visible="false">
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                       <HBox.margin>
+                                          <Insets left="10.0" top="15.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="porkButton" layoutX="20.0" layoutY="40.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="75.0" text="Pork" visible="false">
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                       <HBox.margin>
+                                          <Insets left="5.0" top="15.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="riceButton" layoutX="108.0" layoutY="40.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="75.0" text="Rice" visible="false">
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                       <HBox.margin>
+                                          <Insets left="5.0" top="15.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <VBox layoutX="14.0" layoutY="-56.0" prefHeight="220.0" prefWidth="256.0">
+                           <children>
+                              <HBox prefHeight="31.0" prefWidth="256.0">
+                                 <children>
+                                    <Button fx:id="runningButton11" mnemonicParsing="false" prefHeight="18.0" prefWidth="75.0" text="Running" visible="false">
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                       <HBox.margin>
+                                          <Insets left="10.0" top="15.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="swimmingButton11" layoutX="20.0" layoutY="40.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="75.0" text="Swimming" visible="false">
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                       <HBox.margin>
+                                          <Insets left="5.0" top="15.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="cyclingButton11" layoutX="108.0" layoutY="40.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="75.0" text="Cycling" visible="false">
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                       <HBox.margin>
+                                          <Insets left="5.0" top="15.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                              <HBox layoutX="10.0" layoutY="66.0" prefHeight="35.0" prefWidth="256.0">
+                                 <children>
+                                    <Button fx:id="joggingButton11" mnemonicParsing="false" prefHeight="18.0" prefWidth="75.0" text="Jogging" visible="false">
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                       <HBox.margin>
+                                          <Insets left="10.0" top="15.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="pushUpButton11" layoutX="20.0" layoutY="40.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="75.0" text="Push up" visible="false">
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                       <HBox.margin>
+                                          <Insets left="5.0" top="15.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="squatButton11" layoutX="108.0" layoutY="40.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="75.0" text="Squat" visible="false">
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                       <HBox.margin>
+                                          <Insets left="5.0" top="15.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
                      </children>
                   </Pane>
                </children>
@@ -173,7 +358,7 @@
                         <Insets right="5.0" top="20.0" />
                      </VBox.margin>
                   </Button>
-                  <Button fx:id="mealsButton" mnemonicParsing="false" prefHeight="0.0" prefWidth="165.0" text="Meals Suggestion">
+                  <Button fx:id="mealsButton" mnemonicParsing="false" onAction="#openMealSuggestion" prefHeight="0.0" prefWidth="165.0" text="Meals Suggestion">
                      <VBox.margin>
                         <Insets right="5.0" top="20.0" />
                      </VBox.margin>

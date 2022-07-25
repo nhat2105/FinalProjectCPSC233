@@ -31,10 +31,10 @@ public class ApplicationController {
     @FXML
     private TextField sleepInput, userWeightInput, userHeightInput;	
 	@FXML
-	private Text sleepData, eatingData, exerciseData;	
+	private Text sleepData, eatingData, exerciseData, mealSuggestionText;	
 	
 	@FXML
-	private Button calculateBMIButton;
+	private Button calculateBMIButton, vegetableButton, porkButton, riceButton, chickenButton, soupButton, salmonButton;
 	
 	@FXML
     private Text weightDisplay;
@@ -53,7 +53,7 @@ public class ApplicationController {
     private Button sleepTrackerButton, exerciseButton, BMIButton;
 
     @FXML
-    private Pane exercisePane, sleepTrackerPane;
+    private Pane exercisePane, sleepTrackerPane, mealPane;
 
     @FXML
     private Button squatButton;
@@ -74,6 +74,7 @@ public class ApplicationController {
     @FXML
     private Button pushUpButton;
 
+    //The function below takes in user inputs for their height and weights
     @FXML
     void getStart(ActionEvent event) throws FileNotFoundException, IOException {
     	
@@ -82,8 +83,15 @@ public class ApplicationController {
     	switchScene("Main View");
     }
 
-
     
+    /**
+    * @param view (switch to main view)
+    * @throws FileNotFoundException
+    * @throws IOException
+    * The function below switches the view from get started view to the main
+    * application function view. It passes data of user inputs (height and weight)
+    * from that scene to the main scene also
+    */
     private void switchScene(String view) throws FileNotFoundException, IOException {
 		if (view.equalsIgnoreCase("Main View")) {
 			FXMLLoader loader = new FXMLLoader();
@@ -107,6 +115,9 @@ public class ApplicationController {
 	private void setUserBMI(double BMI) {
 		this.userBMI = BMI;
 	}
+	
+	//The function below get the sleep tracker
+	//result when the right button is clicked
 	@FXML
 	public void getSleepResult(ActionEvent e) {
 		SleepTracker sleepTrack = new SleepTracker();
@@ -116,12 +127,16 @@ public class ApplicationController {
 		sleepData.setVisible(true);
 	}
 	
+	//The function below opens and function the exercise
+	//suggestion feature when the right button is clicked
     @FXML
     void openExercise(ActionEvent event) {
-    	Exercise exercises = new Exercise();
-    	turnOnScene(exercises.getSuitableExercises(userBMI));
+    	BMIControl exercises = new BMIControl();
+    	turnOnScene(exercises.getSuitableHealthStatus(userBMI) + "Exercises");
     }
-
+    
+    //The function below opens the right screen
+    //for the right feature
 	private void turnOnScene(String sceneCode) {
 		sleepTrackerPane.setStyle(""
 				+ "-fx-background-color:lightgray; "
@@ -129,8 +144,7 @@ public class ApplicationController {
 		if (sceneCode.equals("Sleep Tracker")) {
 			//The below code turn off other feature's interface
 			exercisePane.setVisible(false);
-			recommendActText.setVisible(false);
-			healthStatusText.setVisible(false);
+			mealPane.setVisible(false);
 			
 			//The below code open the interface of sleep tracker
 			appName.setText("Sleep Tracker");
@@ -145,6 +159,7 @@ public class ApplicationController {
 			
 			//Turn off other features
 			sleepTrackerPane.setVisible(false);
+			mealPane.setVisible(false);
 			
 			//This feature is turned on based on the BMI result
 			if (sceneCode.contains("over")) {
@@ -171,13 +186,56 @@ public class ApplicationController {
 				pushUpButton.setVisible(true);
 			}
 		}
+		else if (sceneCode.contains("Meal")) {
+			//Turn off other features
+			sleepTrackerPane.setVisible(false);
+			exercisePane.setVisible(false);
+			
+			//Turn on this feature
+			appName.setText("Meal Suggestion");
+			mealPane.setVisible(true);
+			healthStatusText.setVisible(true);
+			//Turn on scene depends on health status
+			if (sceneCode.contains("over")) {
+				healthStatusText.setText("Health status: You are overweight");
+				
+				salmonButton.setVisible(true);
+				vegetableButton.setVisible(true);
+				soupButton.setVisible(true);
+			}
+			else if (sceneCode.contains("under")) {
+				healthStatusText.setText("Health status: You are underweight");
+				
+				porkButton.setVisible(true);
+				chickenButton.setVisible(true);
+				riceButton.setVisible(true);
+			}
+			else {
+				healthStatusText.setText("Health status: You are normal");
+				
+				salmonButton.setVisible(true);
+				vegetableButton.setVisible(true);
+				soupButton.setVisible(true);
+				porkButton.setVisible(true);
+				chickenButton.setVisible(true);
+				riceButton.setVisible(true);
+			}
+			
+		}
 		
 	}
-
-
-
+	//The function below opens and function the meal
+	//suggestion feature when the right button is clicked
 	@FXML
-	public void openSleepTracker(ActionEvent e)  throws FileNotFoundException, IOException{
+	public void openMealSuggestion(ActionEvent e) {
+		BMIControl mealSuggestion = new BMIControl();
+		turnOnScene(mealSuggestion.getSuitableHealthStatus(userBMI) + "Meal");
+	}
+
+	//The function below opens the exercise
+	//sleep tracker feature when the right button is clicked
+	@FXML
+	public void openSleepTracker(ActionEvent e){
 		turnOnScene("Sleep Tracker");
 	}
 

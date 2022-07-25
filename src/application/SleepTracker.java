@@ -6,6 +6,7 @@ public class SleepTracker {
 	double sleepDebt;
 
 	public String getSleepResult(String sleepInput) {
+		//Validate inputs
 		String error = validate(sleepInput);
 		if (error.equals("")) {
 			double sleepHoursEveryday = sleepHours/7;
