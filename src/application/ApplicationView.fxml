@@ -100,8 +100,8 @@
                   </Pane>
                   <Pane fx:id="exercisePane" layoutX="159.0" layoutY="-4.0" prefHeight="304.0" prefWidth="271.0">
                      <children>
-                        <Text layoutX="13.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Recommended Exercises:" textAlignment="CENTER" wrappingWidth="244.13671875" />
-                        <Text fx:id="healthStatusText" layoutX="16.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Health Status:" textAlignment="CENTER" wrappingWidth="235.13671875" />
+                        <Text fx:id="recommendActText" layoutX="13.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Recommended Exercises:" textAlignment="CENTER" visible="false" wrappingWidth="244.13671875" />
+                        <Text fx:id="healthStatusText" layoutX="16.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Health Status:" textAlignment="CENTER" visible="false" wrappingWidth="235.13671875" />
                         <VBox layoutX="7.0" layoutY="54.0" prefHeight="220.0" prefWidth="256.0">
                            <children>
                               <HBox prefHeight="31.0" prefWidth="256.0">

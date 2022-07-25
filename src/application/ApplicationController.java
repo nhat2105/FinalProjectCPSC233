@@ -22,7 +22,7 @@ public class ApplicationController {
 	double userBMI;
 
 	@FXML
-	private Text sleepResult, BMIDisplay;
+	private Text sleepResult, BMIDisplay, healthStatusText, recommendActText;
 	
 
     @FXML
@@ -64,8 +64,6 @@ public class ApplicationController {
     @FXML
     private Button cyclingButton;
 
-    @FXML
-    private Text healthStatusText;
 
     @FXML
     private Button swimmingButton;
@@ -131,6 +129,8 @@ public class ApplicationController {
 		if (sceneCode.equals("Sleep Tracker")) {
 			//The below code turn off other feature's interface
 			exercisePane.setVisible(false);
+			recommendActText.setVisible(false);
+			healthStatusText.setVisible(false);
 			
 			//The below code open the interface of sleep tracker
 			appName.setText("Sleep Tracker");
@@ -140,6 +140,8 @@ public class ApplicationController {
 			appName.setText("Exercise Recommendation");
 			exercisePane.setVisible(true);
 			exerciseData.setVisible(true);
+			recommendActText.setVisible(true);
+			healthStatusText.setVisible(true);
 			
 			//Turn off other features
 			sleepTrackerPane.setVisible(false);
