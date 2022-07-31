@@ -7,7 +7,7 @@
 <?import javafx.scene.text.*?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ApplicationController">
+<VBox fx:id="heightErrorLabel" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ApplicationController">
    <children>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Health Tracker" textAlignment="CENTER" wrappingWidth="371.13671875">
          <font>
@@ -25,7 +25,7 @@
             <Insets top="15.0" />
          </VBox.margin>
       </Text>
-      <HBox prefHeight="89.0" prefWidth="602.0">
+      <HBox prefHeight="98.0" prefWidth="602.0">
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Enter your height (in cm)" wrappingWidth="147.13671875">
                <HBox.margin>
@@ -39,7 +39,7 @@
             </TextField>
          </children>
       </HBox>
-      <HBox layoutX="10.0" layoutY="146.0" prefHeight="64.0" prefWidth="602.0">
+      <HBox layoutX="10.0" layoutY="146.0" prefHeight="44.0" prefWidth="602.0">
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Enter your weight (in kg)" wrappingWidth="147.13671875">
                <HBox.margin>
@@ -53,9 +53,19 @@
             </TextField>
          </children>
       </HBox>
-      <Button fx:id="BMIButton" mnemonicParsing="false" onAction="#getStart" prefHeight="34.0" prefWidth="115.0" text="Let's Get Started!">
+      <Text fx:id="heightErrorText" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="404.13671875">
          <VBox.margin>
-            <Insets left="250.0" />
+            <Insets left="100.0" />
+         </VBox.margin>
+      </Text>
+      <Text fx:id="weightErrorText" layoutX="110.0" layoutY="301.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="404.13671875">
+         <VBox.margin>
+            <Insets left="100.0" top="10.0" />
+         </VBox.margin>
+      </Text>
+      <Button fx:id="BMIButton" mnemonicParsing="false" onAction="#getStart" prefHeight="28.0" prefWidth="115.0" text="Let's Get Started!">
+         <VBox.margin>
+            <Insets left="250.0" top="10.0" />
          </VBox.margin>
       </Button>
    </children>
