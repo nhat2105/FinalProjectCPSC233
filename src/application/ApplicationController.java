@@ -20,67 +20,60 @@ public class ApplicationController {
 	
 	private double userWeight, userHeight;
 	double userBMI;
-
+	
+	//Result display text
 	@FXML
 	private Text sleepResult, BMIDisplay, healthStatusText, recommendActText;
 	
-
+	//Error text
+	@FXML
+	private Text weightErrorText, heightErrorText;
+	
+	//Result button
     @FXML
-    private Button sleepTrackerResultButton;
+    private Button sleepTrackerResultButton, calculateBMIButton;
 
+   //Input text
     @FXML
     private TextField sleepInput, userWeightInput, userHeightInput;	
-	@FXML
-	private Text sleepData, eatingData, exerciseData, mealSuggestionText;	
 	
+    //Meal buttons
 	@FXML
-	private Button calculateBMIButton, vegetableButton, porkButton, riceButton, chickenButton, soupButton, salmonButton;
+	private Button vegetableButton, porkButton, riceButton, chickenButton, soupButton, salmonButton;
 	
+	//Data display text
 	@FXML
-    private Text weightDisplay;
+    private Text weightDisplay, heightDisplay, appName, sleepData, eatingData, exerciseData, mealSuggestionText;
 
+
+    //Feature button
     @FXML
-    private Text heightDisplay;
+    private Button sleepTrackerButton, exerciseButton, BMIButton, mealsButton;
 
-    @FXML
-    private Text appName;
-
-    @FXML
-    private Button mealsButton;
-
-
-    @FXML
-    private Button sleepTrackerButton, exerciseButton, BMIButton;
-
+    //Pane
     @FXML
     private Pane exercisePane, sleepTrackerPane, mealPane;
-
+    
+    //Exercise button
     @FXML
-    private Button squatButton;
-
-    @FXML
-    private Button joggingButton;
-
-    @FXML
-    private Button cyclingButton;
-
-
-    @FXML
-    private Button swimmingButton;
-
-    @FXML
-    private Button runningButton;
-
-    @FXML
-    private Button pushUpButton;
+    private Button squatButton, joggingButton, cyclingButton, swimmingButton, runningButton, pushUpButton;
+    
 
     //The function below takes in user inputs for their height and weights
     @FXML
     void getStart(ActionEvent event) throws FileNotFoundException, IOException {
-    	
-    	setUserHeight(userHeightInput.getText());
-    	setUserWeight(userWeightInput.getText());
-    	switchScene("Main View");
+    	//Validate input first
+    	String errorFreeHeightInput = validateInput(userHeightInput.getText(), 215, 1);
+    	String errorFreeWeightInput = validateInput(userWeightInput.getText(), 130, 1);
+    	if (errorFreeHeightInput == "" && errorFreeWeightInput == "") {
+	    	setUserHeight(userHeightInput.getText());
+	    	setUserWeight(userWeightInput.getText());
+	    	switchScene("Main View");
+    	}
+    	else {
+    		weightErrorText.setText(errorFreeWeightInput);
+    		heightErrorText.setText(errorFreeHeightInput);
+    	}
     }
 
     
@@ -99,6 +92,7 @@ public class ApplicationController {
 			
 			ApplicationController mainController = loader.getController();
 			//The below codes pass data between scenes
+			
 			mainController.setUserHeight(String.valueOf(getUserHeight()));
 			mainController.setUserWeight(String.valueOf(getUserWeight()));
 			userBMI = getUserWeight()/ ((getUserHeight()/100)*(getUserHeight()/100));
@@ -121,10 +115,17 @@ public class ApplicationController {
 	@FXML
 	public void getSleepResult(ActionEvent e) {
 		SleepTracker sleepTrack = new SleepTracker();
-		String sleepHoursTrack = sleepTrack.getSleepResult(sleepInput.getText());
-		sleepResult.setText(sleepHoursTrack);
-		sleepResult.setVisible(true);
-		sleepData.setVisible(true);
+		String errorFreeInput = validateInput(sleepInput.getText(), 24 * 7, 0);
+		if (errorFreeInput == "") {
+			String sleepHoursTrack = sleepTrack.getSleepResult(sleepInput.getText());
+			sleepResult.setText(sleepHoursTrack);
+			sleepResult.setVisible(true);
+			sleepData.setVisible(true);
+		}
+		else {
+			sleepResult.setText(errorFreeInput);
+		}
+		
 	}
 	
 	//The function below opens and function the exercise
@@ -265,6 +266,37 @@ public class ApplicationController {
 		else {
 			this.userHeight = 0;
 		}
+	}
+	public String validateInput(String stringInput, int upperBound, int lowerBound) {
+		
+    	//counter to keep track of '.' char
+    	int counter = 0;
+    	//check to see if entered value is numeric
+    	for (char c: stringInput.toCharArray()) {
+    		//if a character is not a digit, display the error message
+    		if (!Character.isDigit(c) && c != '.') {
+    			return ("Don't include character such as: " + c + 
+    					", only the numerical number");
+    			
+    		}
+    		//if there is a dot, increase the tracking counter
+    		if (c == '.') {
+    			counter += 1;
+    		}
+    		//if there are more than 1 dot, it is an invalid decimal
+    		if (counter > 1) {
+    			return "Invalid value entered. Decimal should only include 1 dot";
+    		}
+    	}
+    	
+    	/*Verify whether the project grade input was in a valid range
+    	 *If not it will be 0
+    	*/
+    	if (Double.parseDouble(stringInput) < lowerBound || Double.parseDouble(stringInput) > upperBound ) {//hours of 7 days
+    		return ("Error. Value entered should be in between " + lowerBound + " and " + upperBound);
+    	}
+		return "";
+		
 	}
 	
 }
