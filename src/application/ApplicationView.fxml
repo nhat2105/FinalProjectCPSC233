@@ -262,9 +262,14 @@
                                     </Button>
                                  </children>
                               </HBox>
+                              <Text fx:id="sleepMealDes" strokeType="OUTSIDE" strokeWidth="0.0" text="Try to include at least 1 food below in your daily meal menu" visible="false" wrappingWidth="254.13671875">
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </Text>
                               <HBox layoutX="10.0" layoutY="50.0" prefHeight="35.0" prefWidth="256.0">
                                  <children>
-                                    <Button fx:id="teaButton" mnemonicParsing="false" prefHeight="18.0" prefWidth="75.0" text="Tea/Coffee" visible="false">
+                                    <Button fx:id="teaButton" mnemonicParsing="false" prefHeight="18.0" prefWidth="75.0" text="Tea" visible="false">
                                        <opaqueInsets>
                                           <Insets />
                                        </opaqueInsets>
@@ -272,7 +277,7 @@
                                           <Insets left="10.0" top="15.0" />
                                        </HBox.margin>
                                     </Button>
-                                    <Button fx:id="fruitButton" layoutX="20.0" layoutY="40.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="75.0" text="Banana/Yogurt" visible="false">
+                                    <Button fx:id="fruitButton" layoutX="20.0" layoutY="40.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="75.0" text="Banana" visible="false">
                                        <opaqueInsets>
                                           <Insets />
                                        </opaqueInsets>
