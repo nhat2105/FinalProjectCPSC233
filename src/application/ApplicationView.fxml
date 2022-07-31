@@ -262,6 +262,34 @@
                                     </Button>
                                  </children>
                               </HBox>
+                              <HBox layoutX="10.0" layoutY="50.0" prefHeight="35.0" prefWidth="256.0">
+                                 <children>
+                                    <Button fx:id="teaButton" mnemonicParsing="false" prefHeight="18.0" prefWidth="75.0" text="Tea/Coffee" visible="false">
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                       <HBox.margin>
+                                          <Insets left="10.0" top="15.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="fruitButton" layoutX="20.0" layoutY="40.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="75.0" text="Banana/Yogurt" visible="false">
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                       <HBox.margin>
+                                          <Insets left="5.0" top="15.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="nutButton" layoutX="108.0" layoutY="40.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="75.0" text="Almond" visible="false">
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                       <HBox.margin>
+                                          <Insets left="5.0" top="15.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                              </HBox>
                            </children>
                         </VBox>
                      </children>
