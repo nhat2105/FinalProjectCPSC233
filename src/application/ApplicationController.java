@@ -41,12 +41,14 @@ public class ApplicationController {
     //Meal buttons
 	@FXML
 	private Button vegetableButton, porkButton, riceButton, chickenButton, soupButton, salmonButton;
+	@FXML
+	private Button nutButton, fruitButton, teaButton;
 	
 	//Data display text
 	@FXML
     private Text weightDisplay, heightDisplay, appName, sleepData, eatingData, exerciseData;
 	@FXML
-    private Text sleepActDescription, sleepActDescription2;
+    private Text sleepActDescription, sleepActDescription2, sleepMealDes;
 
 
     //Feature button
@@ -214,7 +216,23 @@ public class ApplicationController {
 			appName.setText("Meal Suggestion");
 			mealPane.setVisible(true);
 			healthStatusText.setVisible(true);
-			//Turn on scene depends on health status
+			//Turn on scene depends on health status and sleep status
+			if (sceneCode.contains("much") || sceneCode.contains("little")) {
+				sleepMealDes.setVisible(true);
+				if (sceneCode.contains("under")) {
+					//an under-weight shouldn't drink tea, so only show other options
+					nutButton.setVisible(true);
+					fruitButton.setVisible(true);
+				}
+				else {
+					nutButton.setVisible(true);
+					fruitButton.setVisible(true);
+					teaButton.setVisible(true);
+					if (sceneCode.contains("little")) {
+						teaButton.setVisible(false);
+					}
+				}
+			}
 			if (sceneCode.contains("over")) {
 				healthStatusText.setText("Health status: You are overweight");
 				
@@ -248,7 +266,7 @@ public class ApplicationController {
 	@FXML
 	public void openMealSuggestion(ActionEvent e) {
 		BMIControl mealSuggestion = new BMIControl();
-		turnOnScene(mealSuggestion.getSuitableHealthStatus(userBMI) + "Meal");
+		turnOnScene(mealSuggestion.getSuitableHealthStatus(userBMI) + "Meal" + userSleepStatus);
 	}
 
 	//The function below opens the exercise
