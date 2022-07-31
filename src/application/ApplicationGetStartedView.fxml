@@ -7,7 +7,7 @@
 <?import javafx.scene.text.*?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="heightErrorLabel" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ApplicationController">
+<VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ApplicationController">
    <children>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Health Tracker" textAlignment="CENTER" wrappingWidth="371.13671875">
          <font>
