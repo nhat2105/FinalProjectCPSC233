@@ -20,10 +20,11 @@ public class ApplicationController {
 	
 	private double userWeight, userHeight;
 	double userBMI;
+	String userSleepStatus;
 	
 	//Result display text
 	@FXML
-	private Text sleepResult, BMIDisplay, healthStatusText, recommendActText;
+	private Text sleepResult, BMIDisplay, healthStatusText;
 	
 	//Error text
 	@FXML
@@ -43,7 +44,9 @@ public class ApplicationController {
 	
 	//Data display text
 	@FXML
-    private Text weightDisplay, heightDisplay, appName, sleepData, eatingData, exerciseData, mealSuggestionText;
+    private Text weightDisplay, heightDisplay, appName, sleepData, eatingData, exerciseData;
+	@FXML
+    private Text sleepActDescription, sleepActDescription2;
 
 
     //Feature button
@@ -57,6 +60,8 @@ public class ApplicationController {
     //Exercise button
     @FXML
     private Button squatButton, joggingButton, cyclingButton, swimmingButton, runningButton, pushUpButton;
+    @FXML
+    private Button sleepExercisesButton, sleepExercisesButton1, sleepExercisesButton2;
     
 
     //The function below takes in user inputs for their height and weights
@@ -121,6 +126,11 @@ public class ApplicationController {
 			sleepResult.setText(sleepHoursTrack);
 			sleepResult.setVisible(true);
 			sleepData.setVisible(true);
+			userSleepStatus = sleepTrack.getSleepStatus();
+			if (userSleepStatus != null) {
+				healthStatusText.setText("Health status: " + userSleepStatus + " sleep");
+				healthStatusText.setVisible(true);
+			}
 		}
 		else {
 			sleepResult.setText(errorFreeInput);
@@ -133,7 +143,7 @@ public class ApplicationController {
     @FXML
     void openExercise(ActionEvent event) {
     	BMIControl exercises = new BMIControl();
-    	turnOnScene(exercises.getSuitableHealthStatus(userBMI) + "Exercises");
+    	turnOnScene(exercises.getSuitableHealthStatus(userBMI) + "Exercises" + userSleepStatus);
     }
     
     //The function below opens the right screen
@@ -155,14 +165,22 @@ public class ApplicationController {
 			appName.setText("Exercise Recommendation");
 			exercisePane.setVisible(true);
 			exerciseData.setVisible(true);
-			recommendActText.setVisible(true);
 			healthStatusText.setVisible(true);
 			
 			//Turn off other features
 			sleepTrackerPane.setVisible(false);
 			mealPane.setVisible(false);
 			
-			//This feature is turned on based on the BMI result
+			//This feature is turned on based on the BMI result and also sleep results
+			if (sceneCode.contains("much") || sceneCode.contains("little")) {// this indicates user had used sleep tracker
+				sleepExercisesButton.setVisible(true);
+				sleepExercisesButton1.setVisible(true);
+				sleepExercisesButton2.setVisible(true);
+				sleepActDescription.setVisible(true);
+				sleepActDescription2.setVisible(true);
+				
+			}
+			
 			if (sceneCode.contains("over")) {
 				healthStatusText.setText("Health status: You are overweight");
 				
