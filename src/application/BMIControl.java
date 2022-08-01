@@ -1,6 +1,8 @@
 package application;
 
 public class BMIControl {
+	//The function below returns user weight status
+	//based on their BMI
 	public String getSuitableHealthStatus(double BMI) {
 		if (BMI >= 25) {
 			return "overWeight";

@@ -98,7 +98,8 @@ public class ApplicationController {
 			VBox root = loader.load(new FileInputStream("src/application/ApplicationView.fxml"));
 			
 			ApplicationController mainController = loader.getController();
-			//The below codes pass data between scenes
+			
+			//The below codes pass data (user's weight and height )between scenes
 			
 			mainController.setUserHeight(String.valueOf(getUserHeight()));
 			mainController.setUserWeight(String.valueOf(getUserWeight()));
@@ -117,12 +118,18 @@ public class ApplicationController {
 		this.userBMI = BMI;
 	}
 	
-	//The function below get the sleep tracker
-	//result when the right button is clicked
+	/*
+	 * The function below get the sleep tracker
+	result when the right button is clicked
+	*/
 	@FXML
 	public void getSleepResult(ActionEvent e) {
+		//Create new sleep tracker
 		SleepTracker sleepTrack = new SleepTracker();
+		//Validate input
 		String errorFreeInput = validateInput(sleepInput.getText(), 24 * 7, 0);
+		
+		//If input is valid, display the result for sleep status
 		if (errorFreeInput == "") {
 			String sleepHoursTrack = sleepTrack.getSleepResult(sleepInput.getText());
 			sleepResult.setText(sleepHoursTrack);
@@ -134,22 +141,30 @@ public class ApplicationController {
 				healthStatusText.setVisible(true);
 			}
 		}
+		//If input is invalid, error message is displayed
 		else {
 			sleepResult.setText(errorFreeInput);
 		}
 		
 	}
 	
-	//The function below opens and function the exercise
-	//suggestion feature when the right button is clicked
+	/*
+	 * The function below opens and function the exercise
+		suggestion feature when the right button is clicked
+	*/
     @FXML
     void openExercise(ActionEvent event) {
     	BMIControl exercises = new BMIControl();
     	turnOnScene(exercises.getSuitableHealthStatus(userBMI) + "Exercises" + userSleepStatus);
     }
     
-    //The function below opens the right screen
-    //for the right feature
+    /**
+     * The function below turns on the right for the 
+     * right feature, determined by the String sceneCode
+     * passed as the argument
+     * @param sceneCode the String which contains the 
+     * name or code that refers to the right feature
+     */
 	private void turnOnScene(String sceneCode) {
 		sleepTrackerPane.setStyle(""
 				+ "-fx-background-color:lightgray; "
@@ -182,7 +197,7 @@ public class ApplicationController {
 				sleepActDescription2.setVisible(true);
 				
 			}
-			
+			//over-weight screen
 			if (sceneCode.contains("over")) {
 				healthStatusText.setText("Health status: You are overweight");
 				
@@ -190,6 +205,7 @@ public class ApplicationController {
 				cyclingButton.setVisible(true);
 				runningButton.setVisible(true);
 			}
+			//under-weight screen
 			else if (sceneCode.contains("under")) {
 				healthStatusText.setText("Health status: You are underweight");
 				
@@ -197,6 +213,7 @@ public class ApplicationController {
 				joggingButton.setVisible(true);
 				pushUpButton.setVisible(true);
 			}
+			//normal status screen
 			else {
 				healthStatusText.setText("Health status: You are normal");
 				swimmingButton.setVisible(true);
@@ -233,6 +250,7 @@ public class ApplicationController {
 					}
 				}
 			}
+			//over-weight screen
 			if (sceneCode.contains("over")) {
 				healthStatusText.setText("Health status: You are overweight");
 				
@@ -240,6 +258,7 @@ public class ApplicationController {
 				vegetableButton.setVisible(true);
 				soupButton.setVisible(true);
 			}
+			//under-weight screen
 			else if (sceneCode.contains("under")) {
 				healthStatusText.setText("Health status: You are underweight");
 				
@@ -276,11 +295,10 @@ public class ApplicationController {
 		turnOnScene("Sleep Tracker");
 	}
 
-
+	//Setter and getter for user weight input
 	double getUserWeight() {
 		return userWeight;
 	}
-
 	void setUserWeight(String userWeight) {
 		if (userWeight != null) {
 			this.userWeight = Double.parseDouble(userWeight);
@@ -289,7 +307,7 @@ public class ApplicationController {
 			this.userWeight = 0;
 		}
 	}
-
+	//Setter and getter for height input
 	double getUserHeight() {
 		
 		return userHeight;
@@ -303,6 +321,16 @@ public class ApplicationController {
 			this.userHeight = 0;
 		}
 	}
+	/**
+	 * The method below takes a string as a parameter and validate whether
+	 * it is a valid number to be converted into a double, it returns the 
+	 * error message of how it is invalid, if it is valid then error message will
+	 * be an empty string
+	 * @param stringInput represents the input user put in
+	 * @param upperBound represents the max value of the double converted from stringInput should be
+	 * @param lowerBound represents the minimum value the double converted from stringInput should be
+	 * @return error message, empty if stringInput is error-free
+	 */
 	public String validateInput(String stringInput, int upperBound, int lowerBound) {
 		
     	//counter to keep track of '.' char
@@ -325,9 +353,8 @@ public class ApplicationController {
     		}
     	}
     	
-    	/*Verify whether the project grade input was in a valid range
-    	 *If not it will be 0
-    	*/
+    	/* Verify whether the project grade input was in a valid range
+    	 If not it will be 0 */
     	if (Double.parseDouble(stringInput) < lowerBound || Double.parseDouble(stringInput) > upperBound ) {//hours of 7 days
     		return ("Error. Value entered should be in between " + lowerBound + " and " + upperBound);
     	}
