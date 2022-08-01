@@ -5,10 +5,16 @@ public class SleepTracker {
 	double sleepHours, sleepHoursEveryday;
 	String sleepStatus;
 	
-	//Try to add later so that whenever it
+	//Will try later so that whenever it
 	//switches back to the main screen, the input
 	//still saves
 	
+	/**
+	 * The method below returns the sleep result based on 
+	 * sleepInput the user entered
+	 * @param sleepInput String representation of user's hours of sleeps in a week
+	 * @return sleep status in terms of string
+	 */
 	public String getSleepResult(String sleepInput) {
 		//Validate input{
 		sleepHours = Double.parseDouble(sleepInput);
@@ -30,6 +36,7 @@ public class SleepTracker {
 					+ "you have at least 7 hours of sleep every day.";
 			}	
 	}
+	//getter for user's sleep Status
 	public String getSleepStatus() {
 		return sleepStatus;
 	}

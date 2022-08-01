@@ -262,7 +262,7 @@
                                     </Button>
                                  </children>
                               </HBox>
-                              <Text fx:id="sleepMealDes" strokeType="OUTSIDE" strokeWidth="0.0" text="Try to include at least 1 food below in your daily meal menu" visible="false" wrappingWidth="254.13671875">
+                              <Text fx:id="sleepMealDes" strokeType="OUTSIDE" strokeWidth="0.0" text="Try to include at least 1 food below in your daily meal menu to improve your sleep quality" visible="false" wrappingWidth="254.13671875">
                                  <VBox.margin>
                                     <Insets top="10.0" />
                                  </VBox.margin>
