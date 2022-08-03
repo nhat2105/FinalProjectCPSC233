@@ -23,7 +23,7 @@ public class SleepTracker {
 		
 		if (sleepHoursEveryday >= 9.5) {
 			sleepStatus = "too much";
-			return "You sleep too much. Try to reduce it" 
+			return "You sleept too much. Try to reduce it" 
 				+" to 7 to 9 hours per day.";
 			}
 		else if (sleepHoursEveryday >= 7 && sleepHoursEveryday < 9.5) {
