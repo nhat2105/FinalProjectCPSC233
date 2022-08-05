@@ -20,6 +20,19 @@ public class BMIControl {
 			return "all";
 		}
 	}
+	//The following method get nutrition
+	//values of exercises and food
+	public String getInfo(String code) { 
+		switch(code) { 
+		case "chicken": break; 
+		case "pork": break; 
+		case "rice": break; 
+		case "vegetable": break; 
+		case "soup": break; 
+		case "salmon": break; 
 
+		} 
+		return code; 
+		}
 	
 }
