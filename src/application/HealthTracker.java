@@ -48,4 +48,48 @@ public class HealthTracker{
 		
 	}
 
+
+	//Setter and getter for user weight input
+	double getUserWeight() {
+		return userWeight;
+	}
+	void setUserWeight(String userWeight) {
+		if (userWeight != null) {
+			this.userWeight = Double.parseDouble(userWeight);
+		}
+		else {
+			this.userWeight = 0;
+		}
+	}
+	//Setter and getter for height input
+	double getUserHeight() {
+		return userHeight;
+	}
+
+	void setUserHeight(String userHeight) {
+		if (userHeight != null) { 
+			this.userHeight = Double.parseDouble(userHeight);
+		}
+		else {
+			this.userHeight = 0;
+		}
+	}
+	void setUserBMI(double BMI) {
+		this.userBMI = BMI;
+	}
+	double getUserBMI() {
+		return this.userBMI;
+	}
+
+
+	public void updateUserData(String userHeight, String userWeight, double userBMI) {
+		this.setUserBMI(userBMI);
+		this.setUserHeight(userHeight);
+		this.setUserWeight(userWeight);
+		
+	}
+
+
+
+	
 }
