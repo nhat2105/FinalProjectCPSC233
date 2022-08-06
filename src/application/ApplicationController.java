@@ -22,6 +22,9 @@ public class ApplicationController {
 	double userBMI;
 	String userSleepStatus;
 	
+	Meal mealSuggestion;
+	SleepTracker sleepTracker;
+	
 	//Result display text
 	@FXML
 	private Text sleepResult, BMIDisplay, healthStatusText;
@@ -40,13 +43,16 @@ public class ApplicationController {
 	
     //Meal buttons
 	@FXML
-	private Button vegetableButton, porkButton, riceButton, chickenButton, soupButton, salmonButton;
+	private Button vegetableButton, porkButton, beefButton, chickenButton, soupButton, seedButton;
 	@FXML
 	private Button nutButton, fruitButton, teaButton;
+	@FXML
+	private Button vegeOption, meatOption;
+	
 	
 	//Data display text
 	@FXML
-    private Text weightDisplay, heightDisplay, appName, sleepData, eatingData, exerciseData;
+    private Text weightDisplay, heightDisplay, appName, sleepData, eatingData, exerciseData, mealOptionText;
 	@FXML
     private Text sleepActDescription, sleepActDescription2, sleepMealDes;
 
@@ -125,17 +131,17 @@ public class ApplicationController {
 	@FXML
 	public void getSleepResult(ActionEvent e) {
 		//Create new sleep tracker
-		SleepTracker sleepTrack = new SleepTracker();
+		sleepTracker = new SleepTracker();
 		//Validate input
 		String errorFreeInput = validateInput(sleepInput.getText(), 24 * 7, 0);
 		
 		//If input is valid, display the result for sleep status
 		if (errorFreeInput == "") {
-			String sleepHoursTrack = sleepTrack.getSleepResult(sleepInput.getText());
+			String sleepHoursTrack = sleepTracker.getSleepResult(sleepInput.getText());
 			sleepResult.setText(sleepHoursTrack);
 			sleepResult.setVisible(true);
 			sleepData.setVisible(true);
-			userSleepStatus = sleepTrack.getSleepStatus();
+			userSleepStatus = sleepTracker.getSleepStatus();
 			if (userSleepStatus != null) {
 				healthStatusText.setText("Health status: " + userSleepStatus + " sleep");
 				healthStatusText.setVisible(true);
@@ -188,7 +194,8 @@ public class ApplicationController {
 			sleepTrackerPane.setVisible(false);
 			mealPane.setVisible(false);
 			
-			//This feature is turned on based on the BMI result and also sleep results
+			//This feature is turned on based on the user preference and also sleep results
+			
 			if (sceneCode.contains("much") || sceneCode.contains("little")) {// this indicates user had used sleep tracker
 				sleepExercisesButton.setVisible(true);
 				sleepExercisesButton1.setVisible(true);
@@ -197,6 +204,7 @@ public class ApplicationController {
 				sleepActDescription2.setVisible(true);
 				
 			}
+			/**
 			//over-weight screen
 			if (sceneCode.contains("over")) {
 				healthStatusText.setText("Health status: You are overweight");
@@ -223,7 +231,9 @@ public class ApplicationController {
 				joggingButton.setVisible(true);
 				pushUpButton.setVisible(true);
 			}
+			*/
 		}
+		
 		else if (sceneCode.contains("Meal")) {
 			//Turn off other features
 			sleepTrackerPane.setVisible(false);
@@ -232,8 +242,10 @@ public class ApplicationController {
 			//Turn on this feature
 			appName.setText("Meal Suggestion");
 			mealPane.setVisible(true);
+			mealOptionText.setVisible(true);
 			healthStatusText.setVisible(true);
-			//Turn on scene depends on health status and sleep status
+			//Turn on scene depends on user's preferences and sleep status
+			
 			if (sceneCode.contains("much") || sceneCode.contains("little")) {
 				sleepMealDes.setVisible(true);
 				if (sceneCode.contains("under")) {
@@ -250,11 +262,12 @@ public class ApplicationController {
 					}
 				}
 			}
+			/**
 			//over-weight screen
 			if (sceneCode.contains("over")) {
 				healthStatusText.setText("Health status: You are overweight");
 				
-				salmonButton.setVisible(true);
+				seedButton.setVisible(true);
 				vegetableButton.setVisible(true);
 				soupButton.setVisible(true);
 			}
@@ -264,18 +277,19 @@ public class ApplicationController {
 				
 				porkButton.setVisible(true);
 				chickenButton.setVisible(true);
-				riceButton.setVisible(true);
+				beefButton.setVisible(true);
 			}
 			else {
 				healthStatusText.setText("Health status: You are normal");
 				
-				salmonButton.setVisible(true);
+				seedButton.setVisible(true);
 				vegetableButton.setVisible(true);
 				soupButton.setVisible(true);
 				porkButton.setVisible(true);
 				chickenButton.setVisible(true);
-				riceButton.setVisible(true);
+				beefButton.setVisible(true);
 			}
+			*/
 			
 		}
 		
@@ -284,7 +298,7 @@ public class ApplicationController {
 	//suggestion feature when the right button is clicked
 	@FXML
 	public void openMealSuggestion(ActionEvent e) {
-		ActivitiesTracker mealSuggestion = new ActivitiesTracker();
+		mealSuggestion = new Meal();
 		turnOnScene(mealSuggestion.getSuitableHealthStatus(userBMI) + "Meal" + userSleepStatus);
 	}
 
@@ -321,6 +335,16 @@ public class ApplicationController {
 			this.userHeight = 0;
 		}
 	}
+	//This function below is triggered when user chooses food pref as 
+	//vegetable, which is used to set user preference
+    @FXML
+    void setPrefToVegetable(ActionEvent event) {
+    	mealSuggestion.setPreference("vegetable");
+    }
+    @FXML
+    void setPrefToMeat(ActionEvent event) {
+    	mealSuggestion.setPreference("meat");
+    }
 	/**
 	 * The method below takes a string as a parameter and validate whether
 	 * it is a valid number to be converted into a double, it returns the 
