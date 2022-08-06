@@ -427,7 +427,6 @@ public class ApplicationController {
     }
     @FXML
     void addFoodToMenu(ActionEvent e) {
-    	//Allow duplicate kind of food for now
     	mainTracker.addToTodo(new Meal(meal.getCode()));
     	toDoDisplay.setText(mainTracker.getToDoList());
     	
@@ -437,11 +436,8 @@ public class ApplicationController {
     }
     @FXML
     void addExerciseToList(ActionEvent e) {
-    	//Allow duplicate kind of food for now
     	mainTracker.addToTodo(new Exercises(exercises.getCode()));
     	toDoDisplay.setText(mainTracker.getToDoList());
     	
-    	//Also added method to suggest whether something should be added
-    	//according to their BMI
     }
 }
