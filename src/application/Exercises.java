@@ -1,7 +1,6 @@
 package application;
 
 public class Exercises extends Activities {
-	
 	//CHANGE: use constructor to store calories data, args code and userWeight
 	
 	
@@ -66,6 +65,4 @@ public class Exercises extends Activities {
 	String getInfo(String exerciseCode, double userWeight) {
 		return "This activity consumes " + getCaloriesInfo(exerciseCode, userWeight) + " calories in 30 minutes for you";
 	}
-
-	
 }

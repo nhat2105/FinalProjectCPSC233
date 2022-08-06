@@ -5,6 +5,7 @@ public class Activities{
 	int protein = 0;
 	int fat = 0;
 	String preference = "";
+	String actCode = "";
 	
 	
 	public void setPreference(String pref) {
@@ -32,6 +33,13 @@ public class Activities{
 	}
 	protected void setProteinInfo(int proteinAmount) {
 		this.protein = proteinAmount;
+	}
+	public void setCode(String actCode) {
+		this.actCode = actCode;
+		
+	}
+	public String getCode() {
+		return actCode;
 	}
 	
 }

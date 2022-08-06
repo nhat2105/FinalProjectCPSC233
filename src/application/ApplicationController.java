@@ -26,7 +26,7 @@ public class ApplicationController {
 	HealthTracker mainTracker = new HealthTracker();
 	SleepTracker sleepTracker;
 	Exercises exercises = new Exercises();
-	Meal meal = new Meal();
+	Meal meal = new Meal("none");
 	
 	
 	//Result display text
@@ -51,7 +51,7 @@ public class ApplicationController {
 	@FXML
 	private Button nutButton, fruitButton, teaButton;
 	@FXML
-	private Button vegeOption, meatOption, bothOption, cardioOption, mildOption, bothEOption;
+	private Button vegeOption, meatOption, bothOption, cardioOption, mildOption, bothEOption, addToMenuButton;
 	
 	
 	//Data display text
@@ -194,6 +194,7 @@ public class ApplicationController {
 			if (sceneCode.contains("opening")) {
 				exerciseOptionText.setVisible(true);
 				activitiesInfoText.setVisible(false);
+				
 			}
 			else if (!sceneCode.contains("opening")) {
 				exerciseOptionText.setText("");
@@ -248,6 +249,8 @@ public class ApplicationController {
 			if (sceneCode.contains("opening")) {//If it is still the main screen
 				mealOptionText.setVisible(true);
 				mealInfoText.setVisible(false);
+				addToMenuButton.setVisible(false);
+				
 			}
 			else if (!sceneCode.contains("opening")) {
 				mealOptionText.setText("");
@@ -354,28 +357,32 @@ public class ApplicationController {
     @FXML
     void getInfo(ActionEvent ae) {
     	String actInfo =  "";
+    	String actCode = "";
     	if (ae.getSource() == runningButton) {
-    		actInfo = exercises.getInfo("running", mainTracker.getUserWeight());
+    		actCode = "running";
+    		
     	}
     	else if (ae.getSource() == swimmingButton) {
-    		actInfo = exercises.getInfo("swim", mainTracker.getUserWeight());
+    		actCode = "swim";
     	}
     	else if (ae.getSource() == joggingButton) {
-    		actInfo = exercises.getInfo("jogging", mainTracker.getUserWeight());
+    		actCode = "jogging";
     	}
     	else if (ae.getSource() == cyclingButton) {
-    		actInfo = exercises.getInfo("cycling", mainTracker.getUserWeight());
+    		actCode = "cycling";
     	}
     	else if (ae.getSource() == squatButton) {
-    		actInfo = exercises.getInfo("squat", mainTracker.getUserWeight());
+    		actCode = "squat";
     	}
     	else if (ae.getSource() == pushUpButton) {
-    		actInfo = exercises.getInfo("pushUp", mainTracker.getUserWeight());
+    		actCode = "pushUp";
     	}
     	if (ae.getSource() == vegetableButton) {
-    		actInfo = exercises.getInfo("vegetable", mainTracker.getUserWeight());
+    		actCode = "vege";
     	}
-		activitiesInfoText.setText("Info: " + actInfo + ". Pressed 'y' to add to your activities list");
+    	exercises.setCode(actCode);
+    	actInfo = exercises.getInfo(actCode, mainTracker.getUserWeight());
+		activitiesInfoText.setText("Info: " + actInfo + ". Pressed the button below to add to your activities list");
     	activitiesInfoText.setVisible(true);
     }
     /*The following function get the basic information of each
@@ -383,27 +390,35 @@ public class ApplicationController {
      */
     @FXML
     void getMealInfo(ActionEvent ae) {
-    	String mealInfo =  "";
+    	addToMenuButton.setVisible(true);
+    	String mealCode = "";
     	if (ae.getSource() == vegetableButton) {
-    		mealInfo = meal.getInfo("vege");
+    		mealCode = "vegetable";
     	}
     	if (ae.getSource() == soupButton){
-    		mealInfo = meal.getInfo("soup");
+    		mealCode = "soup";
     	}
     	if (ae.getSource() == seedButton) {
-    		mealInfo = meal.getInfo("seed");
+    		mealCode = "seed";
     	}
     	if (ae.getSource() == chickenButton) {
-    		mealInfo = meal.getInfo("chicken");
+    		mealCode = "chicken";
     	}
     	if (ae.getSource() == beefButton){
-    		mealInfo = meal.getInfo("beef");
+    		mealCode = "beef";
     	}
     	if (ae.getSource() == porkButton) {
-    		mealInfo = meal.getInfo("pork");
+    		mealCode = "pork";
     	}
-		mealInfoText.setText("Info: " + mealInfo + ". Pressed 'y' to add to your activities list");
+    	meal.setCode(mealCode);
+    	String mealInfo = meal.getInfo(mealCode);
+		mealInfoText.setText("Info: " + mealInfo + ". Pressed the button below to add to your activities list");
     	mealInfoText.setVisible(true);
     }
-    
+    @FXML
+    void addFoodToMenu(ActionEvent e) {
+    	//Allow duplicate kind of food for now
+    	mainTracker.addToTodo(new Meal(meal.getCode()));
+    	System.out.println(mainTracker.getToDoList());
+    }
 }
