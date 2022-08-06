@@ -161,11 +161,7 @@ public class ApplicationController {
 	 * The function below opens and function the exercise
 		suggestion feature when the right button is clicked
 	*/
-    @FXML
-    void openExercise(ActionEvent event) {
-    	exercises = new Exercises();
-    	turnOnScene("inExercisesopening" + userSleepStatus);
-    }
+
     
     /**
      * The function below turns on the right for the 
@@ -313,20 +309,21 @@ public class ApplicationController {
 		}
 		
 	}
-	//The function below opens and function the meal
-	//suggestion feature when the right button is clicked
-	@FXML
-	public void openMealSuggestion(ActionEvent e) {
-		mealSuggestion = new Meal();
-		turnOnScene("inMealopening" + userSleepStatus);
-	}
-
-	//The function below opens the exercise
-	//sleep tracker feature when the right button is clicked
-	@FXML
-	public void openSleepTracker(ActionEvent e){
-		turnOnScene("Sleep Tracker");
-	}
+    @FXML
+    void openFeature(ActionEvent ae) {
+    	if (ae.getSource() == exerciseButton) {
+    		exercises = new Exercises();
+        	turnOnScene("inExercisesopening" + userSleepStatus);
+    	}
+    	if (ae.getSource() == mealsButton) {
+    		mealSuggestion = new Meal();
+    		turnOnScene("inMealopening" + userSleepStatus);
+    	}
+    	if (ae.getSource() == sleepTrackerButton) {
+    		turnOnScene("Sleep Tracker");
+    	}
+    	
+    }
 	//This function below is triggered when user chooses food pref as 
 	//vegetable, which is used to set user preference
     @FXML
