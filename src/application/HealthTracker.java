@@ -101,6 +101,7 @@ public class HealthTracker{
 		result += "There are " + toDoList.size() + " things in to do list\n";
 		for (Activities a: toDoList) {
 			result += index + ". " + a.toString() + "\n";
+			index++;
 		}
 		return result;
 	}
