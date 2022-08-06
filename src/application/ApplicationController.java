@@ -31,7 +31,7 @@ public class ApplicationController {
 	
 	//Result display text
 	@FXML
-	private Text sleepResult, BMIDisplay, healthStatusText;
+	private Text sleepResult, BMIDisplay, healthStatusText, toDoDisplay;
 	
 	//Error text
 	@FXML
@@ -184,7 +184,6 @@ public class ApplicationController {
 		else if (sceneCode.contains("inExercises")) {
 			appName.setText("Exercise Recommendation");
 			exercisePane.setVisible(true);
-			exerciseData.setVisible(true);
 			healthStatusText.setVisible(true);
 			addActListButton.setVisible(false);
 			
@@ -198,6 +197,7 @@ public class ApplicationController {
 				
 			}
 			else if (!sceneCode.contains("opening")) {
+				exerciseData.setVisible(true);
 				exerciseOptionText.setText("");
 				cardioOption.setVisible(false);
 				mildOption.setVisible(false);
@@ -254,6 +254,7 @@ public class ApplicationController {
 				
 			}
 			else if (!sceneCode.contains("opening")) {
+				eatingData.setVisible(true);
 				mealOptionText.setText("");
 				bothOption.setVisible(false);
 				vegeOption.setVisible(false);
@@ -421,12 +422,13 @@ public class ApplicationController {
     void addFoodToMenu(ActionEvent e) {
     	//Allow duplicate kind of food for now
     	mainTracker.addToTodo(new Meal(meal.getCode()));
-    	System.out.println(mainTracker.getToDoList());
+    	toDoDisplay.setText(mainTracker.getToDoList());
     }
     @FXML
     void addExerciseToList(ActionEvent e) {
     	//Allow duplicate kind of food for now
     	mainTracker.addToTodo(new Exercises(exercises.getCode()));
-    	System.out.println(mainTracker.getToDoList());
+    	toDoDisplay.setText(mainTracker.getToDoList());
+    	
     }
 }

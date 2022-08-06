@@ -2,7 +2,7 @@ package application;
 
 public class Exercises extends Activities {
 	public Exercises(String code) {
-		setCode(code);
+		super(code);
 	}
 
 	//Next step, when clicked on, display data for each button

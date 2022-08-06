@@ -1,9 +1,8 @@
 package application;
 
 public class Meal extends Activities {
-	
 	public Meal(String code) {
-		setCode(code);
+		super(code);
 	}
 	public double getProteinInfo(String code) {//protein per 100g for now
 		switch(code) { 
