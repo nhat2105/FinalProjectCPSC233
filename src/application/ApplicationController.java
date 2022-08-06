@@ -19,9 +19,9 @@ public class ApplicationController {
 	Stage applicationStage;
 
 	String userSleepStatus;
-	double userBMI = 0;
+	double userBMI, userHeight, userWeight;
 	
-	HealthTracker mainTracker;
+	HealthTracker mainTracker = new HealthTracker();
 	Meal mealSuggestion;
 	SleepTracker sleepTracker;
 	Exercises exercises;
@@ -80,8 +80,9 @@ public class ApplicationController {
     	String errorFreeHeightInput = mainTracker.validateInput(userHeightInput.getText(), 215, 1);
     	String errorFreeWeightInput = mainTracker.validateInput(userWeightInput.getText(), 130, 1);
     	if (errorFreeHeightInput == "" && errorFreeWeightInput == "") {
-	    	mainTracker.setUserHeight(userHeightInput.getText());
-	    	mainTracker.setUserWeight(userWeightInput.getText());
+	    	setUserHeight(userHeightInput.getText());
+	    	setUserWeight(userWeightInput.getText());
+	    	//mainTracker.setUserWeight(userWeightInput.getText());
 	    	switchScene("Main View");
     	}
     	else {
@@ -103,19 +104,29 @@ public class ApplicationController {
 		if (view.equalsIgnoreCase("Main View")) {
 			FXMLLoader loader = new FXMLLoader();
 			VBox root = loader.load(new FileInputStream("src/application/ApplicationView.fxml"));
-			
-			ApplicationController mainController = loader.getController();
-			
 			//The below codes pass data (user's weight and height )between scenes
+			ApplicationController mainController = loader.getController();
+			mainController.setUserHeight(String.valueOf(getUserHeight()));
+			mainController.setUserWeight(String.valueOf(getUserWeight()));
+			userBMI = getUserWeight()/ ((getUserHeight()/100)*(getUserHeight()/100));
+	    	mainController.setUserBMI(userBMI);
 			
-			mainController.mainTracker.setUserHeight(String.valueOf(mainTracker.getUserHeight()));
-			mainController.mainTracker.setUserWeight(String.valueOf(mainTracker.getUserWeight()));
-			userBMI = mainTracker.getUserWeight()/ ((mainTracker.getUserHeight()/100)*(mainTracker.getUserHeight()/100));
-	    	mainController.mainTracker.setUserBMI(userBMI);
+			/**
+			mainController.userHeight = (String.valueOf(mainTracker.getUserHeight()));
+			mainController.userWeight = (String.valueOf(mainTracker.getUserWeight()));
+			mainTracker.setUserHeight(String.valueOf(mainController.userHeight));
+			mainTracker.setUserWeight(String.valueOf(mainController.userWeight));
+			*/
+			
+			
+			
+			//mainController.userBMI = .getUserWeight()/ ((mainTracker.getUserHeight()/100)*(mainTracker.getUserHeight()/100));
+	    	//mainTracker.setUserBMI(userBMI);
 			Scene scene = new Scene(root, 600, 400);
 			
 	    	applicationStage.setScene(scene);
 	    	applicationStage.show();
+
 	    	
 		}
 		
@@ -159,6 +170,7 @@ public class ApplicationController {
 	*/
     @FXML
     void openExercise(ActionEvent event) {
+    	System.out.println(getUserHeight());
     	exercises = new Exercises();
     	turnOnScene("inExercisesopening" + userSleepStatus);
     }
@@ -355,4 +367,33 @@ public class ApplicationController {
     	exercises.setPreference("both");
     	turnOnScene("bothEinExercises");
     }
+	//Setter and getter for user weight input
+	double getUserWeight() {
+		return userWeight;
+	}
+	void setUserWeight(String userWeight) {
+		if (userWeight != null) {
+			this.userWeight = Double.parseDouble(userWeight);
+		}
+		else {
+			this.userWeight = 0;
+		}
+	}
+	//Setter and getter for height input
+	double getUserHeight() {
+		
+		return userHeight;
+	}
+
+	void setUserHeight(String userHeight) {
+		if (userHeight != null) {
+			this.userHeight = Double.parseDouble(userHeight);
+		}
+		else {
+			this.userHeight = 0;
+		}
+	}
+	void setUserBMI(double BMI) {
+		this.userBMI = BMI;
+	}
 }
