@@ -197,15 +197,35 @@
                                     <Insets />
                                  </opaqueInsets>
                               </HBox>
+                              <HBox prefHeight="55.0" prefWidth="256.0" />
                            </children>
                         </VBox>
                      </children>
                   </Pane>
                   <Pane fx:id="mealPane" layoutX="160.0" layoutY="1.0" prefHeight="304.0" prefWidth="271.0" visible="false">
                      <children>
-                        <Text fx:id="mealSuggestionText" layoutX="13.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Meal Suggestion:" textAlignment="CENTER" visible="false" wrappingWidth="244.13671875" />
+                        <Text fx:id="mealOptionText" layoutX="13.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="What type of food do you prefer?" textAlignment="CENTER" visible="false" wrappingWidth="244.13671875" />
                         <VBox layoutX="7.0" layoutY="54.0" prefHeight="220.0" prefWidth="256.0">
                            <children>
+                              <HBox prefHeight="40.0" prefWidth="256.0">
+                                 <children>
+                                    <Button fx:id="vegeOption" mnemonicParsing="false" onAction="#setPrefToVegetable" prefHeight="25.0" prefWidth="75.0" text="Vegetable">
+                                       <HBox.margin>
+                                          <Insets left="20.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="meatOption" mnemonicParsing="false" onAction="#setPrefToMeat" prefHeight="25.0" prefWidth="73.0" text="Meat">
+                                       <HBox.margin>
+                                          <Insets left="5.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="bothOption" mnemonicParsing="false" onAction="#setPrefToBoth" prefHeight="25.0" prefWidth="51.0" text="Both">
+                                       <HBox.margin>
+                                          <Insets left="5.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                              </HBox>
                               <HBox prefHeight="31.0" prefWidth="256.0">
                                  <children>
                                     <Button fx:id="vegetableButton" mnemonicParsing="false" prefHeight="18.0" prefWidth="75.0" text="Vegetable" visible="false">
@@ -224,7 +244,7 @@
                                           <Insets left="5.0" top="15.0" />
                                        </HBox.margin>
                                     </Button>
-                                    <Button fx:id="salmonButton" layoutX="108.0" layoutY="40.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="75.0" text="Salmon" visible="false">
+                                    <Button fx:id="seedButton" layoutX="108.0" layoutY="40.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="75.0" text="Seed" visible="false">
                                        <opaqueInsets>
                                           <Insets />
                                        </opaqueInsets>
@@ -252,7 +272,7 @@
                                           <Insets left="5.0" top="15.0" />
                                        </HBox.margin>
                                     </Button>
-                                    <Button fx:id="riceButton" layoutX="108.0" layoutY="40.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="75.0" text="Rice" visible="false">
+                                    <Button fx:id="beefButton" layoutX="108.0" layoutY="40.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="75.0" text="Beef" visible="false">
                                        <opaqueInsets>
                                           <Insets />
                                        </opaqueInsets>

@@ -1,6 +1,7 @@
 package application;
 
 public class Meal extends ActivitiesTracker {
+	String preference = "";
 	
 	public void setInfo(String code) {
 		switch(code) { 
@@ -12,5 +13,10 @@ public class Meal extends ActivitiesTracker {
 		case "salmon": break; 
 		}
 
+	}
+
+	public void setPreference(String pref) {
+		this.preference = pref;
+		
 	}
 }
