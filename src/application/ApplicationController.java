@@ -17,11 +17,11 @@ import javafx.stage.Stage;
 
 public class ApplicationController {
 	Stage applicationStage;
-	
-	private double userWeight, userHeight;
-	double userBMI;
+
 	String userSleepStatus;
+	double userBMI = 0;
 	
+	HealthTracker mainTracker;
 	Meal mealSuggestion;
 	SleepTracker sleepTracker;
 	Exercises exercises;
@@ -77,11 +77,11 @@ public class ApplicationController {
     @FXML
     void getStart(ActionEvent event) throws FileNotFoundException, IOException {
     	//Validate input first
-    	String errorFreeHeightInput = validateInput(userHeightInput.getText(), 215, 1);
-    	String errorFreeWeightInput = validateInput(userWeightInput.getText(), 130, 1);
+    	String errorFreeHeightInput = mainTracker.validateInput(userHeightInput.getText(), 215, 1);
+    	String errorFreeWeightInput = mainTracker.validateInput(userWeightInput.getText(), 130, 1);
     	if (errorFreeHeightInput == "" && errorFreeWeightInput == "") {
-	    	setUserHeight(userHeightInput.getText());
-	    	setUserWeight(userWeightInput.getText());
+	    	mainTracker.setUserHeight(userHeightInput.getText());
+	    	mainTracker.setUserWeight(userWeightInput.getText());
 	    	switchScene("Main View");
     	}
     	else {
@@ -108,10 +108,10 @@ public class ApplicationController {
 			
 			//The below codes pass data (user's weight and height )between scenes
 			
-			mainController.setUserHeight(String.valueOf(getUserHeight()));
-			mainController.setUserWeight(String.valueOf(getUserWeight()));
-			userBMI = getUserWeight()/ ((getUserHeight()/100)*(getUserHeight()/100));
-	    	mainController.setUserBMI(userBMI);
+			mainController.mainTracker.setUserHeight(String.valueOf(mainTracker.getUserHeight()));
+			mainController.mainTracker.setUserWeight(String.valueOf(mainTracker.getUserWeight()));
+			userBMI = mainTracker.getUserWeight()/ ((mainTracker.getUserHeight()/100)*(mainTracker.getUserHeight()/100));
+	    	mainController.mainTracker.setUserBMI(userBMI);
 			Scene scene = new Scene(root, 600, 400);
 			
 	    	applicationStage.setScene(scene);
@@ -121,9 +121,7 @@ public class ApplicationController {
 		
 	}
     
-	private void setUserBMI(double BMI) {
-		this.userBMI = BMI;
-	}
+
 	
 	/*
 	 * The function below get the sleep tracker
@@ -134,7 +132,7 @@ public class ApplicationController {
 		//Create new sleep tracker
 		sleepTracker = new SleepTracker();
 		//Validate input
-		String errorFreeInput = validateInput(sleepInput.getText(), 24 * 7, 0);
+		String errorFreeInput = mainTracker.validateInput(sleepInput.getText(), 24 * 7, 0);
 		
 		//If input is valid, display the result for sleep status
 		if (errorFreeInput == "") {
@@ -324,33 +322,6 @@ public class ApplicationController {
 	public void openSleepTracker(ActionEvent e){
 		turnOnScene("Sleep Tracker");
 	}
-
-	//Setter and getter for user weight input
-	double getUserWeight() {
-		return userWeight;
-	}
-	void setUserWeight(String userWeight) {
-		if (userWeight != null) {
-			this.userWeight = Double.parseDouble(userWeight);
-		}
-		else {
-			this.userWeight = 0;
-		}
-	}
-	//Setter and getter for height input
-	double getUserHeight() {
-		
-		return userHeight;
-	}
-
-	void setUserHeight(String userHeight) {
-		if (userHeight != null) {
-			this.userHeight = Double.parseDouble(userHeight);
-		}
-		else {
-			this.userHeight = 0;
-		}
-	}
 	//This function below is triggered when user chooses food pref as 
 	//vegetable, which is used to set user preference
     @FXML
@@ -384,46 +355,4 @@ public class ApplicationController {
     	exercises.setPreference("both");
     	turnOnScene("bothEinExercises");
     }
-   
-	/**
-	 * The method below takes a string as a parameter and validate whether
-	 * it is a valid number to be converted into a double, it returns the 
-	 * error message of how it is invalid, if it is valid then error message will
-	 * be an empty string
-	 * @param stringInput represents the input user put in
-	 * @param upperBound represents the max value of the double converted from stringInput should be
-	 * @param lowerBound represents the minimum value the double converted from stringInput should be
-	 * @return error message, empty if stringInput is error-free
-	 */
-	public String validateInput(String stringInput, int upperBound, int lowerBound) {
-		
-    	//counter to keep track of '.' char
-    	int counter = 0;
-    	//check to see if entered value is numeric
-    	for (char c: stringInput.toCharArray()) {
-    		//if a character is not a digit, display the error message
-    		if (!Character.isDigit(c) && c != '.') {
-    			return ("Don't include character such as: " + c + 
-    					", only the numerical number");
-    			
-    		}
-    		//if there is a dot, increase the tracking counter
-    		if (c == '.') {
-    			counter += 1;
-    		}
-    		//if there are more than 1 dot, it is an invalid decimal
-    		if (counter > 1) {
-    			return "Invalid value entered. Decimal should only include 1 dot";
-    		}
-    	}
-    	
-    	/* Verify whether the project grade input was in a valid range
-    	 If not it will be 0 */
-    	if (Double.parseDouble(stringInput) < lowerBound || Double.parseDouble(stringInput) > upperBound ) {//hours of 7 days
-    		return ("Error. Value entered should be in between " + lowerBound + " and " + upperBound);
-    	}
-		return "";
-		
-	}
-	
 }
