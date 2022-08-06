@@ -10,6 +10,12 @@ public class Exercises extends Activities {
 		switch(code) {
 		//each display for 30 minutes 
 		//calories burn
+		case "yoga":
+			return 100;
+		case "meditation":
+			return 35;
+		case "aerobics":
+			return 85;
 		case "pushUp":
 			return 210;//7 per min
 		case "squat":
@@ -58,6 +64,7 @@ public class Exercises extends Activities {
 				else {
 					return 180;
 				}
+			
 		}
 		return calories;
 	}

@@ -202,7 +202,7 @@
                               <Text fx:id="sleepActDescription2" boundsType="LOGICAL_VERTICAL_CENTER" strokeType="OUTSIDE" strokeWidth="0.0" text="to 30 minutes every day to improve your sleep" textAlignment="CENTER" visible="false" wrappingWidth="253.13671875" />
                               <HBox layoutX="10.0" layoutY="50.0" prefHeight="35.0" prefWidth="256.0">
                                  <children>
-                                    <Button fx:id="sleepExercisesButton" mnemonicParsing="false" prefHeight="18.0" prefWidth="75.0" text="Yoga" visible="false">
+                                    <Button fx:id="yogaButton" mnemonicParsing="false" onAction="#getInfo" prefHeight="18.0" prefWidth="75.0" text="Yoga" visible="false">
                                        <opaqueInsets>
                                           <Insets />
                                        </opaqueInsets>
@@ -210,7 +210,7 @@
                                           <Insets left="10.0" top="15.0" />
                                        </HBox.margin>
                                     </Button>
-                                    <Button fx:id="sleepExercisesButton1" layoutX="20.0" layoutY="40.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="75.0" text="Meditation" visible="false">
+                                    <Button fx:id="meditationButton" layoutX="20.0" layoutY="40.0" mnemonicParsing="false" onAction="#getInfo" prefHeight="18.0" prefWidth="75.0" text="Meditation" visible="false">
                                        <opaqueInsets>
                                           <Insets />
                                        </opaqueInsets>
@@ -218,7 +218,7 @@
                                           <Insets left="5.0" top="15.0" />
                                        </HBox.margin>
                                     </Button>
-                                    <Button fx:id="sleepExercisesButton2" layoutX="108.0" layoutY="40.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="75.0" text="Aerobics" visible="false">
+                                    <Button fx:id="aerobicsButton" layoutX="108.0" layoutY="40.0" mnemonicParsing="false" onAction="#getInfo" prefHeight="18.0" prefWidth="75.0" text="Aerobics" visible="false">
                                        <opaqueInsets>
                                           <Insets />
                                        </opaqueInsets>
