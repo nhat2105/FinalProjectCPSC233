@@ -1,6 +1,6 @@
 package application;
 
-public class Meal extends ActivitiesTracker {
+public class Meal extends Activities {
 	
 	public void setInfo(String code) {
 		switch(code) { 

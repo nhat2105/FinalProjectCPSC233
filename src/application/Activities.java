@@ -1,16 +1,19 @@
 package application;
 
-public class ActivitiesTracker{
+public class Activities{
 	int calories = 0;
 	int protein = 0;
 	int fat = 0;
 	String preference = "";
 	
+	
 	public void setPreference(String pref) {
-		this.preference = pref;
+		this.preference += pref;
 		
 	}
-	
+	String getPreference() {
+		return preference;
+	}
 	//The function below returns user weight status
 	//based on their BMI
 	public String getSuitableHealthStatus(double BMI) {
@@ -24,13 +27,11 @@ public class ActivitiesTracker{
 			return "all";
 		}
 	}
-	protected void setCaloriesInfo(int caloriesAmount) {
+	protected void setCalories(int caloriesAmount) {
 		this.calories = caloriesAmount;
 	}
-	//The following method get nutrition
-	//values of exercises and food
-	public String getInfo(String componentCode) { 
-		return "This component contains " + calories + " amount of calories for each use";
-		}
+	protected void setProteinInfo(int proteinAmount) {
+		this.protein = proteinAmount;
+	}
 	
 }

@@ -24,9 +24,10 @@ public class ApplicationController {
 	private String userHeight, userWeight;
 	
 	HealthTracker mainTracker = new HealthTracker();
-	Meal mealSuggestion;
 	SleepTracker sleepTracker;
-	Exercises exercises;
+	Exercises exercises = new Exercises();
+	Meal mealSuggestion = new Meal();
+	
 	
 	//Result display text
 	@FXML
@@ -57,7 +58,7 @@ public class ApplicationController {
 	@FXML
     private Text weightDisplay, heightDisplay, appName, sleepData, eatingData, exerciseData, mealOptionText;
 	@FXML
-    private Text sleepActDescription, sleepActDescription2, sleepMealDes, exerciseOptionText;
+    private Text sleepActDescription, sleepActDescription2, sleepMealDes, exerciseOptionText, exerciseInfoText;
 
 
     //Feature button
@@ -196,6 +197,7 @@ public class ApplicationController {
 			
 			if (sceneCode.contains("opening")) {
 				exerciseOptionText.setVisible(true);
+				exerciseInfoText.setVisible(false);
 			}
 			else if (!sceneCode.contains("opening")) {
 				
@@ -312,11 +314,9 @@ public class ApplicationController {
     @FXML
     void openFeature(ActionEvent ae) {
     	if (ae.getSource() == exerciseButton) {
-    		exercises = new Exercises();
         	turnOnScene("inExercisesopening" + userSleepStatus);
     	}
     	if (ae.getSource() == mealsButton) {
-    		mealSuggestion = new Meal();
     		turnOnScene("inMealopening" + userSleepStatus);
     	}
     	if (ae.getSource() == sleepTrackerButton) {
@@ -352,4 +352,29 @@ public class ApplicationController {
         	turnOnScene("bothMinMeal");
     	}
     }
+    @FXML
+    void getInfo(ActionEvent ae) {
+    	String actInfo =  "";
+    	if (ae.getSource() == runningButton) {
+    		actInfo = exercises.getInfo("running", mainTracker.getUserWeight());
+    	}
+    	else if (ae.getSource() == swimmingButton) {
+    		actInfo = exercises.getInfo("swim", mainTracker.getUserWeight());
+    	}
+    	else if (ae.getSource() == joggingButton) {
+    		actInfo = exercises.getInfo("jogging", mainTracker.getUserWeight());
+    	}
+    	else if (ae.getSource() == cyclingButton) {
+    		actInfo = exercises.getInfo("cycling", mainTracker.getUserWeight());
+    	}
+    	else if (ae.getSource() == squatButton) {
+    		actInfo = exercises.getInfo("squat", mainTracker.getUserWeight());
+    	}
+    	else if (ae.getSource() == pushUpButton) {
+    		actInfo = exercises.getInfo("pushUp", mainTracker.getUserWeight());
+    	}
+		exerciseInfoText.setText("Info: " + actInfo + ". Pressed 'y' to add to your activities list");
+    	exerciseInfoText.setVisible(true);
+    }
+    
 }
