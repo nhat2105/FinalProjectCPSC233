@@ -20,7 +20,7 @@ public class ActivitiesTracker extends ApplicationController{
 			return "all";
 		}
 	}
-	public void setCaloriesInfo(int caloriesAmount) {
+	protected void setCaloriesInfo(int caloriesAmount) {
 		this.calories = caloriesAmount;
 	}
 	//The following method get nutrition
