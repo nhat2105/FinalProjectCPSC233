@@ -99,24 +99,24 @@
                         <Text fx:id="sleepResult" layoutX="53.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="165.0" />
                      </children>
                   </Pane>
-                  <Pane fx:id="exercisePane" layoutX="159.0" layoutY="-4.0" prefHeight="304.0" prefWidth="271.0">
+                  <Pane fx:id="exercisePane" layoutX="159.0" layoutY="-4.0" prefHeight="304.0" prefWidth="271.0" visible="false">
                      <children>
                         <Text fx:id="exerciseOptionText" layoutX="13.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="What type of activities do you prefer?" textAlignment="CENTER" visible="false" wrappingWidth="244.13671875" />
                         <VBox layoutX="7.0" layoutY="54.0" prefHeight="220.0" prefWidth="256.0">
                            <children>
                               <HBox prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <Button fx:id="cardioOption" mnemonicParsing="false" onAction="#setPrefToCardio" prefHeight="25.0" prefWidth="68.0" text="Cardio" visible="false">
+                                    <Button fx:id="cardioOption" mnemonicParsing="false" onAction="#setPrefToCardio" prefHeight="25.0" prefWidth="68.0" text="Cardio">
                                        <HBox.margin>
                                           <Insets left="10.0" />
                                        </HBox.margin>
                                     </Button>
-                                    <Button fx:id="mildOption" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#setPrefToMild" prefHeight="25.0" prefWidth="67.0" text="Mild" visible="false">
+                                    <Button fx:id="mildOption" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#setPrefToMild" prefHeight="25.0" prefWidth="67.0" text="Mild">
                                        <HBox.margin>
                                           <Insets left="10.0" />
                                        </HBox.margin>
                                     </Button>
-                                    <Button fx:id="bothEOption" layoutX="62.0" layoutY="10.0" mnemonicParsing="false" onAction="#setPrefToBothE" prefHeight="25.0" prefWidth="76.0" text="Both" visible="false">
+                                    <Button fx:id="bothEOption" layoutX="62.0" layoutY="10.0" mnemonicParsing="false" onAction="#setPrefToBothE" prefHeight="25.0" prefWidth="76.0" text="Both">
                                        <HBox.margin>
                                           <Insets left="10.0" />
                                        </HBox.margin>

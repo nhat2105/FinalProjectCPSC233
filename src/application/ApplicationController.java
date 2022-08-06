@@ -197,12 +197,10 @@ public class ApplicationController {
 			
 			if (sceneCode.contains("opening")) {
 				exerciseOptionText.setVisible(true);
-				cardioOption.setVisible(true);
-				mildOption.setVisible(true);
-				bothEOption.setVisible(true);
 			}
 			else if (!sceneCode.contains("opening")) {
-				exerciseOptionText.setVisible(false);
+				
+				exerciseOptionText.setText("");
 				cardioOption.setVisible(false);
 				mildOption.setVisible(false);
 				bothEOption.setVisible(false);
@@ -257,7 +255,7 @@ public class ApplicationController {
 				mealOptionText.setVisible(true);
 			}
 			else if (!sceneCode.contains("opening")) {
-				mealOptionText.setVisible(false);
+				mealOptionText.setText("");
 				bothOption.setVisible(false);
 				vegeOption.setVisible(false);
 				meatOption.setVisible(false);
