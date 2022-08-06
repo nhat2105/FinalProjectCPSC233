@@ -91,7 +91,19 @@ public class HealthTracker{
 	}
 
 	public void addToTodo(Activities a) {
-		if (toDoList.size() < 8) {
+		boolean canBeAdded = true;
+		if (toDoList.size() >= 8) {
+			canBeAdded = false;
+		}
+		for (Activities existingAct: toDoList) {
+			if (existingAct.getCode() == a.getCode()) {
+				System.out.println("Already in your to do list");
+				canBeAdded = false;
+				break;
+			}
+			
+		}
+		if (canBeAdded) {
 			toDoList.add(a);
 		}
 		//later display message can't add more than 8

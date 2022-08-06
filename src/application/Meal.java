@@ -6,6 +6,12 @@ public class Meal extends Activities {
 	}
 	public double getProteinInfo(String code) {//protein per 100g for now
 		switch(code) { 
+		case "milk":
+			return 3.4;
+		case "fruit":
+			return 0.3;
+		case "tea":
+			return 0.1;
 		case "chicken": 
 			return 27; 
 		case "pork": 
@@ -23,7 +29,7 @@ public class Meal extends Activities {
 		
 	}
 	public String getInfo(String code) {
-		return "Per 100 gram ofthis food contains " + getProteinInfo(code) + "g of protein";
+		return "Per 100 gram of this food contains " + getProteinInfo(code) + "g of protein";
 	}
 	public String toString() {
 		return "In your meal: " + getCode();

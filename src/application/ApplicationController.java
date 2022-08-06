@@ -49,7 +49,7 @@ public class ApplicationController {
 	@FXML
 	private Button vegetableButton, porkButton, beefButton, chickenButton, soupButton, seedButton;
 	@FXML
-	private Button nutButton, fruitButton, teaButton;
+	private Button milkButton, fruitButton, teaButton;
 	@FXML
 	private Button vegeOption, meatOption, bothOption, cardioOption, mildOption, bothEOption, addToMenuButton;
 	
@@ -73,7 +73,7 @@ public class ApplicationController {
     @FXML
     private Button squatButton, joggingButton, cyclingButton, swimmingButton, runningButton, pushUpButton;
     @FXML
-    private Button sleepExercisesButton, sleepExercisesButton1, sleepExercisesButton2, addActListButton;
+    private Button yogaButton, aerobicsButton, meditationButton, addActListButton;
     
 
     //The function below takes in user inputs for their height and weights
@@ -207,9 +207,9 @@ public class ApplicationController {
 			//This feature is turned on based on the user preference and also sleep results
 			
 			if (sceneCode.contains("much") || sceneCode.contains("little")) {// this indicates user had used sleep tracker
-				sleepExercisesButton.setVisible(true);
-				sleepExercisesButton1.setVisible(true);
-				sleepExercisesButton2.setVisible(true);
+				yogaButton.setVisible(true);
+				aerobicsButton.setVisible(true);
+				meditationButton.setVisible(true);
 				sleepActDescription.setVisible(true);
 				sleepActDescription2.setVisible(true);
 				
@@ -265,20 +265,9 @@ public class ApplicationController {
 			
 			if (sceneCode.contains("much") || sceneCode.contains("little")) {
 				sleepMealDes.setVisible(true);
-				if (sceneCode.contains("under")) {
-					//an under-weight shouldn't drink tea, so only show other options
-					nutButton.setVisible(true);
-					fruitButton.setVisible(true);
-				}
-				
-				else {
-					nutButton.setVisible(true);
-					fruitButton.setVisible(true);
-					teaButton.setVisible(true);
-					if (sceneCode.contains("little")) {
-						teaButton.setVisible(false);
-					}
-				}
+				milkButton.setVisible(true);
+				teaButton.setVisible(true);
+				fruitButton.setVisible(true);
 			}
 			//vege screen
 		if (sceneCode.contains("vegetable")) {			
@@ -383,6 +372,15 @@ public class ApplicationController {
     	if (ae.getSource() == vegetableButton) {
     		actCode = "vege";
     	}
+    	if (ae.getSource() == yogaButton) {
+    		actCode = "yoga";
+    	}
+    	if (ae.getSource() == meditationButton) {
+    		actCode = "meditation";
+    	}
+    	if (ae.getSource() == aerobicsButton) {
+    		actCode = "aerobics";
+    	}
     	exercises.setCode(actCode);
     	actInfo = exercises.getInfo(actCode, mainTracker.getUserWeight());
 		activitiesInfoText.setText("Info: " + actInfo + ". Pressed the button below to add to your activities list");
@@ -395,6 +393,15 @@ public class ApplicationController {
     void getMealInfo(ActionEvent ae) {
     	addToMenuButton.setVisible(true);
     	String mealCode = "";
+    	if (ae.getSource() == fruitButton) {
+    		mealCode = "fruit";
+    	}
+    	if (ae.getSource() == milkButton) {
+    		mealCode = "milk";
+    	}
+    	if (ae.getSource() == teaButton) {
+    		mealCode = "tea";
+    	}
     	if (ae.getSource() == vegetableButton) {
     		mealCode = "vegetable";
     	}
@@ -420,13 +427,15 @@ public class ApplicationController {
     }
     @FXML
     void addFoodToMenu(ActionEvent e) {
-    	//Allow duplicate kind of food for now
     	mainTracker.addToTodo(new Meal(meal.getCode()));
     	toDoDisplay.setText(mainTracker.getToDoList());
+    	
+    	//Also added method to suggest whether something should be added
+    	//according to their BMI
+    	
     }
     @FXML
     void addExerciseToList(ActionEvent e) {
-    	//Allow duplicate kind of food for now
     	mainTracker.addToTodo(new Exercises(exercises.getCode()));
     	toDoDisplay.setText(mainTracker.getToDoList());
     	
