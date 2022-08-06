@@ -2,6 +2,9 @@ package application;
 
 public class Meal extends Activities {
 	
+	public Meal(String code) {
+		setCode(code);
+	}
 	public double getProteinInfo(String code) {//protein per 100g for now
 		switch(code) { 
 		case "chicken": 
@@ -10,7 +13,7 @@ public class Meal extends Activities {
 			return 27; 
 		case "beef": 
 			return 26; 
-		case "vege": 
+		case "vegetable": 
 			return 2.9;
 		case "soup": 
 			return 4;
@@ -23,5 +26,7 @@ public class Meal extends Activities {
 	public String getInfo(String code) {
 		return "Per 100 gram ofthis food contains " + getProteinInfo(code) + "g of protein";
 	}
-
+	public String toString() {
+		return "In your menu: " + getCode();
+	}
 }

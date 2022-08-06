@@ -279,6 +279,11 @@
                                  </children>
                               </HBox>
                               <Text fx:id="mealInfoText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" visible="false" wrappingWidth="253.13671875" />
+                              <Button fx:id="addToMenuButton" mnemonicParsing="false" onAction="#addFoodToMenu" prefHeight="25.0" prefWidth="102.0" text="Add to Menu" visible="false">
+                                 <VBox.margin>
+                                    <Insets left="70.0" />
+                                 </VBox.margin>
+                              </Button>
                               <HBox layoutX="10.0" layoutY="66.0" prefHeight="35.0" prefWidth="256.0">
                                  <children>
                                     <Button fx:id="chickenButton" mnemonicParsing="false" onAction="#getMealInfo" prefHeight="18.0" prefWidth="75.0" text="Chicken" visible="false">

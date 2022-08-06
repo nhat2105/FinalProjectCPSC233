@@ -93,6 +93,16 @@ public class HealthTracker{
 	public void addToTodo(Activities a) {
 		toDoList.add(a);
 	}
-
+	
+	
+	public String getToDoList() {
+		String result = "";
+		int index = 1;
+		result += "There are " + toDoList.size() + " things in to do list\n";
+		for (Activities a: toDoList) {
+			result += index + ". " + a.toString() + "\n";
+		}
+		return result;
+	}
 	
 }
