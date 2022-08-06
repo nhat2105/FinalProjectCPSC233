@@ -17,7 +17,7 @@ public class Main extends Application {
 			VBox root = loader.load(new FileInputStream("src/application/ApplicationGetStartedView.fxml"));
 			ApplicationController controller = (ApplicationController)loader.getController();
 			controller.applicationStage = primaryStage;
-			Scene scene = new Scene(root, 600, 450);
+			Scene scene = new Scene(root, 600, 420);
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("CPSC233 Final Project");
 			primaryStage.show();
