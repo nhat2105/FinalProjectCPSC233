@@ -49,7 +49,7 @@ public class ApplicationController {
 	@FXML
 	private Button vegetableButton, porkButton, beefButton, chickenButton, soupButton, seedButton;
 	@FXML
-	private Button nutButton, fruitButton, teaButton;
+	private Button milkButton, fruitButton, teaButton;
 	@FXML
 	private Button vegeOption, meatOption, bothOption, cardioOption, mildOption, bothEOption, addToMenuButton;
 	
@@ -265,20 +265,9 @@ public class ApplicationController {
 			
 			if (sceneCode.contains("much") || sceneCode.contains("little")) {
 				sleepMealDes.setVisible(true);
-				if (sceneCode.contains("under")) {
-					//an under-weight shouldn't drink tea, so only show other options
-					nutButton.setVisible(true);
-					fruitButton.setVisible(true);
-				}
-				
-				else {
-					nutButton.setVisible(true);
-					fruitButton.setVisible(true);
-					teaButton.setVisible(true);
-					if (sceneCode.contains("little")) {
-						teaButton.setVisible(false);
-					}
-				}
+				milkButton.setVisible(true);
+				teaButton.setVisible(true);
+				fruitButton.setVisible(true);
 			}
 			//vege screen
 		if (sceneCode.contains("vegetable")) {			
@@ -404,6 +393,15 @@ public class ApplicationController {
     void getMealInfo(ActionEvent ae) {
     	addToMenuButton.setVisible(true);
     	String mealCode = "";
+    	if (ae.getSource() == fruitButton) {
+    		mealCode = "fruit";
+    	}
+    	if (ae.getSource() == milkButton) {
+    		mealCode = "milk";
+    	}
+    	if (ae.getSource() == teaButton) {
+    		mealCode = "tea";
+    	}
     	if (ae.getSource() == vegetableButton) {
     		mealCode = "vegetable";
     	}
