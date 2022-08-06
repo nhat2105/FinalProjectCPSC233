@@ -4,8 +4,12 @@ public class ActivitiesTracker extends ApplicationController{
 	int calories = 0;
 	int protein = 0;
 	int fat = 0;
-	String group = "";
+	String preference = "";
 	
+	public void setPreference(String pref) {
+		this.preference = pref;
+		
+	}
 	
 	//The function below returns user weight status
 	//based on their BMI

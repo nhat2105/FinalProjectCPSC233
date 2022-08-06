@@ -24,6 +24,7 @@ public class ApplicationController {
 	
 	Meal mealSuggestion;
 	SleepTracker sleepTracker;
+	Exercises exercises;
 	
 	//Result display text
 	@FXML
@@ -47,14 +48,14 @@ public class ApplicationController {
 	@FXML
 	private Button nutButton, fruitButton, teaButton;
 	@FXML
-	private Button vegeOption, meatOption, bothOption;
+	private Button vegeOption, meatOption, bothOption, cardioOption, mildOption, bothEOption;
 	
 	
 	//Data display text
 	@FXML
     private Text weightDisplay, heightDisplay, appName, sleepData, eatingData, exerciseData, mealOptionText;
 	@FXML
-    private Text sleepActDescription, sleepActDescription2, sleepMealDes;
+    private Text sleepActDescription, sleepActDescription2, sleepMealDes, exerciseOptionText;
 
 
     //Feature button
@@ -160,8 +161,8 @@ public class ApplicationController {
 	*/
     @FXML
     void openExercise(ActionEvent event) {
-    	ActivitiesTracker exercises = new ActivitiesTracker();
-    	turnOnScene(exercises.getSuitableHealthStatus(userBMI) + "Exercises" + userSleepStatus);
+    	exercises = new Exercises();
+    	turnOnScene("inExercisesopening" + userSleepStatus);
     }
     
     /**
@@ -184,7 +185,7 @@ public class ApplicationController {
 			appName.setText("Sleep Tracker");
 			sleepTrackerPane.setVisible(true);
 		}
-		else if (sceneCode.contains("Exercises")) {
+		else if (sceneCode.contains("inExercises")) {
 			appName.setText("Exercise Recommendation");
 			exercisePane.setVisible(true);
 			exerciseData.setVisible(true);
@@ -193,6 +194,17 @@ public class ApplicationController {
 			//Turn off other features
 			sleepTrackerPane.setVisible(false);
 			mealPane.setVisible(false);
+			
+			if (sceneCode.contains("opening")) {
+				exerciseOptionText.setVisible(true);
+			}
+			else if (!sceneCode.contains("opening")) {
+				
+				exerciseOptionText.setText("");
+				cardioOption.setVisible(false);
+				mildOption.setVisible(false);
+				bothEOption.setVisible(false);
+			}
 			
 			//This feature is turned on based on the user preference and also sleep results
 			
@@ -204,35 +216,30 @@ public class ApplicationController {
 				sleepActDescription2.setVisible(true);
 				
 			}
-			/**
-			//over-weight screen
-			if (sceneCode.contains("over")) {
-				healthStatusText.setText("Health status: You are overweight");
-				
-				swimmingButton.setVisible(true);
-				cyclingButton.setVisible(true);
-				runningButton.setVisible(true);
-			}
-			//under-weight screen
-			else if (sceneCode.contains("under")) {
-				healthStatusText.setText("Health status: You are underweight");
-				
-				squatButton.setVisible(true);
-				joggingButton.setVisible(true);
-				pushUpButton.setVisible(true);
-			}
-			//normal status screen
-			else {
-				healthStatusText.setText("Health status: You are normal");
-				swimmingButton.setVisible(true);
-				cyclingButton.setVisible(true);
-				runningButton.setVisible(true);
-				squatButton.setVisible(true);
-				joggingButton.setVisible(true);
-				pushUpButton.setVisible(true);
-			}
-			*/
+		if (sceneCode.contains("cardio")) {	
+			
+			swimmingButton.setVisible(true);
+			cyclingButton.setVisible(true);
+			runningButton.setVisible(true);
 		}
+		//mild activities
+		else if (sceneCode.contains("mild")) {
+			squatButton.setVisible(true);
+			joggingButton.setVisible(true);
+			pushUpButton.setVisible(true);
+		}
+		//both
+		else if (sceneCode.contains("bothE")){
+
+			swimmingButton.setVisible(true);
+			cyclingButton.setVisible(true);
+			runningButton.setVisible(true);
+			squatButton.setVisible(true);
+			joggingButton.setVisible(true);
+			pushUpButton.setVisible(true);
+		}
+			
+	}
 		
 		else if (sceneCode.contains("inMeal")) {
 			//Turn off other features
@@ -247,6 +254,12 @@ public class ApplicationController {
 			if (sceneCode.contains("opening")) {//If it is still the main screen
 				mealOptionText.setVisible(true);
 			}
+			else if (!sceneCode.contains("opening")) {
+				mealOptionText.setText("");
+				bothOption.setVisible(false);
+				vegeOption.setVisible(false);
+				meatOption.setVisible(false);
+			}
 				
 			//Turn on scene depends on user's preferences and sleep status
 			
@@ -257,6 +270,7 @@ public class ApplicationController {
 					nutButton.setVisible(true);
 					fruitButton.setVisible(true);
 				}
+				
 				else {
 					nutButton.setVisible(true);
 					fruitButton.setVisible(true);
@@ -268,21 +282,16 @@ public class ApplicationController {
 			}
 			//vege screen
 		if (sceneCode.contains("vegetable")) {
-			mealOptionText.setVisible(false);
-			bothOption.setVisible(false);
-			vegeOption.setVisible(false);
-			meatOption.setVisible(false);
+			
+			
 			seedButton.setVisible(true);
 			vegetableButton.setVisible(true);
 			soupButton.setVisible(true);
-			System.out.println("Reached");
+			
 		}
 			//meat screen
 		else if (sceneCode.contains("meat")) {
-			mealOptionText.setVisible(false);
-			bothOption.setVisible(false);
-			vegeOption.setVisible(false);
-			meatOption.setVisible(false);
+			
 			porkButton.setVisible(true);
 			chickenButton.setVisible(true);
 			beefButton.setVisible(true);
@@ -290,10 +299,7 @@ public class ApplicationController {
 			//both screen
 		else if (sceneCode.contains("bothM")){
 			//healthStatusText.setText("Health status: You are normal");
-			mealOptionText.setVisible(false);
-			bothOption.setVisible(false);
-			vegeOption.setVisible(false);
-			meatOption.setVisible(false);
+			
 			seedButton.setVisible(true);
 			vegetableButton.setVisible(true);
 			soupButton.setVisible(true);
@@ -358,10 +364,27 @@ public class ApplicationController {
     	turnOnScene("meatinMeal");
     }
     @FXML
-    void setPrefToBoth(ActionEvent event) {
+    void setPrefToBothM(ActionEvent event) {
     	mealSuggestion.setPreference("both");
     	turnOnScene("bothMinMeal");
     }
+ 
+    @FXML
+    void setPrefToMild(ActionEvent event) {
+    	exercises.setPreference("mild");
+    	turnOnScene("mildinExercises");
+    }
+    @FXML
+    void setPrefToCardio(ActionEvent event) {
+    	exercises.setPreference("cardio");
+    	turnOnScene("cardioinExercises");
+    }
+    @FXML
+    void setPrefToBothE(ActionEvent event) {
+    	exercises.setPreference("both");
+    	turnOnScene("bothEinExercises");
+    }
+   
 	/**
 	 * The method below takes a string as a parameter and validate whether
 	 * it is a valid number to be converted into a double, it returns the 
