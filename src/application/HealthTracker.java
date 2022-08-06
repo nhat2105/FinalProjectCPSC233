@@ -1,11 +1,12 @@
 package application;
 
+import java.util.ArrayList;
 
 public class HealthTracker{
 	
 	private double userWeight, userHeight;
 	double userBMI;
-
+	ArrayList<Activities> toDoList = new ArrayList<Activities>();
 	
 	/**
 	 * The method below takes a string as a parameter and validate whether
@@ -89,7 +90,9 @@ public class HealthTracker{
 		
 	}
 
-
+	public void addToTodo(Activities a) {
+		toDoList.add(a);
+	}
 
 	
 }
