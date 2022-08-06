@@ -209,14 +209,19 @@
                            <children>
                               <HBox prefHeight="40.0" prefWidth="256.0">
                                  <children>
-                                    <Button fx:id="vegeOption" mnemonicParsing="false" onAction="#setPrefToVegetable" text="Vegetable">
+                                    <Button fx:id="vegeOption" mnemonicParsing="false" onAction="#setPrefToVegetable" prefHeight="25.0" prefWidth="75.0" text="Vegetable">
                                        <HBox.margin>
-                                          <Insets left="40.0" />
+                                          <Insets left="20.0" />
                                        </HBox.margin>
                                     </Button>
                                     <Button fx:id="meatOption" mnemonicParsing="false" onAction="#setPrefToMeat" prefHeight="25.0" prefWidth="73.0" text="Meat">
                                        <HBox.margin>
-                                          <Insets left="10.0" />
+                                          <Insets left="5.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="bothOption" mnemonicParsing="false" onAction="#setPrefToBoth" prefHeight="25.0" prefWidth="51.0" text="Both">
+                                       <HBox.margin>
+                                          <Insets left="5.0" />
                                        </HBox.margin>
                                     </Button>
                                  </children>

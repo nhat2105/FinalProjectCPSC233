@@ -47,7 +47,7 @@ public class ApplicationController {
 	@FXML
 	private Button nutButton, fruitButton, teaButton;
 	@FXML
-	private Button vegeOption, meatOption;
+	private Button vegeOption, meatOption, bothOption;
 	
 	
 	//Data display text
@@ -234,16 +234,20 @@ public class ApplicationController {
 			*/
 		}
 		
-		else if (sceneCode.contains("Meal")) {
+		else if (sceneCode.contains("inMeal")) {
 			//Turn off other features
 			sleepTrackerPane.setVisible(false);
 			exercisePane.setVisible(false);
+				
 			
 			//Turn on this feature
 			appName.setText("Meal Suggestion");
 			mealPane.setVisible(true);
-			mealOptionText.setVisible(true);
 			healthStatusText.setVisible(true);
+			if (sceneCode.contains("opening")) {//If it is still the main screen
+				mealOptionText.setVisible(true);
+			}
+				
 			//Turn on scene depends on user's preferences and sleep status
 			
 			if (sceneCode.contains("much") || sceneCode.contains("little")) {
@@ -262,35 +266,41 @@ public class ApplicationController {
 					}
 				}
 			}
-			/**
-			//over-weight screen
-			if (sceneCode.contains("over")) {
-				healthStatusText.setText("Health status: You are overweight");
-				
-				seedButton.setVisible(true);
-				vegetableButton.setVisible(true);
-				soupButton.setVisible(true);
+			//vege screen
+		if (sceneCode.contains("vegetable")) {
+			mealOptionText.setVisible(false);
+			bothOption.setVisible(false);
+			vegeOption.setVisible(false);
+			meatOption.setVisible(false);
+			seedButton.setVisible(true);
+			vegetableButton.setVisible(true);
+			soupButton.setVisible(true);
+			System.out.println("Reached");
+		}
+			//meat screen
+		else if (sceneCode.contains("meat")) {
+			mealOptionText.setVisible(false);
+			bothOption.setVisible(false);
+			vegeOption.setVisible(false);
+			meatOption.setVisible(false);
+			porkButton.setVisible(true);
+			chickenButton.setVisible(true);
+			beefButton.setVisible(true);
+		}
+			//both screen
+		else if (sceneCode.contains("bothM")){
+			//healthStatusText.setText("Health status: You are normal");
+			mealOptionText.setVisible(false);
+			bothOption.setVisible(false);
+			vegeOption.setVisible(false);
+			meatOption.setVisible(false);
+			seedButton.setVisible(true);
+			vegetableButton.setVisible(true);
+			soupButton.setVisible(true);
+			porkButton.setVisible(true);
+			chickenButton.setVisible(true);
+			beefButton.setVisible(true);
 			}
-			//under-weight screen
-			else if (sceneCode.contains("under")) {
-				healthStatusText.setText("Health status: You are underweight");
-				
-				porkButton.setVisible(true);
-				chickenButton.setVisible(true);
-				beefButton.setVisible(true);
-			}
-			else {
-				healthStatusText.setText("Health status: You are normal");
-				
-				seedButton.setVisible(true);
-				vegetableButton.setVisible(true);
-				soupButton.setVisible(true);
-				porkButton.setVisible(true);
-				chickenButton.setVisible(true);
-				beefButton.setVisible(true);
-			}
-			*/
-			
 		}
 		
 	}
@@ -299,7 +309,7 @@ public class ApplicationController {
 	@FXML
 	public void openMealSuggestion(ActionEvent e) {
 		mealSuggestion = new Meal();
-		turnOnScene(mealSuggestion.getSuitableHealthStatus(userBMI) + "Meal" + userSleepStatus);
+		turnOnScene("inMealopening" + userSleepStatus);
 	}
 
 	//The function below opens the exercise
@@ -340,10 +350,17 @@ public class ApplicationController {
     @FXML
     void setPrefToVegetable(ActionEvent event) {
     	mealSuggestion.setPreference("vegetable");
+    	turnOnScene("vegetableinMeal");
     }
     @FXML
     void setPrefToMeat(ActionEvent event) {
     	mealSuggestion.setPreference("meat");
+    	turnOnScene("meatinMeal");
+    }
+    @FXML
+    void setPrefToBoth(ActionEvent event) {
+    	mealSuggestion.setPreference("both");
+    	turnOnScene("bothMinMeal");
     }
 	/**
 	 * The method below takes a string as a parameter and validate whether
