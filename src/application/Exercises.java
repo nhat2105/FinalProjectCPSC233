@@ -1,9 +1,10 @@
 package application;
 
 public class Exercises extends Activities {
-	//CHANGE: use constructor to store calories data, args code and userWeight
-	
-	
+	public Exercises(String code) {
+		setCode(code);
+	}
+
 	//Next step, when clicked on, display data for each button
 	public double getCaloriesInfo(String code, double userWeight) {
 		switch(code) {
@@ -64,5 +65,8 @@ public class Exercises extends Activities {
 	//String representation of get information
 	String getInfo(String exerciseCode, double userWeight) {
 		return "This activity consumes " + getCaloriesInfo(exerciseCode, userWeight) + " calories in 30 minutes for you";
+	}
+	public String toString() {
+		return "Your activity: " + getCode();
 	}
 }
