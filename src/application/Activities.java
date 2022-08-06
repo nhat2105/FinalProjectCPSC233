@@ -7,6 +7,9 @@ public class Activities{
 	String preference = "";
 	String actCode = "";
 	
+	public Activities(String code) {
+		setCode(code);
+	}
 	
 	public void setPreference(String pref) {
 		this.preference += pref;

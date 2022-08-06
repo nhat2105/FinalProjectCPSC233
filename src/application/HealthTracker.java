@@ -91,14 +91,17 @@ public class HealthTracker{
 	}
 
 	public void addToTodo(Activities a) {
-		toDoList.add(a);
+		if (toDoList.size() < 8) {
+			toDoList.add(a);
+		}
+		//later display message can't add more than 8
 	}
 	
 	
 	public String getToDoList() {
 		String result = "";
 		int index = 1;
-		result += "There are " + toDoList.size() + " things in to do list\n";
+		result += toDoList.size() + " things to do\n";
 		for (Activities a: toDoList) {
 			result += index + ". " + a.toString() + "\n";
 			index++;
