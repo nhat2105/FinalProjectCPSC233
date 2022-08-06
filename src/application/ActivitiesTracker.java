@@ -25,16 +25,8 @@ public class ActivitiesTracker extends ApplicationController{
 	}
 	//The following method get nutrition
 	//values of exercises and food
-	public String getInfo(String code) { 
-		switch(code) { 
-		case "chicken": break; 
-		case "pork": break; 
-		case "rice": break; 
-		case "vegetable": break; 
-		case "soup": break; 
-		case "salmon": break; 
-		}
-		return code; 
+	public String getInfo(String componentCode) { 
+		return "This component contains " + calories + " amount of calories for each use";
 		}
 	
 }
