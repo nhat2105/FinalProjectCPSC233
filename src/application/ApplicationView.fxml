@@ -151,7 +151,7 @@
                                     </Button>
                                  </children>
                               </HBox>
-                              <Text fx:id="exerciseInfoText" strokeType="OUTSIDE" strokeWidth="0.0" text="Info:" visible="false" wrappingWidth="253.13671875">
+                              <Text fx:id="activitiesInfoText" strokeType="OUTSIDE" strokeWidth="0.0" text="Info:" visible="false" wrappingWidth="253.13671875">
                                  <VBox.margin>
                                     <Insets />
                                  </VBox.margin>
@@ -252,7 +252,7 @@
                               </HBox>
                               <HBox prefHeight="31.0" prefWidth="256.0">
                                  <children>
-                                    <Button fx:id="vegetableButton" mnemonicParsing="false" prefHeight="18.0" prefWidth="75.0" text="Vegetable" visible="false">
+                                    <Button fx:id="vegetableButton" mnemonicParsing="false" onAction="#getMealInfo" prefHeight="18.0" prefWidth="75.0" text="Vegetable" visible="false">
                                        <opaqueInsets>
                                           <Insets />
                                        </opaqueInsets>
@@ -260,7 +260,7 @@
                                           <Insets left="10.0" top="15.0" />
                                        </HBox.margin>
                                     </Button>
-                                    <Button fx:id="soupButton" layoutX="20.0" layoutY="40.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="75.0" text="Soup" visible="false">
+                                    <Button fx:id="soupButton" layoutX="20.0" layoutY="40.0" mnemonicParsing="false" onAction="#getMealInfo" prefHeight="18.0" prefWidth="75.0" text="Soup" visible="false">
                                        <opaqueInsets>
                                           <Insets />
                                        </opaqueInsets>
@@ -268,7 +268,7 @@
                                           <Insets left="5.0" top="15.0" />
                                        </HBox.margin>
                                     </Button>
-                                    <Button fx:id="seedButton" layoutX="108.0" layoutY="40.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="75.0" text="Seed" visible="false">
+                                    <Button fx:id="seedButton" layoutX="108.0" layoutY="40.0" mnemonicParsing="false" onAction="#getMealInfo" prefHeight="18.0" prefWidth="75.0" text="Seed" visible="false">
                                        <opaqueInsets>
                                           <Insets />
                                        </opaqueInsets>
@@ -278,9 +278,10 @@
                                     </Button>
                                  </children>
                               </HBox>
+                              <Text fx:id="mealInfoText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" visible="false" wrappingWidth="253.13671875" />
                               <HBox layoutX="10.0" layoutY="66.0" prefHeight="35.0" prefWidth="256.0">
                                  <children>
-                                    <Button fx:id="chickenButton" mnemonicParsing="false" prefHeight="18.0" prefWidth="75.0" text="Chicken" visible="false">
+                                    <Button fx:id="chickenButton" mnemonicParsing="false" onAction="#getMealInfo" prefHeight="18.0" prefWidth="75.0" text="Chicken" visible="false">
                                        <opaqueInsets>
                                           <Insets />
                                        </opaqueInsets>
@@ -288,7 +289,7 @@
                                           <Insets left="10.0" top="15.0" />
                                        </HBox.margin>
                                     </Button>
-                                    <Button fx:id="porkButton" layoutX="20.0" layoutY="40.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="75.0" text="Pork" visible="false">
+                                    <Button fx:id="porkButton" layoutX="20.0" layoutY="40.0" mnemonicParsing="false" onAction="#getMealInfo" prefHeight="18.0" prefWidth="75.0" text="Pork" visible="false">
                                        <opaqueInsets>
                                           <Insets />
                                        </opaqueInsets>
@@ -296,7 +297,7 @@
                                           <Insets left="5.0" top="15.0" />
                                        </HBox.margin>
                                     </Button>
-                                    <Button fx:id="beefButton" layoutX="108.0" layoutY="40.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="75.0" text="Beef" visible="false">
+                                    <Button fx:id="beefButton" layoutX="108.0" layoutY="40.0" mnemonicParsing="false" onAction="#getMealInfo" prefHeight="18.0" prefWidth="75.0" text="Beef" visible="false">
                                        <opaqueInsets>
                                           <Insets />
                                        </opaqueInsets>

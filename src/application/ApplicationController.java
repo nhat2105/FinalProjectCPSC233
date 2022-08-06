@@ -26,7 +26,7 @@ public class ApplicationController {
 	HealthTracker mainTracker = new HealthTracker();
 	SleepTracker sleepTracker;
 	Exercises exercises = new Exercises();
-	Meal mealSuggestion = new Meal();
+	Meal meal = new Meal();
 	
 	
 	//Result display text
@@ -58,7 +58,7 @@ public class ApplicationController {
 	@FXML
     private Text weightDisplay, heightDisplay, appName, sleepData, eatingData, exerciseData, mealOptionText;
 	@FXML
-    private Text sleepActDescription, sleepActDescription2, sleepMealDes, exerciseOptionText, exerciseInfoText;
+    private Text sleepActDescription, sleepActDescription2, sleepMealDes, exerciseOptionText, activitiesInfoText, mealInfoText;
 
 
     //Feature button
@@ -120,14 +120,10 @@ public class ApplicationController {
 			
 	    	applicationStage.setScene(scene);
 	    	applicationStage.show();
-
 	    	
-		}
-		
+		}	
 	}
     
-
-	
 	/*
 	 * The function below get the sleep tracker
 	result when the right button is clicked
@@ -197,10 +193,9 @@ public class ApplicationController {
 			
 			if (sceneCode.contains("opening")) {
 				exerciseOptionText.setVisible(true);
-				exerciseInfoText.setVisible(false);
+				activitiesInfoText.setVisible(false);
 			}
 			else if (!sceneCode.contains("opening")) {
-				
 				exerciseOptionText.setText("");
 				cardioOption.setVisible(false);
 				mildOption.setVisible(false);
@@ -218,7 +213,6 @@ public class ApplicationController {
 				
 			}
 		if (sceneCode.contains("cardio")) {	
-			
 			swimmingButton.setVisible(true);
 			cyclingButton.setVisible(true);
 			runningButton.setVisible(true);
@@ -231,7 +225,6 @@ public class ApplicationController {
 		}
 		//both
 		else if (sceneCode.contains("bothE")){
-
 			swimmingButton.setVisible(true);
 			cyclingButton.setVisible(true);
 			runningButton.setVisible(true);
@@ -254,6 +247,7 @@ public class ApplicationController {
 			healthStatusText.setVisible(true);
 			if (sceneCode.contains("opening")) {//If it is still the main screen
 				mealOptionText.setVisible(true);
+				mealInfoText.setVisible(false);
 			}
 			else if (!sceneCode.contains("opening")) {
 				mealOptionText.setText("");
@@ -282,9 +276,7 @@ public class ApplicationController {
 				}
 			}
 			//vege screen
-		if (sceneCode.contains("vegetable")) {
-			
-			
+		if (sceneCode.contains("vegetable")) {			
 			seedButton.setVisible(true);
 			vegetableButton.setVisible(true);
 			soupButton.setVisible(true);
@@ -311,6 +303,10 @@ public class ApplicationController {
 		}
 		
 	}
+	/*The following method opens the right feature when a feature is clicked
+	 * getSource method ensures the right button is associated with the right
+	 * screen
+	 */
     @FXML
     void openFeature(ActionEvent ae) {
     	if (ae.getSource() == exerciseButton) {
@@ -340,18 +336,21 @@ public class ApplicationController {
         	turnOnScene("bothEinExercises");
     	}
     	if (ae.getSource() == vegeOption) {
-    		mealSuggestion.setPreference("vegetable");
+    		meal.setPreference("vegetable");
         	turnOnScene("vegetableinMeal");
     	}
     	if (ae.getSource() == meatOption) {
-    		mealSuggestion.setPreference("meat");
+    		meal.setPreference("meat");
         	turnOnScene("meatinMeal");
     	}
     	if (ae.getSource() == bothOption) {//for meal 
-    		mealSuggestion.setPreference("both");
+    		meal.setPreference("both");
         	turnOnScene("bothMinMeal");
     	}
     }
+    /*The following function get the information of 
+     * each exercise and each user's weight
+     */
     @FXML
     void getInfo(ActionEvent ae) {
     	String actInfo =  "";
@@ -373,8 +372,38 @@ public class ApplicationController {
     	else if (ae.getSource() == pushUpButton) {
     		actInfo = exercises.getInfo("pushUp", mainTracker.getUserWeight());
     	}
-		exerciseInfoText.setText("Info: " + actInfo + ". Pressed 'y' to add to your activities list");
-    	exerciseInfoText.setVisible(true);
+    	if (ae.getSource() == vegetableButton) {
+    		actInfo = exercises.getInfo("vegetable", mainTracker.getUserWeight());
+    	}
+		activitiesInfoText.setText("Info: " + actInfo + ". Pressed 'y' to add to your activities list");
+    	activitiesInfoText.setVisible(true);
+    }
+    /*The following function get the basic information of each
+     * food in the meal panel
+     */
+    @FXML
+    void getMealInfo(ActionEvent ae) {
+    	String mealInfo =  "";
+    	if (ae.getSource() == vegetableButton) {
+    		mealInfo = meal.getInfo("vege");
+    	}
+    	if (ae.getSource() == soupButton){
+    		mealInfo = meal.getInfo("soup");
+    	}
+    	if (ae.getSource() == seedButton) {
+    		mealInfo = meal.getInfo("seed");
+    	}
+    	if (ae.getSource() == chickenButton) {
+    		mealInfo = meal.getInfo("chicken");
+    	}
+    	if (ae.getSource() == beefButton){
+    		mealInfo = meal.getInfo("beef");
+    	}
+    	if (ae.getSource() == porkButton) {
+    		mealInfo = meal.getInfo("pork");
+    	}
+		mealInfoText.setText("Info: " + mealInfo + ". Pressed 'y' to add to your activities list");
+    	mealInfoText.setVisible(true);
     }
     
 }

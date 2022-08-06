@@ -60,7 +60,6 @@ public class Exercises extends Activities {
 				}
 		}
 		return calories;
-		
 	}
 
 	//String representation of get information
