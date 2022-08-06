@@ -161,11 +161,7 @@ public class ApplicationController {
 	 * The function below opens and function the exercise
 		suggestion feature when the right button is clicked
 	*/
-    @FXML
-    void openExercise(ActionEvent event) {
-    	exercises = new Exercises();
-    	turnOnScene("inExercisesopening" + userSleepStatus);
-    }
+
     
     /**
      * The function below turns on the right for the 
@@ -313,51 +309,47 @@ public class ApplicationController {
 		}
 		
 	}
-	//The function below opens and function the meal
-	//suggestion feature when the right button is clicked
-	@FXML
-	public void openMealSuggestion(ActionEvent e) {
-		mealSuggestion = new Meal();
-		turnOnScene("inMealopening" + userSleepStatus);
-	}
-
-	//The function below opens the exercise
-	//sleep tracker feature when the right button is clicked
-	@FXML
-	public void openSleepTracker(ActionEvent e){
-		turnOnScene("Sleep Tracker");
-	}
-	//This function below is triggered when user chooses food pref as 
-	//vegetable, which is used to set user preference
     @FXML
-    void setPrefToVegetable(ActionEvent event) {
-    	mealSuggestion.setPreference("vegetable");
-    	turnOnScene("vegetableinMeal");
-    }
-    @FXML
-    void setPrefToMeat(ActionEvent event) {
-    	mealSuggestion.setPreference("meat");
-    	turnOnScene("meatinMeal");
-    }
-    @FXML
-    void setPrefToBothM(ActionEvent event) {
-    	mealSuggestion.setPreference("both");
-    	turnOnScene("bothMinMeal");
+    void openFeature(ActionEvent ae) {
+    	if (ae.getSource() == exerciseButton) {
+    		exercises = new Exercises();
+        	turnOnScene("inExercisesopening" + userSleepStatus);
+    	}
+    	if (ae.getSource() == mealsButton) {
+    		mealSuggestion = new Meal();
+    		turnOnScene("inMealopening" + userSleepStatus);
+    	}
+    	if (ae.getSource() == sleepTrackerButton) {
+    		turnOnScene("Sleep Tracker");
+    	}
+    	
     }
  
     @FXML
-    void setPrefToMild(ActionEvent event) {
-    	exercises.setPreference("mild");
-    	turnOnScene("mildinExercises");
-    }
-    @FXML
-    void setPrefToCardio(ActionEvent event) {
-    	exercises.setPreference("cardio");
-    	turnOnScene("cardioinExercises");
-    }
-    @FXML
-    void setPrefToBothE(ActionEvent event) {
-    	exercises.setPreference("both");
-    	turnOnScene("bothEinExercises");
+    void setPref(ActionEvent ae) {
+    	if (ae.getSource() == cardioOption) {
+    		exercises.setPreference("cardio");
+        	turnOnScene("cardioinExercises");
+    	}
+    	if (ae.getSource() == mildOption) {
+    		exercises.setPreference("mild");
+        	turnOnScene("mildinExercises");
+    	}
+    	if (ae.getSource() == bothEOption) {
+    		exercises.setPreference("both");
+        	turnOnScene("bothEinExercises");
+    	}
+    	if (ae.getSource() == vegeOption) {
+    		mealSuggestion.setPreference("vegetable");
+        	turnOnScene("vegetableinMeal");
+    	}
+    	if (ae.getSource() == meatOption) {
+    		mealSuggestion.setPreference("meat");
+        	turnOnScene("meatinMeal");
+    	}
+    	if (ae.getSource() == bothOption) {//for meal 
+    		mealSuggestion.setPreference("both");
+        	turnOnScene("bothMinMeal");
+    	}
     }
 }
