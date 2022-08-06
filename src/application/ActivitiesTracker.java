@@ -1,6 +1,6 @@
 package application;
 
-public class BMIControl extends ApplicationController{
+public class ActivitiesTracker extends ApplicationController{
 	int calories = 0;
 	int protein = 0;
 	int fat = 0;

@@ -154,7 +154,7 @@ public class ApplicationController {
 	*/
     @FXML
     void openExercise(ActionEvent event) {
-    	BMIControl exercises = new BMIControl();
+    	ActivitiesTracker exercises = new ActivitiesTracker();
     	turnOnScene(exercises.getSuitableHealthStatus(userBMI) + "Exercises" + userSleepStatus);
     }
     
@@ -284,7 +284,7 @@ public class ApplicationController {
 	//suggestion feature when the right button is clicked
 	@FXML
 	public void openMealSuggestion(ActionEvent e) {
-		BMIControl mealSuggestion = new BMIControl();
+		ActivitiesTracker mealSuggestion = new ActivitiesTracker();
 		turnOnScene(mealSuggestion.getSuitableHealthStatus(userBMI) + "Meal" + userSleepStatus);
 	}
 
