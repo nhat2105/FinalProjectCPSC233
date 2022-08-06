@@ -106,17 +106,17 @@
                            <children>
                               <HBox prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <Button fx:id="cardioOption" mnemonicParsing="false" onAction="#setPrefToCardio" prefHeight="25.0" prefWidth="68.0" text="Cardio">
+                                    <Button fx:id="cardioOption" mnemonicParsing="false" onAction="#setPref" prefHeight="25.0" prefWidth="68.0" text="Cardio">
                                        <HBox.margin>
                                           <Insets left="10.0" />
                                        </HBox.margin>
                                     </Button>
-                                    <Button fx:id="mildOption" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#setPrefToMild" prefHeight="25.0" prefWidth="67.0" text="Mild">
+                                    <Button fx:id="mildOption" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#setPref" prefHeight="25.0" prefWidth="67.0" text="Mild">
                                        <HBox.margin>
                                           <Insets left="10.0" />
                                        </HBox.margin>
                                     </Button>
-                                    <Button fx:id="bothEOption" layoutX="62.0" layoutY="10.0" mnemonicParsing="false" onAction="#setPrefToBothE" prefHeight="25.0" prefWidth="76.0" text="Both">
+                                    <Button fx:id="bothEOption" layoutX="62.0" layoutY="10.0" mnemonicParsing="false" onAction="#setPref" prefHeight="25.0" prefWidth="76.0" text="Both">
                                        <HBox.margin>
                                           <Insets left="10.0" />
                                        </HBox.margin>
@@ -228,17 +228,17 @@
                            <children>
                               <HBox prefHeight="40.0" prefWidth="256.0">
                                  <children>
-                                    <Button fx:id="vegeOption" mnemonicParsing="false" onAction="#setPrefToVegetable" prefHeight="25.0" prefWidth="75.0" text="Vegetable">
+                                    <Button fx:id="vegeOption" mnemonicParsing="false" onAction="#setPref" prefHeight="25.0" prefWidth="75.0" text="Vegetable">
                                        <HBox.margin>
                                           <Insets left="20.0" />
                                        </HBox.margin>
                                     </Button>
-                                    <Button fx:id="meatOption" mnemonicParsing="false" onAction="#setPrefToMeat" prefHeight="25.0" prefWidth="73.0" text="Meat">
+                                    <Button fx:id="meatOption" mnemonicParsing="false" onAction="#setPref" prefHeight="25.0" prefWidth="73.0" text="Meat">
                                        <HBox.margin>
                                           <Insets left="5.0" />
                                        </HBox.margin>
                                     </Button>
-                                    <Button fx:id="bothOption" mnemonicParsing="false" onAction="#setPrefToBothM" prefHeight="25.0" prefWidth="51.0" text="Both">
+                                    <Button fx:id="bothOption" mnemonicParsing="false" onAction="#setPref" prefHeight="25.0" prefWidth="51.0" text="Both">
                                        <HBox.margin>
                                           <Insets left="5.0" />
                                        </HBox.margin>

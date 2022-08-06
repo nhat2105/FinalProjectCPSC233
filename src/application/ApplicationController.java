@@ -324,37 +324,32 @@ public class ApplicationController {
     	}
     	
     }
-	//This function below is triggered when user chooses food pref as 
-	//vegetable, which is used to set user preference
-    @FXML
-    void setPrefToVegetable(ActionEvent event) {
-    	mealSuggestion.setPreference("vegetable");
-    	turnOnScene("vegetableinMeal");
-    }
-    @FXML
-    void setPrefToMeat(ActionEvent event) {
-    	mealSuggestion.setPreference("meat");
-    	turnOnScene("meatinMeal");
-    }
-    @FXML
-    void setPrefToBothM(ActionEvent event) {
-    	mealSuggestion.setPreference("both");
-    	turnOnScene("bothMinMeal");
-    }
  
     @FXML
-    void setPrefToMild(ActionEvent event) {
-    	exercises.setPreference("mild");
-    	turnOnScene("mildinExercises");
-    }
-    @FXML
-    void setPrefToCardio(ActionEvent event) {
-    	exercises.setPreference("cardio");
-    	turnOnScene("cardioinExercises");
-    }
-    @FXML
-    void setPrefToBothE(ActionEvent event) {
-    	exercises.setPreference("both");
-    	turnOnScene("bothEinExercises");
+    void setPref(ActionEvent ae) {
+    	if (ae.getSource() == cardioOption) {
+    		exercises.setPreference("cardio");
+        	turnOnScene("cardioinExercises");
+    	}
+    	if (ae.getSource() == mildOption) {
+    		exercises.setPreference("mild");
+        	turnOnScene("mildinExercises");
+    	}
+    	if (ae.getSource() == bothEOption) {
+    		exercises.setPreference("both");
+        	turnOnScene("bothEinExercises");
+    	}
+    	if (ae.getSource() == vegeOption) {
+    		mealSuggestion.setPreference("vegetable");
+        	turnOnScene("vegetableinMeal");
+    	}
+    	if (ae.getSource() == meatOption) {
+    		mealSuggestion.setPreference("meat");
+        	turnOnScene("meatinMeal");
+    	}
+    	if (ae.getSource() == bothOption) {//for meal 
+    		mealSuggestion.setPreference("both");
+        	turnOnScene("bothMinMeal");
+    	}
     }
 }
