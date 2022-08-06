@@ -25,7 +25,7 @@ public class ApplicationController {
 	
 	HealthTracker mainTracker = new HealthTracker();
 	SleepTracker sleepTracker;
-	Exercises exercises = new Exercises();
+	Exercises exercises = new Exercises("none");
 	Meal meal = new Meal("none");
 	
 	
@@ -73,7 +73,7 @@ public class ApplicationController {
     @FXML
     private Button squatButton, joggingButton, cyclingButton, swimmingButton, runningButton, pushUpButton;
     @FXML
-    private Button sleepExercisesButton, sleepExercisesButton1, sleepExercisesButton2;
+    private Button sleepExercisesButton, sleepExercisesButton1, sleepExercisesButton2, addActListButton;
     
 
     //The function below takes in user inputs for their height and weights
@@ -116,7 +116,7 @@ public class ApplicationController {
 			mainController.userWeight = (String.valueOf(mainTracker.getUserWeight()));	
 			mainController.userBMI = mainTracker.getUserWeight()/ ((mainTracker.getUserHeight()/100)*(mainTracker.getUserHeight()/100));
 	    	
-			Scene scene = new Scene(root, 600, 400);
+			Scene scene = new Scene(root, 600, 420);
 			
 	    	applicationStage.setScene(scene);
 	    	applicationStage.show();
@@ -186,6 +186,7 @@ public class ApplicationController {
 			exercisePane.setVisible(true);
 			exerciseData.setVisible(true);
 			healthStatusText.setVisible(true);
+			addActListButton.setVisible(false);
 			
 			//Turn off other features
 			sleepTrackerPane.setVisible(false);
@@ -358,6 +359,7 @@ public class ApplicationController {
     void getInfo(ActionEvent ae) {
     	String actInfo =  "";
     	String actCode = "";
+    	addActListButton.setVisible(true);
     	if (ae.getSource() == runningButton) {
     		actCode = "running";
     		
@@ -419,6 +421,12 @@ public class ApplicationController {
     void addFoodToMenu(ActionEvent e) {
     	//Allow duplicate kind of food for now
     	mainTracker.addToTodo(new Meal(meal.getCode()));
+    	System.out.println(mainTracker.getToDoList());
+    }
+    @FXML
+    void addExerciseToList(ActionEvent e) {
+    	//Allow duplicate kind of food for now
+    	mainTracker.addToTodo(new Exercises(exercises.getCode()));
     	System.out.println(mainTracker.getToDoList());
     }
 }

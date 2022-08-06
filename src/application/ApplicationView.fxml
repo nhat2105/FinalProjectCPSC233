@@ -41,8 +41,7 @@
             <Insets left="180.0" />
          </VBox.margin>
       </Text>
-      <Text fx:id="healthStatusText" strokeType="OUTSIDE" strokeWidth="0.0" text="Health Status:" visible="false" wrappingWidth="235.13671875" />
-      <HBox prefHeight="310.0" prefWidth="600.0">
+      <HBox prefHeight="295.0" prefWidth="600.0">
          <children>
             <Pane prefHeight="310.0" prefWidth="538.0">
                <children>
@@ -156,6 +155,11 @@
                                     <Insets />
                                  </VBox.margin>
                               </Text>
+                              <Button fx:id="addActListButton" mnemonicParsing="false" onAction="#addExerciseToList" prefHeight="25.0" prefWidth="133.0" text="Add to to do list" visible="false">
+                                 <VBox.margin>
+                                    <Insets left="60.0" />
+                                 </VBox.margin>
+                              </Button>
                               <HBox layoutX="10.0" layoutY="66.0" prefHeight="30.0" prefWidth="256.0">
                                  <children>
                                     <Button fx:id="joggingButton" mnemonicParsing="false" onAction="#getInfo" prefHeight="18.0" prefWidth="75.0" text="Jogging" visible="false">
@@ -372,6 +376,7 @@
             </VBox>
          </children>
       </HBox>
+      <Text fx:id="healthStatusText" strokeType="OUTSIDE" strokeWidth="0.0" text="Health Status:" visible="false" wrappingWidth="235.13671875" />
    </children>
 	
 </VBox>
