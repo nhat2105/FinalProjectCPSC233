@@ -27,6 +27,6 @@ public class Meal extends Activities {
 		return "Per 100 gram ofthis food contains " + getProteinInfo(code) + "g of protein";
 	}
 	public String toString() {
-		return "In your menu: " + getCode();
+		return "In your meal: " + getCode();
 	}
 }
