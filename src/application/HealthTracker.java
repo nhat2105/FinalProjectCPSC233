@@ -90,23 +90,23 @@ public class HealthTracker{
 		
 	}
 
-	public void addToTodo(Activities a) {
-		boolean canBeAdded = true;
+	public String addToTodo(Activities a) {
+		String errorMessage = "";
 		if (toDoList.size() >= 10) {
-			canBeAdded = false;
+			errorMessage = "This list is full";
+			System.out.println(errorMessage);
 		}
 		for (Activities existingAct: toDoList) {
 			if (existingAct.getCode() == a.getCode()) {
-				System.out.println("Already in your to do list");
-				canBeAdded = false;
+				errorMessage = "Already in your to do list";
+				System.out.println(errorMessage);
 				break;
-			}
-			
+			}	
 		}
-		if (canBeAdded) {
+		if (errorMessage == "") {
 			toDoList.add(a);
 		}
-		//later display message can't add more than 8
+		return errorMessage;
 	}
 	
 	
@@ -137,8 +137,8 @@ public class HealthTracker{
 	}
 
 
-	public void addCalories(double caloriesInfo) {
-		this.userCalories += caloriesInfo;
+	public void addCalories(double calories) {
+		this.userCalories += calories;
 		
 	}
 }

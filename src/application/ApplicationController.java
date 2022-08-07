@@ -438,7 +438,6 @@ public class ApplicationController {
     	mealInfoText.setVisible(true);
     }
     //TODO
-    //Fix calories consumption pop up -> don't allow add calories twice
     //if user is not "normal", should display calories consumption to be normal
     //Display error of adding to to-do list on the screen
     //Error handling for all inputs
@@ -454,8 +453,8 @@ public class ApplicationController {
     	
     	foodToAdd.setCaloriesInfo(meal.getCode());
     	
-    	mainTracker.addCalories(foodToAdd.getCaloriesInfo());
-    	mainTracker.addToTodo(foodToAdd);
+    	String errorFree = mainTracker.addToTodo(foodToAdd);
+    	if (errorFree == "")mainTracker.addCalories(foodToAdd.getCaloriesInfo());
     	toDoDisplay.setText(mainTracker.getToDoList());
     	
     	caloriesConsumptionText.setText("Total calories: " + String.valueOf((int)mainTracker.getCaloriesConsumption()));
@@ -465,8 +464,9 @@ public class ApplicationController {
     void addExerciseToList(ActionEvent e) {
     	Exercises exerciseToAdd = new Exercises(exercises.getCode());
     	exerciseToAdd.setCaloriesInfo(exercises.getCode(), mainTracker.getUserBMI());
-    	mainTracker.addCalories(-exerciseToAdd.getCaloriesInfo());
-    	mainTracker.addToTodo(exerciseToAdd);
+    	String errorFree = mainTracker.addToTodo(exerciseToAdd);
+    	if (errorFree == "")mainTracker.addCalories(-exerciseToAdd.getCaloriesInfo());
+    	
     	toDoDisplay.setText(mainTracker.getToDoList());
     	
     	caloriesConsumptionText.setText("Total calories: " + String.valueOf((int)mainTracker.getCaloriesConsumption()));
