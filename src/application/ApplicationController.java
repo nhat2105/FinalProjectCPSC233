@@ -56,7 +56,7 @@ public class ApplicationController {
 	
 	//Data display text
 	@FXML
-    private Text weightDisplay, heightDisplay, appName, sleepData, eatingData, exerciseData, mealOptionText;
+    private Text appName, mealOptionText;
 	@FXML
     private Text sleepActDescription, sleepActDescription2, sleepMealDes, exerciseOptionText, activitiesInfoText, mealInfoText;
 
@@ -140,7 +140,6 @@ public class ApplicationController {
 			String sleepHoursTrack = sleepTracker.getSleepResult(sleepInput.getText());
 			sleepResult.setText(sleepHoursTrack);
 			sleepResult.setVisible(true);
-			sleepData.setVisible(true);
 			userSleepStatus = sleepTracker.getSleepStatus();
 			if (userSleepStatus != null) {
 				healthStatusText.setText("Health status: " + userSleepStatus + " sleep");
@@ -199,7 +198,6 @@ public class ApplicationController {
 				
 			}
 			else if (!sceneCode.contains("opening")) {
-				exerciseData.setVisible(true);
 				exerciseOptionText.setText("");
 				cardioOption.setVisible(false);
 				mildOption.setVisible(false);
@@ -261,7 +259,6 @@ public class ApplicationController {
 				
 			}
 			else if (!sceneCode.contains("opening")) {
-				eatingData.setVisible(true);
 				mealOptionText.setText("");
 				bothOption.setVisible(false);
 				vegeOption.setVisible(false);
@@ -448,6 +445,7 @@ public class ApplicationController {
     //Add method to suggest whether something should be added according to user's BMI
     //Probably (column) chart to show the distribution of their health (food, sleep, exercise)
     //compared to the healthy ones
+    //Menubar
     
     @FXML
     void addFoodToMenu(ActionEvent e) {
