@@ -120,5 +120,16 @@ public class HealthTracker{
 		}
 		return result;
 	}
+	public String getHealthStatus(double BMI) {
+		if (BMI >= 25) {
+			return "overWeight";
+		}
+		else if (BMI <= 18.5) {
+			return "underWeight";
+		}
+		else {
+			return "all";
+		}
+	}
 	
 }

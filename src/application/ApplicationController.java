@@ -347,7 +347,6 @@ public class ApplicationController {
      */
     @FXML
     void getInfo(ActionEvent ae) {
-    	String actInfo =  "";
     	String actCode = "";
     	addActListButton.setVisible(true);
     	if (ae.getSource() == runningButton) {
@@ -382,8 +381,9 @@ public class ApplicationController {
     		actCode = "aerobics";
     	}
     	exercises.setCode(actCode);
-    	actInfo = exercises.getInfo(actCode, mainTracker.getUserWeight());
-		activitiesInfoText.setText("Info: " + actInfo + ". Pressed the button below to add to your activities list");
+    	exercises.setCaloriesInfo(actCode, mainTracker.getUserWeight()); 
+    	
+		activitiesInfoText.setText("Info: " + exercises.getInfo() + ". Pressed the button below to add to your activities list");
     	activitiesInfoText.setVisible(true);
     }
     /*The following function get the basic information of each
@@ -421,13 +421,14 @@ public class ApplicationController {
     		mealCode = "pork";
     	}
     	meal.setCode(mealCode);
-    	String mealInfo = meal.getInfo(mealCode);
-		mealInfoText.setText("Info: " + mealInfo + ". Pressed the button below to add to your activities list");
+    	meal.setProteinInfo(mealCode);
+		mealInfoText.setText("Info: " + meal.getInfo() + ". Pressed the button below to add to your activities list");
     	mealInfoText.setVisible(true);
     }
     @FXML
     void addFoodToMenu(ActionEvent e) {
-    	mainTracker.addToTodo(new Meal(meal.getCode()));
+    	Meal foodToAdd = new Meal(meal.getCode());
+    	mainTracker.addToTodo(foodToAdd);
     	toDoDisplay.setText(mainTracker.getToDoList());
     	
     	//Also added method to suggest whether something should be added
@@ -436,7 +437,8 @@ public class ApplicationController {
     }
     @FXML
     void addExerciseToList(ActionEvent e) {
-    	mainTracker.addToTodo(new Exercises(exercises.getCode()));
+    	Exercises exerciseToAdd = new Exercises(exercises.getCode());
+    	mainTracker.addToTodo(exerciseToAdd);
     	toDoDisplay.setText(mainTracker.getToDoList());
     	
     }

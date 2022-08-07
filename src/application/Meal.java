@@ -1,35 +1,47 @@
 package application;
 
 public class Meal extends Activities {
+	private double protein = 0;
 	public Meal(String code) {
 		super(code);
 	}
-	public double getProteinInfo(String code) {//protein per 100g for now
+	public double getProteinInfo() {
+		return this.protein;
+	}
+	public void setProteinInfo(String code) {//protein per 100g for now
 		switch(code) { 
 		case "milk":
-			return 3.4;
+			this.protein = 3.4;
+			break;
 		case "fruit":
-			return 0.3;
+			this.protein = 0.3;
+			break;
 		case "tea":
-			return 0.1;
+			this.protein = 0.1;
+			break;
 		case "chicken": 
-			return 27; 
+			this.protein = 27; 
+			break;
 		case "pork": 
-			return 27; 
+			this.protein = 27; 
+			break;
 		case "beef": 
-			return 26; 
+			this.protein = 26; 
+			break;
 		case "vegetable": 
-			return 2.9;
+			this.protein = 2.9;
+			break;
 		case "soup": 
-			return 4;
+			this.protein = 4;
+			break;
 		case "seed": 
-			return 30;
+			this.protein = 30;
+			break;
 		}
-		return calories;
 		
 	}
-	public String getInfo(String code) {
-		return "Per 100 gram of this food contains " + getProteinInfo(code) + "g of protein";
+	public String getInfo() {
+		return "Per 100 gram of this food contains " + getProteinInfo() + "g of protein";
 	}
 	public String toString() {
 		return "In your meal: " + getCode();

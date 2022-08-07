@@ -4,74 +4,93 @@ public class Exercises extends Activities {
 	public Exercises(String code) {
 		super(code);
 	}
-
-	//Next step, when clicked on, display data for each button
-	public double getCaloriesInfo(String code, double userWeight) {
+	
+	public void setCaloriesInfo(String code, double userWeight) {
 		switch(code) {
 		//each display for 30 minutes 
 		//calories burn
 		case "yoga":
-			return 100;
+			this.calories = 100;
+			break;
 		case "meditation":
-			return 35;
+			this.calories = 35;
+			break;
 		case "aerobics":
-			return 85;
+			this.calories = 85;
+			break;
 		case "pushUp":
-			return 210;//7 per min
+			this.calories = 210;//7 per min
+			break;
 		case "squat":
-			return 240; //8 per minute
+			this.calories = 240; //8 per minute
+			break;
 		case "swim":
-			return 250;	
+			this.calories = 250;	
+			break;
 			//These activities below based on
 			//user's weight as well
 		case "running":
 			if (userWeight >= 60 && userWeight <= 70) {
-				return 300;
+				this.calories = 300;
+				break;
 			}else if (userWeight > 70 && userWeight <= 80) {
-				return 350;
+				this.calories = 350;
+				break;
 			}else if (userWeight > 80 && userWeight <= 90) {
-				return 400;
+				this.calories = 400;
+				break;
 			}else if (userWeight > 90 && userWeight <= 100) {
-				return 450;
+				this.calories = 450;
+				break;
 				}
 			else {
-				return 220;
+				this.calories = 220;
+				break;
 				}
 			case "jogging":
 				if (userWeight >= 60 && userWeight <= 70) {
-					return 125;
+					this.calories = 125;
+					break;
 				}else if (userWeight > 70 && userWeight <= 80) {
-					return 150;
+					this.calories = 150;
+					break;
 				}else if (userWeight > 80 && userWeight <= 90) {
-					return 175;
+					this.calories = 175;
+					break;
 				}else if (userWeight > 90 && userWeight <= 100) {
-					return 200;
+					this.calories = 200;
+					break;
 				}
 				else {
-					return 100;
+					this.calories = 100;
+					break;
 				}
 				
 			case "cycling":		
 				if (userWeight >= 60 && userWeight <= 70) {
-					return 200;
+					this.calories = 200;
+					break;
 				}else if (userWeight > 70 && userWeight <= 80) {
-					return 250;
+					this.calories = 250;
+					break;
 				}else if (userWeight > 80 && userWeight <= 90) {
-					return 300;
+					this.calories = 300;
+					break;
 				}else if (userWeight > 90 && userWeight <= 100) {
-					return 350;
+					this.calories = 350;
+					break;
 				}
 				else {
-					return 180;
+					this.calories = 180;
+					break;
 				}
 			
 		}
-		return calories;
 	}
 
 	//String representation of get information
-	String getInfo(String exerciseCode, double userWeight) {
-		return "This activity consumes " + getCaloriesInfo(exerciseCode, userWeight) + " calories in 30 minutes for you";
+	String getInfo() {
+		return "This activity consumes " + getCaloriesInfo() + " calories in 30 minutes for you";
 	}
 	public String toString() {
 		return "Your activity: " + getCode();
