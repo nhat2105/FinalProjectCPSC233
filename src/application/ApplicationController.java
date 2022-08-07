@@ -56,7 +56,7 @@ public class ApplicationController {
 	
 	//Data display text
 	@FXML
-    private Text appName, mealOptionText, caloriesConsumptionText, recommendCaloriesText;
+    private Text appName, mealOptionText, caloriesConsumptionText, weightChangeText;
 	@FXML
     private Text sleepActDescription, sleepActDescription2, sleepMealDes, exerciseOptionText, activitiesInfoText, mealInfoText;
 
@@ -437,14 +437,14 @@ public class ApplicationController {
 		mealInfoText.setText("Info: " + meal.getInfo() + ". Pressed the button below to add to your activities list");
     	mealInfoText.setVisible(true);
     }
-    //TODO
-    //if user is not "normal", should display calories consumption to be normal
-    //Display error of adding to to-do list on the screen
-    //Error handling for all inputs
-    
-    //Add method to suggest whether something should be added according to user's BMI
+    //TODO MAIN
+    //display recommended food and act (text in two features: food and exercise)
     //Probably (column) chart to show the distribution of their health (food, sleep, exercise)
     //compared to the healthy ones
+   
+    //TODO touch
+    //Display error of adding to to-do list on the screen
+    //Error handling for all inputs
     //Menubar
     
     @FXML
@@ -457,7 +457,10 @@ public class ApplicationController {
     	if (errorFree == "")mainTracker.addCalories(foodToAdd.getCaloriesInfo());
     	toDoDisplay.setText(mainTracker.getToDoList());
     	
-    	caloriesConsumptionText.setText("Total calories: " + String.valueOf((int)mainTracker.getCaloriesConsumption()));
+    	int caloriesConsumption = (int)mainTracker.getCaloriesConsumption();
+    	caloriesConsumptionText.setText("Total calories: " + caloriesConsumption);
+    	weightChangeText.setText("After a month, you will gain " 
+    	+ mainTracker.convertWeightChange(caloriesConsumption) + " kg per month");
     	
     }
     @FXML
@@ -466,10 +469,13 @@ public class ApplicationController {
     	exerciseToAdd.setCaloriesInfo(exercises.getCode(), mainTracker.getUserBMI());
     	String errorFree = mainTracker.addToTodo(exerciseToAdd);
     	if (errorFree == "")mainTracker.addCalories(-exerciseToAdd.getCaloriesInfo());
-    	
     	toDoDisplay.setText(mainTracker.getToDoList());
     	
-    	caloriesConsumptionText.setText("Total calories: " + String.valueOf((int)mainTracker.getCaloriesConsumption()));
+    	int caloriesConsumption = (int)mainTracker.getCaloriesConsumption();
+    	caloriesConsumptionText.setText("Total calories: " + caloriesConsumption);
+    	weightChangeText.setText("With this, you will gain " 
+    	+ mainTracker.convertWeightChange(caloriesConsumption) +" kg per month");
+    	
     	
     }
 }

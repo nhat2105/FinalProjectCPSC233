@@ -141,4 +141,7 @@ public class HealthTracker{
 		this.userCalories += calories;
 		
 	}
+	public int convertWeightChange(double calories) {
+		return (int)calories * 30/7716;
+	}
 }

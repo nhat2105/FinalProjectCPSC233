@@ -59,7 +59,7 @@
                            </font>
                         </Text>
                         <Text fx:id="caloriesConsumptionText" strokeType="OUTSIDE" strokeWidth="0.0" text="Total calories:" textAlignment="CENTER" wrappingWidth="156.13671875" />
-                        <Text fx:id="recommendCaloriesText" strokeType="OUTSIDE" strokeWidth="0.0" text="Recommended calories:" textAlignment="CENTER" wrappingWidth="159.13671875" />
+                        <Text fx:id="weightChangeText" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="159.13671875" />
                         <Text fx:id="toDoDisplay" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="157.13671875" />
                      </children>
                   </VBox>
