@@ -207,14 +207,19 @@ public class ApplicationController {
 			}
 			
 			//This feature is turned on based on the user preference and also sleep results
-			
 			if (sceneCode.contains("much") || sceneCode.contains("little")) {// this indicates user had used sleep tracker
 				yogaButton.setVisible(true);
 				aerobicsButton.setVisible(true);
 				meditationButton.setVisible(true);
 				sleepActDescription.setVisible(true);
 				sleepActDescription2.setVisible(true);
-				
+			}
+			if (!sceneCode.contains("much") && !sceneCode.contains("little")) { //turn off when user has good sleep
+				yogaButton.setVisible(false);
+				aerobicsButton.setVisible(false);
+				meditationButton.setVisible(false);
+				sleepActDescription.setVisible(false);
+				sleepActDescription2.setVisible(false);
 			}
 		if (sceneCode.contains("cardio")) {	
 			swimmingButton.setVisible(true);
@@ -270,6 +275,13 @@ public class ApplicationController {
 				milkButton.setVisible(true);
 				teaButton.setVisible(true);
 				fruitButton.setVisible(true);
+			}
+			//Turn off suggestion for sleep if user has good sleep
+			else if (!sceneCode.contains("much") && !sceneCode.contains("little")) {
+				sleepMealDes.setVisible(false);
+				milkButton.setVisible(false);
+				teaButton.setVisible(false);
+				fruitButton.setVisible(false);
 			}
 			//vege screen
 		if (sceneCode.contains("vegetable")) {			
@@ -428,7 +440,6 @@ public class ApplicationController {
     	mealInfoText.setVisible(true);
     }
     //TODO
-    //If user sleep is normal, stop showing recommendation for sleep acts
     //Also add text that says total calories consumption for the day (use mainTracker),
     //if user is not "normal", should display calories consumption to be normal
     //Display error of adding to to-do list on the screen
