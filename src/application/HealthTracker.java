@@ -92,7 +92,7 @@ public class HealthTracker{
 
 	public void addToTodo(Activities a) {
 		boolean canBeAdded = true;
-		if (toDoList.size() >= 8) {
+		if (toDoList.size() >= 10) {
 			canBeAdded = false;
 		}
 		for (Activities existingAct: toDoList) {
