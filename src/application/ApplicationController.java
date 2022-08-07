@@ -56,7 +56,7 @@ public class ApplicationController {
 	
 	//Data display text
 	@FXML
-    private Text appName, mealOptionText;
+    private Text appName, mealOptionText, caloriesConsumptionText, recommendCaloriesText;
 	@FXML
     private Text sleepActDescription, sleepActDescription2, sleepMealDes, exerciseOptionText, activitiesInfoText, mealInfoText;
 
@@ -433,11 +433,12 @@ public class ApplicationController {
     	}
     	meal.setCode(mealCode);
     	meal.setProteinInfo(mealCode);
+    	meal.setCaloriesInfo(mealCode);
 		mealInfoText.setText("Info: " + meal.getInfo() + ". Pressed the button below to add to your activities list");
     	mealInfoText.setVisible(true);
     }
     //TODO
-    //Also add text that says total calories consumption for the day (use mainTracker),
+    //Fix calories consumption pop up -> don't allow add calories twice
     //if user is not "normal", should display calories consumption to be normal
     //Display error of adding to to-do list on the screen
     //Error handling for all inputs
@@ -450,16 +451,25 @@ public class ApplicationController {
     @FXML
     void addFoodToMenu(ActionEvent e) {
     	Meal foodToAdd = new Meal(meal.getCode());
+    	
+    	foodToAdd.setCaloriesInfo(meal.getCode());
+    	
+    	mainTracker.addCalories(foodToAdd.getCaloriesInfo());
     	mainTracker.addToTodo(foodToAdd);
     	toDoDisplay.setText(mainTracker.getToDoList());
     	
+    	caloriesConsumptionText.setText("Total calories: " + String.valueOf((int)mainTracker.getCaloriesConsumption()));
     	
     }
     @FXML
     void addExerciseToList(ActionEvent e) {
     	Exercises exerciseToAdd = new Exercises(exercises.getCode());
+    	exerciseToAdd.setCaloriesInfo(exercises.getCode(), mainTracker.getUserBMI());
+    	mainTracker.addCalories(-exerciseToAdd.getCaloriesInfo());
     	mainTracker.addToTodo(exerciseToAdd);
     	toDoDisplay.setText(mainTracker.getToDoList());
+    	
+    	caloriesConsumptionText.setText("Total calories: " + String.valueOf((int)mainTracker.getCaloriesConsumption()));
     	
     }
 }

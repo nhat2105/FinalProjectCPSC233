@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class HealthTracker{
 	
 	private double userWeight, userHeight;
-	double userBMI;
+	double userBMI, userCalories;
 	ArrayList<Activities> toDoList = new ArrayList<Activities>();
 	
 	/**
@@ -131,5 +131,14 @@ public class HealthTracker{
 			return "normal";
 		}
 	}
-	
+
+	public double getCaloriesConsumption() {
+		return this.userCalories;
+	}
+
+
+	public void addCalories(double caloriesInfo) {
+		this.userCalories += caloriesInfo;
+		
+	}
 }

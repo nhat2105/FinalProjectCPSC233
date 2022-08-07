@@ -7,7 +7,9 @@ public class Activities{
 	
 	public Activities(String code) {
 		setCode(code);
+		
 	}
+	
 	
 	public void setPreference(String pref) {
 		this.preference += pref;
@@ -17,8 +19,8 @@ public class Activities{
 		return preference;
 	}
 	
-	protected double getCaloriesInfo() {
-		return this.calories;
+	public double getCaloriesInfo() {
+		return calories;
 	}
 	//The function below returns user weight status
 	//based on their BMI
@@ -28,6 +30,9 @@ public class Activities{
 	}
 	public String getCode() {
 		return actCode;
+	}
+	protected void setCalories(double caloriesAmount) {
+		this.calories = caloriesAmount;
 	}
 	
 }

@@ -40,8 +40,41 @@ public class Meal extends Activities {
 		}
 		
 	}
+	public void setCaloriesInfo(String code) {//protein per 100g for now
+		switch(code) { 
+		
+		case "milk":
+			super.setCalories(42);
+			break;
+		case "fruit":
+			super.setCalories(71);
+			break;
+		case "tea":
+			super.setCalories(1);
+			break;
+		case "chicken": 
+			super.setCalories(239); 
+			break;
+		case "pork": 
+			super.setCalories(242); 
+			break;
+		case "beef": 
+			super.setCalories(250); 
+			break;
+		case "vegetable": 
+			super.setCalories(65);
+			break;
+		case "soup": 
+			super.setCalories(42);
+			break;
+		case "seed": 
+			super.setCalories(559);
+			break;
+		}
+		
+	}
 	public String getInfo() {
-		return "Per 100 gram of this food contains " + getProteinInfo() + "g of protein";
+		return "Per 100 gram of this food contains " + getProteinInfo() + "g of protein and " + super.getCaloriesInfo() + " calories";
 	}
 	public String toString() {
 		return "In your meal: " + getCode();
