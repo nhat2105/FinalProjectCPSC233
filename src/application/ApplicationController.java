@@ -56,7 +56,7 @@ public class ApplicationController {
 	
 	//Data display text
 	@FXML
-    private Text appName, mealOptionText, caloriesConsumptionText, weightChangeText;
+    private Text appName, mealOptionText, caloriesConsumptionText, weightChangeText, suggestionText;
 	@FXML
     private Text sleepActDescription, sleepActDescription2, sleepMealDes, exerciseOptionText, activitiesInfoText, mealInfoText;
 
@@ -168,6 +168,11 @@ public class ApplicationController {
      */
 	private void turnOnScene(String sceneCode) {
 		mainTracker.updateUserData(userHeight, userWeight, userBMI);
+		if (!mainTracker.getHealthStatus(userBMI).contains("normal")) {
+			suggestionText.setText("Suggestion food: " + mainTracker.getFoodSuggestion() + "\n" 
+			+ "Suggestion exercises: "+mainTracker.getExerciseSuggestion()); 
+		}
+		
 		healthStatusText.setText("Health status: " + mainTracker.getHealthStatus(userBMI));
 		
 		sleepTrackerPane.setStyle(""
@@ -438,11 +443,10 @@ public class ApplicationController {
     	mealInfoText.setVisible(true);
     }
     //TODO MAIN
-    //display recommended food and act (text in two features: food and exercise)
-    //Probably (column) chart to show the distribution of their health (food, sleep, exercise)
-    //compared to the healthy ones
+    //SleepTracker duplication of input entries
+    //-- (column) chart to show the distribution of their health (food, sleep, exercise) compared to the healthy ones
    
-    //TODO touch
+    //TODO final touch
     //Display error of adding to to-do list on the screen
     //Error handling for all inputs
     //Menubar

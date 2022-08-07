@@ -144,4 +144,37 @@ public class HealthTracker{
 	public int convertWeightChange(double calories) {
 		return (int)calories * 30/7716;
 	}
+
+
+	public String getFoodSuggestion() {
+		String matchActivities = "";
+		String healthStatus = this.getHealthStatus(getUserBMI());
+		if (healthStatus.contains("under")){
+			matchActivities = "Beef, nut";
+			return matchActivities;
+		}
+		else if (healthStatus.contains("over")){
+			matchActivities = "Vegetable, fruit";
+			return matchActivities;
+		}
+		else {
+			return "";
+		}
+	}
+		public String getExerciseSuggestion() {
+			String matchActivities = "";
+			String healthStatus = this.getHealthStatus(getUserBMI());
+			if (healthStatus.contains("under")){
+				matchActivities = "Jogging, squat";
+				return matchActivities;
+			}
+			else if (healthStatus.contains("over")){
+				matchActivities = "Swimming, running";
+				return matchActivities;
+			}
+			else {
+				return "";
+			}
+		
+	}
 }
