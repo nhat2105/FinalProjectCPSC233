@@ -19,9 +19,9 @@ public class ApplicationController {
 	Stage applicationStage;
 
 	String userSleepStatus;
-	private double userBMI;
+	private double userBMI = 0;
 
-	private String userHeight, userWeight;
+	private String userHeight = "0", userWeight = "0";
 	
 	HealthTracker mainTracker = new HealthTracker();
 	SleepTracker sleepTracker;
@@ -169,6 +169,8 @@ public class ApplicationController {
      */
 	private void turnOnScene(String sceneCode) {
 		mainTracker.updateUserData(userHeight, userWeight, userBMI);
+		healthStatusText.setText("Health status: " + mainTracker.getHealthStatus(userBMI));
+		
 		sleepTrackerPane.setStyle(""
 				+ "-fx-background-color:lightgray; "
 				);
@@ -425,14 +427,23 @@ public class ApplicationController {
 		mealInfoText.setText("Info: " + meal.getInfo() + ". Pressed the button below to add to your activities list");
     	mealInfoText.setVisible(true);
     }
+    //TODO
+    //If user sleep is normal, stop showing recommendation for sleep acts
+    //Also add text that says total calories consumption for the day (use mainTracker),
+    //if user is not "normal", should display calories consumption to be normal
+    //Display error of adding to to-do list on the screen
+    //Error handling for all inputs
+    
+    //Add method to suggest whether something should be added according to user's BMI
+    //Probably (column) chart to show the distribution of their health (food, sleep, exercise)
+    //compared to the healthy ones
+    
     @FXML
     void addFoodToMenu(ActionEvent e) {
     	Meal foodToAdd = new Meal(meal.getCode());
     	mainTracker.addToTodo(foodToAdd);
     	toDoDisplay.setText(mainTracker.getToDoList());
     	
-    	//Also added method to suggest whether something should be added
-    	//according to their BMI
     	
     }
     @FXML

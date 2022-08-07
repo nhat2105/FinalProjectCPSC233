@@ -128,7 +128,7 @@ public class HealthTracker{
 			return "underWeight";
 		}
 		else {
-			return "all";
+			return "normal";
 		}
 	}
 	
