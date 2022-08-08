@@ -3,13 +3,16 @@ package application;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -27,7 +30,10 @@ public class ApplicationController {
 	SleepTracker sleepTracker;
 	Exercises exercises = new Exercises("none");
 	Meal meal = new Meal("none");
-	
+
+	//Root VBox
+    @FXML
+    private VBox sleepTrackerRoot;
 	
 	//Result display text
 	@FXML
@@ -43,7 +49,7 @@ public class ApplicationController {
 
    //Input text
     @FXML
-    private TextField sleepInput, userWeightInput, userHeightInput, removeItemTextField;	
+    private TextField userWeightInput, userHeightInput, removeItemTextField;	
 	
     //Meal buttons
 	@FXML
@@ -75,6 +81,8 @@ public class ApplicationController {
     @FXML
     private Button yogaButton, aerobicsButton, meditationButton, addActListButton;
     
+    //For sleep inputs control
+    ArrayList<TextField> allSleepInputsTextFields = new ArrayList<TextField>();
 
     //The function below takes in user inputs for their height and weights
     @FXML
@@ -132,12 +140,21 @@ public class ApplicationController {
 	public void getSleepResult(ActionEvent e) {
 		//Create new sleep tracker
 		sleepTracker = new SleepTracker();
+
 		//Validate input
-		String errorFreeInput = mainTracker.validateInput(sleepInput.getText(), 24, 0);
+		String errorFreeInput = "";
+		for (TextField sleepInput: allSleepInputsTextFields) {
+			errorFreeInput = "";
+			errorFreeInput = mainTracker.validateInput(sleepInput.getText(), 24, 0);
+			if (errorFreeInput != "") {
+				sleepResult.setText(errorFreeInput);
+				break;
+			}
+		}
 		
 		//If input is valid, display the result for sleep status
 		if (errorFreeInput == "") {
-			String sleepHoursTrack = sleepTracker.getSleepResult(sleepInput.getText());
+			String sleepHoursTrack = sleepTracker.getSleepResult(allSleepInputsTextFields);
 			sleepResult.setText(sleepHoursTrack);
 			sleepResult.setVisible(true);
 			userSleepStatus = sleepTracker.getSleepStatus();
@@ -147,9 +164,6 @@ public class ApplicationController {
 			}
 		}
 		//If input is invalid, error message is displayed
-		else {
-			sleepResult.setText(errorFreeInput);
-		}
 		
 	}
 	
@@ -186,6 +200,19 @@ public class ApplicationController {
 			//The below code open the interface of sleep tracker
 			appName.setText("Sleep Tracker");
 			sleepTrackerPane.setVisible(true);
+			
+			for (int i = 0; i < 7; i++) {
+				HBox sleepInputRow = new HBox();
+				Label sleepInputLabel = new Label("Day " + (i+1)+ ": ");
+				TextField sleepInputTextField = new TextField();
+				
+				allSleepInputsTextFields.add(sleepInputTextField);
+				
+				sleepInputRow.getChildren().addAll(sleepInputLabel, sleepInputTextField);
+				sleepTrackerRoot.getChildren().add(sleepInputRow);
+				
+				
+			}
 		}
 		else if (sceneCode.contains("inExercises")) {
 			appName.setText("Exercise Recommendation");
@@ -443,14 +470,12 @@ public class ApplicationController {
     	mealInfoText.setVisible(true);
     }
     //TODO MAIN
-    //Remove to-do activities from todo list
-    //SleepTracker duplication of input entries
     //-- (column) chart to show the distribution of their health (food, sleep, exercise) compared to the healthy ones
     //Export (save chart) with Dates to compared (or if they can load it and compare)
    
     //TODO final touch
     //Display error of adding to to-do list on the screen
-    //Error handling for all inputs
+    //Error handling for all inputs -> fix using try-catch block
     
     @FXML
     void addFoodToMenu(ActionEvent e) {
