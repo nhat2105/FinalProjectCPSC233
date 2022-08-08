@@ -28,17 +28,17 @@
           </Menu>
         </menus>
       </MenuBar>
+      <Text fx:id="appName" strokeType="OUTSIDE" strokeWidth="0.0" text="Main Screen" textAlignment="CENTER" wrappingWidth="235.13671875">
+         <VBox.margin>
+            <Insets left="180.0" />
+         </VBox.margin>
+      </Text>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Choose a feature that you would like to use" textAlignment="CENTER" wrappingWidth="166.927734375">
          <font>
             <Font size="16.0" />
          </font>
          <VBox.margin>
             <Insets left="425.0" top="20.0" />
-         </VBox.margin>
-      </Text>
-      <Text fx:id="appName" strokeType="OUTSIDE" strokeWidth="0.0" text="Main Screen" textAlignment="CENTER" wrappingWidth="235.13671875">
-         <VBox.margin>
-            <Insets left="180.0" />
          </VBox.margin>
       </Text>
       <HBox prefHeight="286.0" prefWidth="600.0">
@@ -89,11 +89,13 @@
                   <Line endX="20.0" layoutX="73.0" layoutY="68.0" rotate="90.0" startX="153.0" />
                   <Pane fx:id="sleepTrackerPane" layoutX="160.0" layoutY="1.0" prefHeight="289.0" prefWidth="271.0" visible="false">
                      <children>
-                        <Text layoutX="14.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hours of sleep" wrappingWidth="85.13671875" />
-                        <TextField fx:id="sleepInput" layoutX="110.0" layoutY="49.0" />
-                        <Button fx:id="sleepTrackerResultButton" layoutX="99.0" layoutY="96.0" mnemonicParsing="false" onAction="#getSleepResult" text="Get Result" />
-                        <Text layoutX="17.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter your sleep hours of yesterday" wrappingWidth="235.13671875" />
-                        <Text fx:id="sleepResult" layoutX="53.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="165.0" />
+                        <Text layoutX="17.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter your sleep hours of last week" wrappingWidth="235.13671875" />
+                        <VBox fx:id="sleepTrackerRoot" layoutX="20.0" layoutY="35.0" prefHeight="165.0" prefWidth="235.0">
+                           <children>
+                              <Text fx:id="sleepResult" boundsType="LOGICAL_VERTICAL_CENTER" strokeType="OUTSIDE" strokeWidth="0.0" textOrigin="BOTTOM" wrappingWidth="182.0" />
+                           </children>
+                        </VBox>
+                        <Button fx:id="sleepTrackerResultButton" layoutX="92.0" layoutY="257.0" mnemonicParsing="false" onAction="#getSleepResult" prefHeight="16.0" prefWidth="92.0" text="Get Result" />
                      </children>
                   </Pane>
                   <Pane fx:id="exercisePane" layoutX="159.0" layoutY="-4.0" prefHeight="304.0" prefWidth="271.0" visible="false">

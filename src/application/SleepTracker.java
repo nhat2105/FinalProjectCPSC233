@@ -1,5 +1,9 @@
 package application;
 
+import java.util.ArrayList;
+
+import javafx.scene.control.TextField;
+
 public class SleepTracker {
 	
 	double sleepHours, sleepHoursEveryday;
@@ -15,10 +19,10 @@ public class SleepTracker {
 	 * @param sleepInput String representation of user's hours of sleeps in a week
 	 * @return sleep status in terms of string
 	 */
-	public String getSleepResult(String sleepInput) {
-		//Validate input{
-		sleepHours = Double.parseDouble(sleepInput);
-		
+	public String getSleepResult(ArrayList<TextField> allSleepInputs) {
+		for (TextField sleepInput: allSleepInputs) {
+			sleepHours += Double.parseDouble(sleepInput.getText());
+		}
 		sleepHoursEveryday = sleepHours/7;
 		
 		if (sleepHoursEveryday >= 9.5) {
