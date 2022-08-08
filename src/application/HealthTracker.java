@@ -2,10 +2,12 @@ package application;
 
 import java.util.ArrayList;
 
+import javafx.scene.layout.VBox;
+
 public class HealthTracker{
 	
 	private double userWeight, userHeight;
-	double userBMI;
+	double userBMI, userCalories;
 	ArrayList<Activities> toDoList = new ArrayList<Activities>();
 	
 	/**
@@ -49,7 +51,11 @@ public class HealthTracker{
 		
 	}
 
-
+	public void getUserChart() {
+		//open a new window later and pop up a pie chart in their
+	}
+	
+	
 	//Setter and getter for user weight input
 	double getUserWeight() {
 		return userWeight;
@@ -90,23 +96,23 @@ public class HealthTracker{
 		
 	}
 
-	public void addToTodo(Activities a) {
-		boolean canBeAdded = true;
-		if (toDoList.size() >= 8) {
-			canBeAdded = false;
+	public String addToTodo(Activities a) {
+		String errorMessage = "";
+		if (toDoList.size() >= 10) {
+			errorMessage = "This list is full";
+			System.out.println(errorMessage);
 		}
 		for (Activities existingAct: toDoList) {
 			if (existingAct.getCode() == a.getCode()) {
-				System.out.println("Already in your to do list");
-				canBeAdded = false;
+				errorMessage = "Already in your to do list";
+				System.out.println(errorMessage);
 				break;
-			}
-			
+			}	
 		}
-		if (canBeAdded) {
+		if (errorMessage == "") {
 			toDoList.add(a);
 		}
-		//later display message can't add more than 8
+		return errorMessage;
 	}
 	
 	
@@ -120,5 +126,75 @@ public class HealthTracker{
 		}
 		return result;
 	}
-	
+	public String getHealthStatus(double BMI) {
+		if (BMI >= 25) {
+			return "overWeight";
+		}
+		else if (BMI <= 18.5) {
+			return "underWeight";
+		}
+		else {
+			return "normal";
+		}
+	}
+
+	public double getCaloriesConsumption() {
+		return this.userCalories;
+	}
+
+
+	public void addCalories(double calories) {
+		this.userCalories += calories;
+		
+	}
+	public int convertWeightChange(double calories) {
+		return (int)calories * 30/7716;
+	}
+
+
+	public String getFoodSuggestion() {
+		String matchActivities = "";
+		String healthStatus = this.getHealthStatus(getUserBMI());
+		if (healthStatus.contains("under")){
+			matchActivities = "Beef, nut";
+			return matchActivities;
+		}
+		else if (healthStatus.contains("over")){
+			matchActivities = "Vegetable, fruit";
+			return matchActivities;
+		}
+		else {
+			return "";
+		}
+	}
+		public String getExerciseSuggestion() {
+			String matchActivities = "";
+			String healthStatus = this.getHealthStatus(getUserBMI());
+			if (healthStatus.contains("under")){
+				matchActivities = "Jogging, squat";
+				return matchActivities;
+			}
+			else if (healthStatus.contains("over")){
+				matchActivities = "Swimming, running";
+				return matchActivities;
+			}
+			else {
+				return "";
+			}
+	}
+		public int getToDoSize() {
+			return toDoList.size();
+		}
+
+		public void remove(String indexToRemove) {
+			int index = 0;
+			for (Activities a: toDoList) {
+				//Since to do list shows index starts with 1
+				if ((index+1) == Integer.parseInt(indexToRemove)) {
+					toDoList.remove(a);
+					break;
+				}
+				index++;
+			}
+		}
 }
