@@ -43,7 +43,7 @@ public class ApplicationController {
 
    //Input text
     @FXML
-    private TextField sleepInput, userWeightInput, userHeightInput;	
+    private TextField sleepInput, userWeightInput, userHeightInput, removeItemTextField;	
 	
     //Meal buttons
 	@FXML
@@ -56,14 +56,14 @@ public class ApplicationController {
 	
 	//Data display text
 	@FXML
-    private Text appName, mealOptionText, caloriesConsumptionText, weightChangeText, suggestionText;
+    private Text appName, mealOptionText, caloriesConsumptionText, weightChangeText, suggestionText, removeToDoText;
 	@FXML
     private Text sleepActDescription, sleepActDescription2, sleepMealDes, exerciseOptionText, activitiesInfoText, mealInfoText;
 
 
     //Feature button
     @FXML
-    private Button sleepTrackerButton, exerciseButton, BMIButton, mealsButton;
+    private Button sleepTrackerButton, exerciseButton, BMIButton, mealsButton, removeItemButton;
 
     //Pane
     @FXML
@@ -133,7 +133,7 @@ public class ApplicationController {
 		//Create new sleep tracker
 		sleepTracker = new SleepTracker();
 		//Validate input
-		String errorFreeInput = mainTracker.validateInput(sleepInput.getText(), 24 * 7, 0);
+		String errorFreeInput = mainTracker.validateInput(sleepInput.getText(), 24, 0);
 		
 		//If input is valid, display the result for sleep status
 		if (errorFreeInput == "") {
@@ -443,13 +443,14 @@ public class ApplicationController {
     	mealInfoText.setVisible(true);
     }
     //TODO MAIN
+    //Remove to-do activities from todo list
     //SleepTracker duplication of input entries
     //-- (column) chart to show the distribution of their health (food, sleep, exercise) compared to the healthy ones
+    //Export (save chart) with Dates to compared (or if they can load it and compare)
    
     //TODO final touch
     //Display error of adding to to-do list on the screen
     //Error handling for all inputs
-    //Menubar
     
     @FXML
     void addFoodToMenu(ActionEvent e) {
@@ -460,6 +461,9 @@ public class ApplicationController {
     	String errorFree = mainTracker.addToTodo(foodToAdd);
     	if (errorFree == "")mainTracker.addCalories(foodToAdd.getCaloriesInfo());
     	toDoDisplay.setText(mainTracker.getToDoList());
+    	removeToDoText.setVisible(true);
+    	removeItemButton.setVisible(true);
+    	removeItemTextField.setVisible(true);
     	
     	int caloriesConsumption = (int)mainTracker.getCaloriesConsumption();
     	caloriesConsumptionText.setText("Total calories: " + caloriesConsumption);
@@ -468,18 +472,28 @@ public class ApplicationController {
     	
     }
     @FXML
+    void removeItemFromToDo(ActionEvent e) {
+    	String indexToRemove = removeItemTextField.getText();
+    	String errorFree = mainTracker.validateInput(indexToRemove, mainTracker.getToDoSize(), 0);
+    	if (errorFree == "")mainTracker.remove(indexToRemove);
+    	//Update the scene
+    	toDoDisplay.setText(mainTracker.getToDoList());
+    }
+    @FXML
     void addExerciseToList(ActionEvent e) {
     	Exercises exerciseToAdd = new Exercises(exercises.getCode());
     	exerciseToAdd.setCaloriesInfo(exercises.getCode(), mainTracker.getUserBMI());
     	String errorFree = mainTracker.addToTodo(exerciseToAdd);
     	if (errorFree == "")mainTracker.addCalories(-exerciseToAdd.getCaloriesInfo());
     	toDoDisplay.setText(mainTracker.getToDoList());
+    	removeToDoText.setVisible(true);
+    	removeItemButton.setVisible(true);
+    	removeItemTextField.setVisible(true);
     	
     	int caloriesConsumption = (int)mainTracker.getCaloriesConsumption();
     	caloriesConsumptionText.setText("Total calories: " + caloriesConsumption);
     	weightChangeText.setText("With this, you will gain " 
-    	+ mainTracker.convertWeightChange(caloriesConsumption) +" kg per month");
-    	
-    	
+    	+ mainTracker.convertWeightChange(caloriesConsumption) +" kg per month");	
     }
+   
 }
