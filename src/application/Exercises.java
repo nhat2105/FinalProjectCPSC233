@@ -3,6 +3,7 @@ package application;
 public class Exercises extends Activities {
 	public Exercises(String code) {
 		super(code);
+		setType("exercise");
 	}
 	
 	public void setCaloriesInfo(String code, double userWeight) {

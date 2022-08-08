@@ -2,8 +2,6 @@ package application;
 
 import java.util.ArrayList;
 
-import javafx.scene.layout.VBox;
-
 public class HealthTracker{
 	
 	private double userWeight, userHeight;
@@ -192,9 +190,16 @@ public class HealthTracker{
 				//Since to do list shows index starts with 1
 				if ((index+1) == Integer.parseInt(indexToRemove)) {
 					toDoList.remove(a);
+					if (a.getType() == "meal") {
+						addCalories(-a.getCaloriesInfo());
+					}
+					else if (a.getType() == "exercise") {
+						addCalories(a.getCaloriesInfo());
+					}
 					break;
 				}
 				index++;
 			}
 		}
+		
 }

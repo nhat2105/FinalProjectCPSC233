@@ -4,6 +4,7 @@ public class Meal extends Activities {
 	private double protein = 0;
 	public Meal(String code) {
 		super(code);
+		setType("meal");
 	}
 	public double getProteinInfo() {
 		return this.protein;
