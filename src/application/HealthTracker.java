@@ -2,6 +2,8 @@ package application;
 
 import java.util.ArrayList;
 
+import javafx.scene.layout.VBox;
+
 public class HealthTracker{
 	
 	private double userWeight, userHeight;
@@ -49,7 +51,11 @@ public class HealthTracker{
 		
 	}
 
-
+	public void getUserChart() {
+		//open a new window later and pop up a pie chart in their
+	}
+	
+	
 	//Setter and getter for user weight input
 	double getUserWeight() {
 		return userWeight;
@@ -175,6 +181,20 @@ public class HealthTracker{
 			else {
 				return "";
 			}
-		
 	}
+		public int getToDoSize() {
+			return toDoList.size();
+		}
+
+		public void remove(String indexToRemove) {
+			int index = 0;
+			for (Activities a: toDoList) {
+				//Since to do list shows index starts with 1
+				if ((index+1) == Integer.parseInt(indexToRemove)) {
+					toDoList.remove(a);
+					break;
+				}
+				index++;
+			}
+		}
 }
