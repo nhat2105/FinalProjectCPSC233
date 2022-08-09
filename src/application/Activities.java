@@ -6,9 +6,10 @@ public class Activities{
 	private String actCode = "";
 	protected String type = "";
 	
-	public Activities(String code) {
+	public Activities(String code, double calories, String type) {
 		setCode(code);
-		
+		setCalories(calories);
+		setType(type);
 	}
 	
 	

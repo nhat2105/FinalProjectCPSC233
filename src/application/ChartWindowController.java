@@ -10,6 +10,7 @@ public class ChartWindowController {
 	@FXML
 	LineChart<String, Number> sleepLineChart;
 	
+	
 	public void createLineChart(ArrayList<TextField> allSleepInputs) {//take some inputs from other window, then create it
 		XYChart.Series<String, Number> sleepSeries = new XYChart.Series<String, Number>();
 		int dayNumber = 1;
