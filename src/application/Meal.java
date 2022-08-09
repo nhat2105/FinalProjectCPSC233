@@ -4,10 +4,13 @@ public class Meal extends Activities {
 	private double protein = 0;
 	public Meal(String code) {
 		super(code);
-		setType("meal");
+		setType();
 	}
 	public double getProteinInfo() {
 		return this.protein;
+	} 
+	public void setType() {
+		this.type = this.getPreference();
 	}
 	public void setProteinInfo(String code) {//protein per 100g for now
 		switch(code) { 
