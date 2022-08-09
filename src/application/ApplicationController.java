@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -31,6 +32,10 @@ public class ApplicationController {
 	Exercises exercises = new Exercises("none");
 	Meal meal = new Meal("none");
 
+	//Menu items
+	@FXML
+    private MenuItem mealChart, sleepChart;
+	
 	//Root VBox
     @FXML
     private VBox sleepTrackerRoot;
@@ -138,6 +143,8 @@ public class ApplicationController {
 	*/
 	@FXML
 	public void getSleepResult(ActionEvent e) {
+		
+		
 		//Create new sleep tracker
 		sleepTracker = new SleepTracker();
 
@@ -163,7 +170,7 @@ public class ApplicationController {
 				healthStatusText.setVisible(true);
 			}
 		}
-		//If input is invalid, error message is displayed
+	
 		
 	}
 	
@@ -199,7 +206,14 @@ public class ApplicationController {
 			
 			//The below code open the interface of sleep tracker
 			appName.setText("Sleep Tracker");
+			
+			//remove old data if there's any
+			allSleepInputsTextFields.clear();
+			sleepTrackerRoot.getChildren().clear();
+			sleepTrackerRoot.getChildren().add(sleepResult);
+			
 			sleepTrackerPane.setVisible(true);
+			
 			
 			for (int i = 0; i < 7; i++) {
 				HBox sleepInputRow = new HBox();
@@ -470,12 +484,15 @@ public class ApplicationController {
     	mealInfoText.setVisible(true);
     }
     //TODO MAIN
-    //-- (column) chart to show the distribution of their health (food, sleep, exercise) compared to the healthy ones
+    //line chart to show the distribution of their health (sleep, exercise) compared to the healthy ones
+    //pie chart to show distribution of each meal
     //Export (save chart) with Dates to compared (or if they can load it and compare)
    
     //TODO final touch
     //Display error of adding to to-do list on the screen
     //Error handling for all inputs -> fix using try-catch block
+    //All use setters and getters, no default built inside the class (differentiate by the name of button)
+    //possible export of todo list as well
     
     @FXML
     void addFoodToMenu(ActionEvent e) {
@@ -503,6 +520,10 @@ public class ApplicationController {
     	if (errorFree == "")mainTracker.remove(indexToRemove);
     	//Update the scene
     	toDoDisplay.setText(mainTracker.getToDoList());
+    	int caloriesConsumption = (int)mainTracker.getCaloriesConsumption();
+    	weightChangeText.setText("After a month, you will gain " 
+    	    	+ mainTracker.convertWeightChange(caloriesConsumption) + " kg per month");
+    	    	
     }
     @FXML
     void addExerciseToList(ActionEvent e) {
@@ -519,6 +540,35 @@ public class ApplicationController {
     	caloriesConsumptionText.setText("Total calories: " + caloriesConsumption);
     	weightChangeText.setText("With this, you will gain " 
     	+ mainTracker.convertWeightChange(caloriesConsumption) +" kg per month");	
+    }
+    @FXML
+    void openChartWindow(ActionEvent event) {
+    	try {
+			FXMLLoader loader = new FXMLLoader();
+			
+			VBox root = loader.load(new FileInputStream("src/application/ChartView.fxml"));
+			ChartWindowController chartController = loader.getController();
+			chartController.createPieChart();
+			Stage chartWindow = new Stage();
+			Scene scene = new Scene(root, 600, 420);
+			
+			if (event.getSource() == mealChart) {
+	    		chartController.createPieChart();		
+	    	}
+	    	else if (event.getSource() == sleepChart) {
+	    		chartController.createLineChart(allSleepInputsTextFields);
+	    	}
+	    	
+			chartWindow.setScene(scene);
+			chartWindow.setTitle("Chart Window");
+			
+			
+			chartWindow.show();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+    	
+    
     }
    
 }
