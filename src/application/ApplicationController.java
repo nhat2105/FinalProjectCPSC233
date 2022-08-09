@@ -29,8 +29,8 @@ public class ApplicationController {
 	
 	HealthTracker mainTracker = new HealthTracker();
 	SleepTracker sleepTracker;
-	Exercises exercises = new Exercises("none");
-	Meal meal = new Meal("none");
+	Exercises exercises = new Exercises("none", 0, "exercise");
+	Meal meal = new Meal("none", 0, "meal", 0);
 
 	//Menu items
 	@FXML
@@ -405,40 +405,51 @@ public class ApplicationController {
     @FXML
     void getInfo(ActionEvent ae) {
     	String actCode = "";
+    	double caloriesInfo = 0;
     	addActListButton.setVisible(true);
     	if (ae.getSource() == runningButton) {
     		actCode = "running";
-    		
+    		//this activity also based on weight, averagely calculate by the formula below
+    		caloriesInfo = (11.5 * 3.5 * mainTracker.getUserWeight()/200)*30;
     	}
     	else if (ae.getSource() == swimmingButton) {
     		actCode = "swim";
+    		caloriesInfo = 250;
     	}
     	else if (ae.getSource() == joggingButton) {
     		actCode = "jogging";
+    		//similar to running
+    		caloriesInfo = (5 * 3.5 * mainTracker.getUserWeight()/200)*30;
     	}
     	else if (ae.getSource() == cyclingButton) {
+    		
     		actCode = "cycling";
+    		//formula provided to calculate cycling calories burned
+    		caloriesInfo = 7.2 * mainTracker.getUserWeight() * 0.0175 * 30;
     	}
     	else if (ae.getSource() == squatButton) {
     		actCode = "squat";
+    		caloriesInfo = 240;
     	}
     	else if (ae.getSource() == pushUpButton) {
     		actCode = "pushUp";
+    		caloriesInfo = 210;
     	}
-    	if (ae.getSource() == vegetableButton) {
-    		actCode = "vege";
-    	}
+
     	if (ae.getSource() == yogaButton) {
     		actCode = "yoga";
+    		caloriesInfo = 100;
     	}
     	if (ae.getSource() == meditationButton) {
     		actCode = "meditation";
+    		caloriesInfo = 35;
     	}
     	if (ae.getSource() == aerobicsButton) {
     		actCode = "aerobics";
+    		caloriesInfo = 85;
     	}
     	exercises.setCode(actCode);
-    	exercises.setCaloriesInfo(actCode, mainTracker.getUserWeight()); 
+    	exercises.setCaloriesInfo(caloriesInfo); 
     	
 		activitiesInfoText.setText("Info: " + exercises.getInfo() + ". Pressed the button below to add to your activities list");
     	activitiesInfoText.setVisible(true);
@@ -450,41 +461,61 @@ public class ApplicationController {
     void getMealInfo(ActionEvent ae) {
     	addToMenuButton.setVisible(true);
     	String mealCode = "";
+    	double caloriesInfo = 0;
+    	double proteinInfo = 0;
     	if (ae.getSource() == fruitButton) {
     		mealCode = "fruit";
+    		caloriesInfo = 71;
+    		proteinInfo = 0.3;
     	}
     	if (ae.getSource() == milkButton) {
     		mealCode = "milk";
+    		caloriesInfo = 42;
+    		proteinInfo = 3.4;
     	}
     	if (ae.getSource() == teaButton) {
     		mealCode = "tea";
+    		caloriesInfo = 1;
+    		proteinInfo = 0.1;
     	}
     	if (ae.getSource() == vegetableButton) {
     		mealCode = "vegetable";
+    		caloriesInfo = 65;
+    		proteinInfo = 2.9;
     	}
     	if (ae.getSource() == soupButton){
     		mealCode = "soup";
+    		caloriesInfo = 42;
+    		proteinInfo = 4;
     	}
     	if (ae.getSource() == seedButton) {
     		mealCode = "seed";
+    		caloriesInfo = 559;
+    		proteinInfo = 30;
     	}
     	if (ae.getSource() == chickenButton) {
     		mealCode = "chicken";
+    		caloriesInfo = 239;
+    		proteinInfo = 27;
     	}
     	if (ae.getSource() == beefButton){
     		mealCode = "beef";
+    		caloriesInfo = 250;
+    		proteinInfo = 26;
     	}
     	if (ae.getSource() == porkButton) {
     		mealCode = "pork";
+    		caloriesInfo = 242;
+    		proteinInfo = 27;
     	}
     	meal.setCode(mealCode);
-    	meal.setProteinInfo(mealCode);
-    	meal.setCaloriesInfo(mealCode);
+    	meal.setProteinInfo(proteinInfo);
+    	meal.setCaloriesInfo(caloriesInfo);
 		mealInfoText.setText("Info: " + meal.getInfo() + ". Pressed the button below to add to your activities list");
     	mealInfoText.setVisible(true);
     }
     //TODO MAIN
-    //line chart to show the distribution of their health (sleep, exercise) compared to the healthy ones
+    //bar chart to show the distribution of their health (overall: sleep, water, food, exercise) compared to the healthy ones
     //pie chart to show distribution of each meal
     //Export (save chart) with Dates to compared (or if they can load it and compare)
    
@@ -496,9 +527,7 @@ public class ApplicationController {
     
     @FXML
     void addFoodToMenu(ActionEvent e) {
-    	Meal foodToAdd = new Meal(meal.getCode());
-    	
-    	foodToAdd.setCaloriesInfo(meal.getCode());
+    	Meal foodToAdd = new Meal(meal.getCode(), meal.getCaloriesInfo(), "exercise", meal.getProteinInfo());
     	
     	String errorFree = mainTracker.addToTodo(foodToAdd);
     	if (errorFree == "")mainTracker.addCalories(foodToAdd.getCaloriesInfo());
@@ -511,7 +540,7 @@ public class ApplicationController {
     	caloriesConsumptionText.setText("Total calories: " + caloriesConsumption);
     	weightChangeText.setText("After a month, you will gain " 
     	+ mainTracker.convertWeightChange(caloriesConsumption) + " kg per month");
-    	
+    
     }
     @FXML
     void removeItemFromToDo(ActionEvent e) {
@@ -527,8 +556,8 @@ public class ApplicationController {
     }
     @FXML
     void addExerciseToList(ActionEvent e) {
-    	Exercises exerciseToAdd = new Exercises(exercises.getCode());
-    	exerciseToAdd.setCaloriesInfo(exercises.getCode(), mainTracker.getUserBMI());
+    	Exercises exerciseToAdd = new Exercises(exercises.getCode(), exercises.getCaloriesInfo(), "exercise");
+    	exerciseToAdd.setCaloriesInfo(mainTracker.getUserBMI());
     	String errorFree = mainTracker.addToTodo(exerciseToAdd);
     	if (errorFree == "")mainTracker.addCalories(-exerciseToAdd.getCaloriesInfo());
     	toDoDisplay.setText(mainTracker.getToDoList());
