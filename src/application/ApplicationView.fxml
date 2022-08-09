@@ -16,9 +16,11 @@
    <children>
       <MenuBar>
         <menus>
-          <Menu mnemonicParsing="false" text="Edit">
+          <Menu mnemonicParsing="false" text="Charts">
             <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
+              <MenuItem fx:id="mealChart" mnemonicParsing="false" onAction="#openChartWindow" text="Meal Chart" />
+                  <MenuItem fx:id="sleepChart" mnemonicParsing="false" onAction="#openChartWindow" text="Sleep Chart" />
+                  <MenuItem mnemonicParsing="false" text="Import Chart" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">

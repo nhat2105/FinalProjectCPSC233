@@ -19,7 +19,7 @@ public class Main extends Application {
 			controller.applicationStage = primaryStage;
 			Scene scene = new Scene(root, 600, 420);
 			primaryStage.setScene(scene);
-			primaryStage.setTitle("CPSC233 Final Project");
+			primaryStage.setTitle("Health Tracker");
 			primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();
