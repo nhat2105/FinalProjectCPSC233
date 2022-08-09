@@ -4,6 +4,7 @@ public class Activities{
 	protected double calories = 0;
 	private String preference = "";
 	private String actCode = "";
+	protected String type = "";
 	
 	public Activities(String code) {
 		setCode(code);
@@ -27,6 +28,12 @@ public class Activities{
 	protected void setCode(String actCode) {
 		this.actCode = actCode;
 		
+	}
+	public void setType(String typeOfAct) {
+		this.type = typeOfAct;
+	}
+	public String getType() {
+		return this.type;
 	}
 	public String getCode() {
 		return actCode;
