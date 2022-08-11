@@ -52,7 +52,7 @@ public class ApplicationController {
 	
 	//Error text
 	@FXML
-	private Text weightErrorText, heightErrorText;
+	private Text weightErrorText, heightErrorText, errorToDoText;
 	
 	//Result button
     @FXML
@@ -538,8 +538,6 @@ public class ApplicationController {
 		mealInfoText.setText("Info: " + meal.getInfo() + ". Pressed the button below to add to your activities list");
     	mealInfoText.setVisible(true);
     }
-    //TODO MAIN
-    //Export (save chart) with Dates to compared (or if they can load it and compare)
    
     //TODO final touch
     //Display error of adding to to-do list on the screen
@@ -547,7 +545,6 @@ public class ApplicationController {
     //Add comments on each function
     //clean up and rearrangement of folders inside the project
     //Include function which user can find max or min calories consumption and such
-    //possible export of todo list as well
     //Hashmap for the catalog
     //Search bar for these choice box items
     
@@ -558,6 +555,7 @@ public class ApplicationController {
     	mealGroupList.add(meal.getMealGroup());
     	String errorFree = mainTracker.addToTodo(foodToAdd);
     	if (errorFree == "")mainTracker.addCalories(foodToAdd.getCaloriesInfo());
+    	else errorToDoText.setText(errorFree);
     	toDoDisplay.setText(mainTracker.getToDoList());
     	removeToDoText.setVisible(true);
     	removeItemButton.setVisible(true);
@@ -588,6 +586,7 @@ public class ApplicationController {
     	Exercises exerciseToAdd = new Exercises(exercises.getCode(), exercises.getCaloriesInfo(), "exercise");
     	String errorFree = mainTracker.addToTodo(exerciseToAdd);
     	if (errorFree == "")mainTracker.addCalories(-exerciseToAdd.getCaloriesInfo());
+    	else errorToDoText.setText(errorFree);
     	toDoDisplay.setText(mainTracker.getToDoList());
     	removeToDoText.setVisible(true);
     	removeItemButton.setVisible(true);
@@ -619,7 +618,6 @@ public class ApplicationController {
 			
 			VBox root = loader.load(new FileInputStream("src/application/ChartView.fxml"));
 			ChartWindowController chartController = loader.getController();
-			chartController.createPieChart(mealGroupList);
 			Stage chartWindow = new Stage();
 			Scene scene = new Scene(root, 600, 420);
 			
