@@ -190,10 +190,10 @@ public class HealthTracker{
 				//Since to do list shows index starts with 1
 				if ((index+1) == Integer.parseInt(indexToRemove)) {
 					toDoList.remove(a);
-					if (a.getType() == "meal") {
-						addCalories(-a.getCaloriesInfo());
+					if (a.getType().equals("meal")) {
+						addCalories(-1 * a.getCaloriesInfo());
 					}
-					else if (a.getType() == "exercise") {
+					else if (a.getType().equals("exercise")) {
 						addCalories(a.getCaloriesInfo());
 					}
 					break;

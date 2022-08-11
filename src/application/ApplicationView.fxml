@@ -106,7 +106,6 @@
                   </Pane>
                   <Pane fx:id="exercisePane" layoutX="159.0" layoutY="-4.0" prefHeight="304.0" prefWidth="271.0" visible="false">
                      <children>
-                        <Text fx:id="exerciseOptionText" layoutX="13.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="What type of activities do you prefer?" textAlignment="CENTER" visible="false" wrappingWidth="244.13671875" />
                         <VBox layoutX="7.0" layoutY="54.0" prefHeight="220.0" prefWidth="256.0">
                            <children>
                               <HBox prefHeight="25.0" prefWidth="256.0">
