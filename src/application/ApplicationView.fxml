@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.collections.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.effect.*?>
@@ -11,6 +12,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.collections.FXCollections?>
 
 <VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ApplicationController">
    <children>
@@ -30,17 +32,17 @@
           </Menu>
         </menus>
       </MenuBar>
-      <Text fx:id="appName" strokeType="OUTSIDE" strokeWidth="0.0" text="Main Screen" textAlignment="CENTER" wrappingWidth="235.13671875">
-         <VBox.margin>
-            <Insets left="180.0" />
-         </VBox.margin>
-      </Text>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Choose a feature that you would like to use" textAlignment="CENTER" wrappingWidth="166.927734375">
          <font>
             <Font size="16.0" />
          </font>
          <VBox.margin>
             <Insets left="425.0" top="20.0" />
+         </VBox.margin>
+      </Text>
+      <Text fx:id="appName" strokeType="OUTSIDE" strokeWidth="0.0" text="Main Screen" textAlignment="CENTER" wrappingWidth="235.13671875">
+         <VBox.margin>
+            <Insets left="180.0" />
          </VBox.margin>
       </Text>
       <HBox prefHeight="286.0" prefWidth="600.0">
@@ -102,54 +104,39 @@
                   </Pane>
                   <Pane fx:id="exercisePane" layoutX="159.0" layoutY="-4.0" prefHeight="304.0" prefWidth="271.0" visible="false">
                      <children>
-                        <Text fx:id="exerciseOptionText" layoutX="13.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="What type of activities do you prefer?" textAlignment="CENTER" visible="false" wrappingWidth="244.13671875" />
                         <VBox layoutX="7.0" layoutY="54.0" prefHeight="220.0" prefWidth="256.0">
                            <children>
                               <HBox prefHeight="25.0" prefWidth="256.0">
                                  <children>
-                                    <Button fx:id="cardioOption" mnemonicParsing="false" onAction="#setPref" prefHeight="25.0" prefWidth="68.0" text="Cardio">
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Choose an exercise: " wrappingWidth="91.13671875">
                                        <HBox.margin>
-                                          <Insets left="10.0" />
-                                       </HBox.margin>
-                                    </Button>
-                                    <Button fx:id="mildOption" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#setPref" prefHeight="25.0" prefWidth="67.0" text="Mild">
+                                          <Insets top="5.0" />
+                                       </HBox.margin></Text>
+                                    <ChoiceBox fx:id="exerciseChoiceBox" onAction="#getInfo" prefHeight="25.0" prefWidth="144.0">
+                                    	<items>
+											<FXCollections fx:factory="observableArrayList">
+												<String fx:value="Running" />
+												<String fx:value="Jogging" />
+												<String fx:value="Swimming" />
+												<String fx:value="Push up" />
+												<String fx:value="Squat" />
+												<String fx:value="Cycling" />
+												<String fx:value="Weight lifting" />
+												<String fx:value="Pulling up" />
+												<String fx:value="Tennis" />
+												<String fx:value="Soccer" />
+												<String fx:value="Basketball" />
+												<String fx:value="Rugby" />
+												<String fx:value="Volleyball" />
+												<String fx:value="Badminton" />
+												<String fx:value="Crunches" />
+												
+											</FXCollections>
+										</items>
                                        <HBox.margin>
-                                          <Insets left="10.0" />
+                                          <Insets top="5.0" />
                                        </HBox.margin>
-                                    </Button>
-                                    <Button fx:id="bothEOption" layoutX="62.0" layoutY="10.0" mnemonicParsing="false" onAction="#setPref" prefHeight="25.0" prefWidth="76.0" text="Both">
-                                       <HBox.margin>
-                                          <Insets left="10.0" />
-                                       </HBox.margin>
-                                    </Button>
-                                 </children>
-                              </HBox>
-                              <HBox prefHeight="25.0" prefWidth="256.0">
-                                 <children>
-                                    <Button fx:id="runningButton" mnemonicParsing="false" onAction="#getInfo" prefHeight="34.0" prefWidth="75.0" text="Running" visible="false">
-                                       <opaqueInsets>
-                                          <Insets />
-                                       </opaqueInsets>
-                                       <HBox.margin>
-                                          <Insets left="10.0" top="15.0" />
-                                       </HBox.margin>
-                                    </Button>
-                                    <Button fx:id="swimmingButton" layoutX="20.0" layoutY="40.0" mnemonicParsing="false" onAction="#getInfo" prefHeight="18.0" prefWidth="75.0" text="Swimming" visible="false">
-                                       <opaqueInsets>
-                                          <Insets />
-                                       </opaqueInsets>
-                                       <HBox.margin>
-                                          <Insets left="5.0" top="15.0" />
-                                       </HBox.margin>
-                                    </Button>
-                                    <Button fx:id="cyclingButton" layoutX="108.0" layoutY="40.0" mnemonicParsing="false" onAction="#getInfo" prefHeight="18.0" prefWidth="75.0" text="Cycling" visible="false">
-                                       <opaqueInsets>
-                                          <Insets />
-                                       </opaqueInsets>
-                                       <HBox.margin>
-                                          <Insets left="5.0" top="15.0" />
-                                       </HBox.margin>
-                                    </Button>
+                                    </ChoiceBox>
                                  </children>
                               </HBox>
                               <Text fx:id="activitiesInfoText" strokeType="OUTSIDE" strokeWidth="0.0" text="Info:" visible="false" wrappingWidth="253.13671875">
@@ -162,34 +149,6 @@
                                     <Insets left="60.0" />
                                  </VBox.margin>
                               </Button>
-                              <HBox layoutX="10.0" layoutY="66.0" prefHeight="30.0" prefWidth="256.0">
-                                 <children>
-                                    <Button fx:id="joggingButton" mnemonicParsing="false" onAction="#getInfo" prefHeight="18.0" prefWidth="75.0" text="Jogging" visible="false">
-                                       <opaqueInsets>
-                                          <Insets />
-                                       </opaqueInsets>
-                                       <HBox.margin>
-                                          <Insets left="10.0" top="15.0" />
-                                       </HBox.margin>
-                                    </Button>
-                                    <Button fx:id="pushUpButton" layoutX="20.0" layoutY="40.0" mnemonicParsing="false" onAction="#getInfo" prefHeight="18.0" prefWidth="75.0" text="Push up" visible="false">
-                                       <opaqueInsets>
-                                          <Insets />
-                                       </opaqueInsets>
-                                       <HBox.margin>
-                                          <Insets left="5.0" top="15.0" />
-                                       </HBox.margin>
-                                    </Button>
-                                    <Button fx:id="squatButton" layoutX="108.0" layoutY="40.0" mnemonicParsing="false" onAction="#getInfo" prefHeight="18.0" prefWidth="75.0" text="Squat" visible="false">
-                                       <opaqueInsets>
-                                          <Insets />
-                                       </opaqueInsets>
-                                       <HBox.margin>
-                                          <Insets left="5.0" top="15.0" />
-                                       </HBox.margin>
-                                    </Button>
-                                 </children>
-                              </HBox>
                               <Text fx:id="sleepActDescription" boundsType="LOGICAL_VERTICAL_CENTER" strokeType="OUTSIDE" strokeWidth="0.0" text="Try to do at least one activity below for 15" textAlignment="CENTER" visible="false" wrappingWidth="253.13671875">
                                  <VBox.margin>
                                     <Insets top="10.0" />
@@ -234,54 +193,41 @@
                   </Pane>
                   <Pane fx:id="mealPane" layoutX="160.0" layoutY="1.0" prefHeight="304.0" prefWidth="271.0" visible="false">
                      <children>
-                        <Text fx:id="mealOptionText" layoutX="13.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="What type of food do you prefer?" textAlignment="CENTER" visible="false" wrappingWidth="244.13671875" />
                         <VBox layoutX="7.0" layoutY="54.0" prefHeight="220.0" prefWidth="256.0">
                            <children>
-                              <HBox prefHeight="40.0" prefWidth="256.0">
-                                 <children>
-                                    <Button fx:id="vegeOption" mnemonicParsing="false" onAction="#setPref" prefHeight="25.0" prefWidth="75.0" text="Vegetable">
-                                       <HBox.margin>
-                                          <Insets left="20.0" />
-                                       </HBox.margin>
-                                    </Button>
-                                    <Button fx:id="meatOption" mnemonicParsing="false" onAction="#setPref" prefHeight="25.0" prefWidth="73.0" text="Meat">
-                                       <HBox.margin>
-                                          <Insets left="5.0" />
-                                       </HBox.margin>
-                                    </Button>
-                                    <Button fx:id="bothOption" mnemonicParsing="false" onAction="#setPref" prefHeight="25.0" prefWidth="51.0" text="Both">
-                                       <HBox.margin>
-                                          <Insets left="5.0" />
-                                       </HBox.margin>
-                                    </Button>
-                                 </children>
-                              </HBox>
                               <HBox prefHeight="31.0" prefWidth="256.0">
                                  <children>
-                                    <Button fx:id="vegetableButton" mnemonicParsing="false" onAction="#getMealInfo" prefHeight="18.0" prefWidth="75.0" text="Vegetable" visible="false">
-                                       <opaqueInsets>
-                                          <Insets />
-                                       </opaqueInsets>
-                                       <HBox.margin>
-                                          <Insets left="10.0" top="15.0" />
-                                       </HBox.margin>
-                                    </Button>
-                                    <Button fx:id="soupButton" layoutX="20.0" layoutY="40.0" mnemonicParsing="false" onAction="#getMealInfo" prefHeight="18.0" prefWidth="75.0" text="Soup" visible="false">
-                                       <opaqueInsets>
-                                          <Insets />
-                                       </opaqueInsets>
-                                       <HBox.margin>
-                                          <Insets left="5.0" top="15.0" />
-                                       </HBox.margin>
-                                    </Button>
-                                    <Button fx:id="seedButton" layoutX="108.0" layoutY="40.0" mnemonicParsing="false" onAction="#getMealInfo" prefHeight="18.0" prefWidth="75.0" text="Seed" visible="false">
-                                       <opaqueInsets>
-                                          <Insets />
-                                       </opaqueInsets>
-                                       <HBox.margin>
-                                          <Insets left="5.0" top="15.0" />
-                                       </HBox.margin>
-                                    </Button>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Choose your meal: " wrappingWidth="96.13671875" />
+                                    <ChoiceBox fx:id="mealChoiceBox"  onAction="#getMealInfo" prefWidth="150.0">
+                                    <items>
+											<FXCollections fx:factory="observableArrayList">
+												<String fx:value="Chicken" />
+												<String fx:value="Pork" />
+												<String fx:value="Beef" />
+												<String fx:value="Soup" />
+												<String fx:value="Vegetable" />
+												<String fx:value="Seed" />
+												<String fx:value="Rice" />
+												<String fx:value="Muffin" />
+												<String fx:value="Pie" />
+												<String fx:value="Salmon" />
+												<String fx:value="Pizza" />
+												<String fx:value="Hamburger" />
+												<String fx:value="Sushi" />
+												<String fx:value="Shrimp" />
+												
+												<String fx:value="Noodles" />
+												<String fx:value="Spaghetti" />
+												<String fx:value="Apple juice" />
+												<String fx:value="Peach juice" />
+												<String fx:value="Watermelon" />
+												<String fx:value="Lemonade" />
+												<String fx:value="Mango" />
+											
+												
+											</FXCollections>
+										</items>
+                                    </ChoiceBox>
                                  </children>
                               </HBox>
                               <Text fx:id="mealInfoText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" visible="false" wrappingWidth="253.13671875" />
