@@ -515,6 +515,7 @@ public class ApplicationController {
     	mealInfoText.setVisible(true);
     }
     //TODO MAIN
+    //created new bar chart
     //bar chart to show the distribution of their health (overall: sleep, water, food, exercise) compared to the healthy ones
     //pie chart to show distribution of each meal
     //Export (save chart) with Dates to compared (or if they can load it and compare)
