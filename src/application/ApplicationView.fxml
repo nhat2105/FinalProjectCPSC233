@@ -108,11 +108,11 @@
                            <children>
                               <HBox prefHeight="25.0" prefWidth="256.0">
                                  <children>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Choose an exercise: " wrappingWidth="91.13671875">
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Choose an exercise: " wrappingWidth="111.13671875">
                                        <HBox.margin>
                                           <Insets top="5.0" />
                                        </HBox.margin></Text>
-                                    <ChoiceBox fx:id="exerciseChoiceBox" onAction="#getInfo" prefHeight="25.0" prefWidth="144.0">
+                                    <ComboBox fx:id="exerciseComboBox" editable="true" onAction="#getInfo" prefHeight="25.0" prefWidth="52.0">
                                     	<items>
 											<FXCollections fx:factory="observableArrayList">
 												<String fx:value="Running" />
@@ -136,7 +136,12 @@
                                        <HBox.margin>
                                           <Insets top="5.0" />
                                        </HBox.margin>
-                                    </ChoiceBox>
+                                    </ComboBox>
+                                    <Button fx:id="exerciseSearchButton" mnemonicParsing="false" onAction="#searchItem" prefHeight="25.0" prefWidth="71.0" text="Search" textAlignment="CENTER">
+                                       <HBox.margin>
+                                          <Insets left="5.0" top="5.0" />
+                                       </HBox.margin>
+                                    </Button>
                                  </children>
                               </HBox>
                               <Text fx:id="activitiesInfoText" strokeType="OUTSIDE" strokeWidth="0.0" text="Info:" visible="false" wrappingWidth="253.13671875">
@@ -186,7 +191,6 @@
                                     <Insets />
                                  </opaqueInsets>
                               </HBox>
-                              <HBox prefHeight="55.0" prefWidth="256.0" />
                            </children>
                         </VBox>
                      </children>
@@ -198,7 +202,7 @@
                               <HBox prefHeight="31.0" prefWidth="256.0">
                                  <children>
                                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Choose your meal: " wrappingWidth="96.13671875" />
-                                    <ChoiceBox fx:id="mealChoiceBox"  onAction="#getMealInfo" prefWidth="150.0">
+                                    <ComboBox fx:id="mealComboBox" editable="true" onAction="#getMealInfo" prefWidth="150.0">
                                     <items>
 											<FXCollections fx:factory="observableArrayList">
 												<String fx:value="Chicken" />
@@ -227,7 +231,7 @@
 												
 											</FXCollections>
 										</items>
-                                    </ChoiceBox>
+                                    </ComboBox>
                                  </children>
                               </HBox>
                               <Text fx:id="mealInfoText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" visible="false" wrappingWidth="253.13671875" />
@@ -236,34 +240,6 @@
                                     <Insets left="70.0" />
                                  </VBox.margin>
                               </Button>
-                              <HBox layoutX="10.0" layoutY="66.0" prefHeight="35.0" prefWidth="256.0">
-                                 <children>
-                                    <Button fx:id="chickenButton" mnemonicParsing="false" onAction="#getMealInfo" prefHeight="18.0" prefWidth="75.0" text="Chicken" visible="false">
-                                       <opaqueInsets>
-                                          <Insets />
-                                       </opaqueInsets>
-                                       <HBox.margin>
-                                          <Insets left="10.0" top="15.0" />
-                                       </HBox.margin>
-                                    </Button>
-                                    <Button fx:id="porkButton" layoutX="20.0" layoutY="40.0" mnemonicParsing="false" onAction="#getMealInfo" prefHeight="18.0" prefWidth="75.0" text="Pork" visible="false">
-                                       <opaqueInsets>
-                                          <Insets />
-                                       </opaqueInsets>
-                                       <HBox.margin>
-                                          <Insets left="5.0" top="15.0" />
-                                       </HBox.margin>
-                                    </Button>
-                                    <Button fx:id="beefButton" layoutX="108.0" layoutY="40.0" mnemonicParsing="false" onAction="#getMealInfo" prefHeight="18.0" prefWidth="75.0" text="Beef" visible="false">
-                                       <opaqueInsets>
-                                          <Insets />
-                                       </opaqueInsets>
-                                       <HBox.margin>
-                                          <Insets left="5.0" top="15.0" />
-                                       </HBox.margin>
-                                    </Button>
-                                 </children>
-                              </HBox>
                               <Text fx:id="sleepMealDes" strokeType="OUTSIDE" strokeWidth="0.0" text="Try to include at least 1 food below in your daily meal menu to improve your sleep quality" visible="false" wrappingWidth="254.13671875">
                                  <VBox.margin>
                                     <Insets top="10.0" />
