@@ -10,7 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
@@ -32,10 +32,11 @@ public class ApplicationController {
 	SleepTracker sleepTracker;
 	Exercises exercises = new Exercises("none", 0, "exercise");
 	Meal meal = new Meal("none", 0, "meal", 0);
+	ArrayList<String> mealGroupList = new ArrayList<String>();
 
-	//ChoiceBox
+	//ComboBox
 	@FXML
-	private ChoiceBox<String> exerciseChoiceBox, mealChoiceBox;
+	private ComboBox<String> mealComboBox, exerciseComboBox;
 	
 	//Menu items
 	@FXML
@@ -87,7 +88,7 @@ public class ApplicationController {
     
     //Exercise button
     @FXML
-    private Button yogaButton, aerobicsButton, meditationButton, addActListButton;
+    private Button yogaButton, aerobicsButton, meditationButton, addActListButton, exerciseSearchButton;
     
     //For sleep inputs control
     ArrayList<TextField> allSleepInputsTextFields = new ArrayList<TextField>();
@@ -324,8 +325,8 @@ public class ApplicationController {
     	String actCode = "";
     	double caloriesInfo = 0;
     	addActListButton.setVisible(true);
-    	if (ae.getSource() == exerciseChoiceBox) {
-    		actCode = ((String) exerciseChoiceBox.getValue());
+    	if (ae.getSource() == exerciseComboBox) {
+    		actCode = ((String) exerciseComboBox.getValue());
     	}
     	if (actCode.equals("Running")) {
     		//this activity also based on weight, averagely calculate by the formula below
@@ -404,27 +405,32 @@ public class ApplicationController {
     void getMealInfo(ActionEvent ae) {
     	addToMenuButton.setVisible(true);
     	String mealCode = "";
+    	String mealGroup = "";
     	double caloriesInfo = 0;
     	double proteinInfo = 0;
-    	if (ae.getSource() == mealChoiceBox)mealCode = (String) mealChoiceBox.getValue();
+    	if (ae.getSource() == mealComboBox)mealCode = (String) mealComboBox.getValue();
     	if (ae.getSource() == fruitButton) {
     		mealCode = "fruit";
     		caloriesInfo = 71;
     		proteinInfo = 0.3;
+    		mealGroup = "green";
     	}
     	if (ae.getSource() == milkButton) {
     		mealCode = "milk";
     		caloriesInfo = 42;
     		proteinInfo = 3.4;
+    		
     	}
     	if (ae.getSource() == teaButton) {
     		mealCode = "tea";
     		caloriesInfo = 1;
     		proteinInfo = 0.1;
+    		
     	}
     	if (mealCode.equals("Vegetable")) {
     		caloriesInfo = 65;
     		proteinInfo = 2.9;
+    		mealGroup = "green";
     	}
     	if (mealCode.equals("Soup")){
     		caloriesInfo = 42;
@@ -433,98 +439,123 @@ public class ApplicationController {
     	if (mealCode.equals("Seed")) {
     		caloriesInfo = 559;
     		proteinInfo = 30;
+    		mealGroup = "protein";
     	}
     	if (mealCode.equals("Chicken")) {
     		caloriesInfo = 239;
     		proteinInfo = 27;
+    		mealGroup = "meat";
     	}
     	if (mealCode.equals("Beef")) {
     		caloriesInfo = 250;
     		proteinInfo = 26;
+    		mealGroup = "meat";
     	}
     	if (mealCode.equals("Pork")) {
     		caloriesInfo = 242;
     		proteinInfo = 27;
+    		mealGroup = "meat";
     	}
     	if (mealCode.equals("Rice")) {
     		caloriesInfo = 130;
     		proteinInfo = 2.7;
+    		mealGroup = "protein";
     	}
     	if (mealCode.equals("Muffin")) {
     		caloriesInfo = 377;
     		proteinInfo = 4.5;
+    		mealGroup = "dessert";
     	}
     	if (mealCode.equals("Pie")) {
     		caloriesInfo = 237;
     		proteinInfo = 1.9;
+    		mealGroup = "dessert";
     	}
     	if (mealCode.equals("Pizza")) {
     		caloriesInfo = 266;
     		proteinInfo = 11;
+    		mealGroup = "protein";
     	}
     	if (mealCode.equals("Hamburger")) {
     		caloriesInfo = 332;
     		proteinInfo = 17;
+    		mealGroup = "protein";
     	}
     	if (mealCode.equals("Sushi")) {
     		caloriesInfo = 90;
     		proteinInfo = 2.9;
+    		mealGroup = "protein";
     	}
     	if (mealCode.equals("Salmon")) {
     		caloriesInfo = 208;
     		proteinInfo = 20;
+    		mealGroup = "seafood";
     	}
     	if (mealCode.equals("Shrimp")) {
     		caloriesInfo = 24;
     		proteinInfo = 2.9;
+    		mealGroup = "seafood";
     	}
     	if (mealCode.equals("Noodles")) {
     		caloriesInfo = 138;
     		proteinInfo = 4.5;
+    		mealGroup = "protein";
     	}
     	if (mealCode.equals("Apple juice")) {
     		caloriesInfo = 46;
     		proteinInfo = 0.1;
+    		mealGroup = "green";
+
     	}
     	if (mealCode.equals("Lemonade")) {
     		caloriesInfo = 40;
     		proteinInfo = .4;
+    		mealGroup = "green";
+
     	}
     	if (mealCode.equals("Peach")) {
     		caloriesInfo = 39;
     		proteinInfo = .6;
+    		mealGroup = "green";
+
     	}
     	if (mealCode.equals("Watermelon")) {
     		caloriesInfo = 30;
     		proteinInfo = .6;
+    		mealGroup = "green";
+
     	}
     	if (mealCode.equals("Mango")) {
     		caloriesInfo = 70;
     		proteinInfo = .8;
+    		mealGroup = "green";
+
     	}
     	meal.setCode(mealCode);
     	meal.setProteinInfo(proteinInfo);
     	meal.setCaloriesInfo(caloriesInfo);
+    	meal.setMealGroup(mealGroup);
 		mealInfoText.setText("Info: " + meal.getInfo() + ". Pressed the button below to add to your activities list");
     	mealInfoText.setVisible(true);
     }
     //TODO MAIN
-    //Search bar for these choice box items
-    //bar chart to show the distribution of their health (overall: sleep, water, food, exercise) compared to the healthy ones
-    //pie chart to show distribution of each meal
     //Export (save chart) with Dates to compared (or if they can load it and compare)
    
     //TODO final touch
     //Display error of adding to to-do list on the screen
     //Error handling for all inputs -> fix using try-catch block
+    //Add comments on each function
+    //clean up and rearrangement of folders inside the project
     //Include function which user can find max or min calories consumption and such
     //possible export of todo list as well
-    //clean up and rearrangement of folders inside the project
+    //Hashmap for the catalog
+    //Search bar for these choice box items
+    
     
     @FXML
     void addFoodToMenu(ActionEvent e) {
     	Meal foodToAdd = new Meal(meal.getCode(), meal.getCaloriesInfo(), "meal", meal.getProteinInfo());
-    	
+    	mealGroupList.add(meal.getMealGroup());
     	String errorFree = mainTracker.addToTodo(foodToAdd);
     	if (errorFree == "")mainTracker.addCalories(foodToAdd.getCaloriesInfo());
     	toDoDisplay.setText(mainTracker.getToDoList());
@@ -567,6 +598,20 @@ public class ApplicationController {
     	weightChangeText.setText("With this, you will gain " 
     	+ mainTracker.convertWeightChange(caloriesConsumption) +" kg per month");	
     }
+   
+    @FXML 
+    void searchItem(ActionEvent event){
+    	if (event.getSource() == exerciseSearchButton) {
+    		/**
+    		if (mainTracker.inExerciseList(exerciseComboBox.getValue())) {
+    			exercises.setCode(exerciseComboBox.getValue());
+    			//Not quite done
+    			//exercises.setCalories(120);
+    		}
+    		*/
+    	}
+    }
+    
     @FXML
     void openChartWindow(ActionEvent event) {
     	try {
@@ -574,12 +619,12 @@ public class ApplicationController {
 			
 			VBox root = loader.load(new FileInputStream("src/application/ChartView.fxml"));
 			ChartWindowController chartController = loader.getController();
-			chartController.createPieChart();
+			chartController.createPieChart(mealGroupList);
 			Stage chartWindow = new Stage();
 			Scene scene = new Scene(root, 600, 420);
 			
 			if (event.getSource() == mealChart) {
-	    		chartController.createPieChart();		
+	    		chartController.createPieChart(mealGroupList);		
 	    	}
 	    	else if (event.getSource() == sleepChart) {
 	    		chartController.createLineChart(allSleepInputsTextFields);
