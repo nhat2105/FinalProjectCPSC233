@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.paint.*?>
 <?import javafx.collections.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.*?>
@@ -49,7 +50,7 @@
          <children>
             <Pane prefHeight="278.0" prefWidth="550.0">
                <children>
-                  <VBox layoutY="-43.0" prefHeight="332.0" prefWidth="160.0">
+                  <VBox layoutY="-65.0" prefHeight="354.0" prefWidth="160.0">
                      <cursor>
                         <Cursor fx:constant="DEFAULT" />
                      </cursor>
@@ -88,6 +89,7 @@
                               <Insets left="50.0" top="5.0" />
                            </VBox.margin>
                         </Button>
+                        <Text fx:id="errorToDoText" fill="#ff0101" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="154.0" />
                      </children>
                   </VBox>
                   <Line endX="20.0" layoutX="73.0" layoutY="68.0" rotate="90.0" startX="153.0" />
@@ -96,7 +98,7 @@
                         <Text layoutX="17.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter your sleep hours of last week" wrappingWidth="235.13671875" />
                         <VBox fx:id="sleepTrackerRoot" layoutX="20.0" layoutY="35.0" prefHeight="165.0" prefWidth="235.0">
                            <children>
-                              <Text fx:id="sleepResult" boundsType="LOGICAL_VERTICAL_CENTER" strokeType="OUTSIDE" strokeWidth="0.0" textOrigin="BOTTOM" wrappingWidth="182.0" />
+                              <Text fx:id="sleepResult" boundsType="LOGICAL_VERTICAL_CENTER" fill="#061180" strokeType="OUTSIDE" strokeWidth="0.0" textOrigin="BOTTOM" wrappingWidth="182.0" />
                            </children>
                         </VBox>
                         <Button fx:id="sleepTrackerResultButton" layoutX="92.0" layoutY="257.0" mnemonicParsing="false" onAction="#getSleepResult" prefHeight="16.0" prefWidth="92.0" text="Get Result" />
