@@ -1,6 +1,8 @@
 package application;
 
 public class Meal extends Activities {
+	String mealGroup ="";
+	
 	public Meal(String code, double calories, String type, double protein) {
 		super(code, calories, type);
 		setProteinInfo(protein);
@@ -9,8 +11,11 @@ public class Meal extends Activities {
 	public double getProteinInfo() {
 		return this.protein;
 	} 
-	public void setType() {
-		this.type = this.getPreference();
+	public void setMealGroup(String group) {
+		this.mealGroup = group;
+	}
+	public String getMealGroup() {
+		return this.mealGroup;
 	}
 	public void setProteinInfo(double protein) {//protein per 100g for now
 		this.protein = protein;
