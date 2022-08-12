@@ -124,7 +124,7 @@ public class ApplicationController {
     private void switchScene(String view) throws FileNotFoundException, IOException {
 		if (view.equalsIgnoreCase("Main View")) {
 			FXMLLoader loader = new FXMLLoader();
-			VBox root = loader.load(new FileInputStream("src/FXML/ApplicationView.fxml"));
+			VBox root = loader.load(new FileInputStream("src/application/ApplicationView.fxml"));
 			
 			//The below codes pass data (user's weight and height )between scenes
 			ApplicationController mainController = loader.getController();
@@ -315,77 +315,22 @@ public class ApplicationController {
     @FXML
     void getInfo(ActionEvent ae) {
     	String actCode = "";
-    	double caloriesInfo = 0;
     	addActListButton.setVisible(true);
     	if (ae.getSource() == exerciseComboBox) {
     		actCode = ((String) exerciseComboBox.getValue());
     	}
-    	if (actCode.equals("Running")) {
-    		//this activity also based on weight, averagely calculate by the formula below
-    		caloriesInfo = (11.5 * 3.5 * mainTracker.getUserWeight()/200)*30;
-    	}
-    	else if (actCode.equals("Swimming")) {
-    		caloriesInfo = 250;
-    	}
-    	else if (actCode.equals("Jogging")) {
-    		//similar to running
-    		caloriesInfo = (5 * 3.5 * mainTracker.getUserWeight()/200)*30;
-    	}
-    	else if (actCode.equals("Cycling")) {
-    		//formula provided to calculate cycling calories burned
-    		caloriesInfo = 7.2 * mainTracker.getUserWeight() * 0.0175 * 30;
-    	}
-    	else if (actCode.equals("Squat")) {
-    		caloriesInfo = 240;
-    	}
-    	else if (actCode.equals("Push up")) {
-    		caloriesInfo = 210;
-    	}
-    	else if (actCode.equals("Weight lifting")) {
-    		//this activity depends on weight
-    		caloriesInfo = mainTracker.getUserWeight()* 4.8 * 0.0175 * 30 ;
-    	}
-    	else if (actCode.equals("Pulling up")) {
-    		//this activity depends on weight
-    		caloriesInfo = mainTracker.getUserWeight()* 3.8 * 0.0175 * 30 ;
-    	}
-    	else if (actCode.equals("Tennis")) {
-    		//this activity depends on weight
-    		caloriesInfo = mainTracker.getUserWeight()* 8 * 0.0175 * 30 ;
-    	}
-    	else if (actCode.equals("Soccer")) {
-    		caloriesInfo = 300;
-    	}
-    	else if (actCode.equals("Volleyball")) {
-    		caloriesInfo = 298;
-    	}
-    	else if (actCode.equals("Basketball")) {
-    		caloriesInfo = 274;
-    	}
-    	else if (actCode.equals("Rugby")) {
-    		caloriesInfo = 317;
-    	}
-    	else if (actCode.equals("Badminton")) {
-    		caloriesInfo = 114;
-    	}
-    	else if (actCode.equals("Crunches")) {
-    		caloriesInfo = 214;
-    	}
 
     	if (ae.getSource() == yogaButton) {
-    		actCode = "yoga";
-    		caloriesInfo = 100;
+    		actCode = "Yoga";
     	}
     	if (ae.getSource() == meditationButton) {
-    		actCode = "meditation";
-    		caloriesInfo = 35;
+    		actCode = "Meditation";
     	}
     	if (ae.getSource() == aerobicsButton) {
-    		actCode = "aerobics";
-    		caloriesInfo = 85;
+    		actCode = "Aerobics";
     	}
     	exercises.setCode(actCode);
-    	exercises.setCaloriesInfo(caloriesInfo); 
+    	exercises.setCaloriesInfo(exercises.getExerciseCalories(actCode, mainTracker.getUserWeight())); 
     	
 		activitiesInfoText.setText("Info: " + exercises.getInfo() + ". Pressed the button below to add to your activities list");
     	activitiesInfoText.setVisible(true);
@@ -532,10 +477,10 @@ public class ApplicationController {
     }
    
     //TODO final touch
+    //List for the catalog
     //Add comments on each function
     //Include function which user can find max or min calories consumption and such
     //Sleep disorder function (if any entry is higher than 12 or lower than 1)
-    //Hashmap for the catalog
     //Search bar for these choice box items
     
     
@@ -611,7 +556,7 @@ public class ApplicationController {
     	try {
 			FXMLLoader loader = new FXMLLoader();
 			
-			VBox root = loader.load(new FileInputStream("src/FXML/ChartView.fxml"));
+			VBox root = loader.load(new FileInputStream("src/application/ChartView.fxml"));
 			ChartWindowController chartController = loader.getController();
 			Stage chartWindow = new Stage();
 			Scene scene = new Scene(root, 600, 420);
