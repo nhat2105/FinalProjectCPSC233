@@ -2,7 +2,6 @@ package application;
 
 public class Activities{
 	protected double calories = 0;
-	private String preference = "";
 	private String actCode = "";
 	protected String type = "";
 	
@@ -10,15 +9,6 @@ public class Activities{
 		setCode(code);
 		setCalories(calories);
 		setType(type);
-	}
-	
-	
-	public void setPreference(String pref) {
-		this.preference += pref;
-		
-	}
-	String getPreference() {
-		return preference;
 	}
 	
 	public double getCaloriesInfo() {
