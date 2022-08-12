@@ -211,7 +211,7 @@ public class HealthTracker{
 					if (a.getType().equals("meal")) {
 						addCalories(-1 * a.getCaloriesInfo());
 					}
-					else if (a.getType() == "exercise") {
+					else if (a.getType().equals("exercise")) {
 						addCalories(a.getCaloriesInfo());
 					}
 					break;

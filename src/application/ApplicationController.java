@@ -10,7 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
@@ -52,7 +52,7 @@ public class ApplicationController {
 	
 	//Error text
 	@FXML
-	private Text weightErrorText, heightErrorText;
+	private Text weightErrorText, heightErrorText, errorToDoText;
 	
 	//Result button
     @FXML
@@ -88,7 +88,7 @@ public class ApplicationController {
     
     //Exercise button
     @FXML
-    private Button yogaButton, aerobicsButton, meditationButton, addActListButton;
+    private Button yogaButton, aerobicsButton, meditationButton, addActListButton, exerciseSearchButton;
     
     //For sleep inputs control
     ArrayList<TextField> allSleepInputsTextFields = new ArrayList<TextField>();
@@ -416,11 +416,13 @@ public class ApplicationController {
     		mealCode = "milk";
     		caloriesInfo = 42;
     		proteinInfo = 3.4;
+    		
     	}
     	if (ae.getSource() == teaButton) {
     		mealCode = "tea";
     		caloriesInfo = 1;
     		proteinInfo = 0.1;
+    		
     	}
     	if (mealCode.equals(anObject:"Vegetable")) {
     		caloriesInfo = 65;
@@ -501,42 +503,48 @@ public class ApplicationController {
     		caloriesInfo = 46;
     		proteinInfo = 0.1;
     		mealGroup = "green";
+        
     	}
     	if (mealCode.equals(anObject:"Lemonade")) {
     		caloriesInfo = 40;
     		proteinInfo = .4;
     		mealGroup = "green";
+
     	}
     	if (mealCode.equals("Peach")) {
     		caloriesInfo = 39;
     		proteinInfo = .6;
     		mealGroup = "green";
+
     	}
     	if (mealCode.equals("Watermelon")) {
     		caloriesInfo = 30;
     		proteinInfo = .6;
     		mealGroup = "green";
+
     	}
     	if (mealCode.equals("Mango")) {
     		caloriesInfo = 70;
     		proteinInfo = .8;
     		mealGroup = "green";
+
     	}
     	meal.setCode(mealCode);
     	meal.setProteinInfo(proteinInfo);
     	meal.setCaloriesInfo(caloriesInfo);
+    	meal.setMealGroup(mealGroup);
 		mealInfoText.setText("Info: " + meal.getInfo() + ". Pressed the button below to add to your activities list");
     	mealInfoText.setVisible(true);
     }
-    
-   
-  //TODO final touch
+
+    //TODO final touch
     //Add comments on each function
     //clean up and rearrangement of folders inside the project
     //Include function which user can find max or min calories consumption and such
     //Sleep disorder function (if any entry is higher than 12 or lower than 1)
     //Hashmap for the catalog
     //Search bar for these choice box items
+
     
     @FXML
     void addFoodToMenu(ActionEvent e) {
@@ -544,6 +552,7 @@ public class ApplicationController {
     	mealGroupList.add(meal.getMealGroup());
     	String errorFree = mainTracker.addToTodo(foodToAdd);
     	if (errorFree == "")mainTracker.addCalories(foodToAdd.getCaloriesInfo());
+    	else errorToDoText.setText(errorFree);
     	toDoDisplay.setText(mainTracker.getToDoList());
     	removeToDoText.setVisible(true);
     	removeItemButton.setVisible(true);
@@ -580,6 +589,7 @@ public class ApplicationController {
     	String errorFree = mainTracker.addToTodo(exerciseToAdd);
     	if (errorFree == "")mainTracker.addCalories(-exerciseToAdd.getCaloriesInfo());
     	errorToDoText.setText(errorFree);
+
     	toDoDisplay.setText(mainTracker.getToDoList());
     	removeToDoText.setVisible(true);
     	removeItemButton.setVisible(true);
@@ -590,7 +600,7 @@ public class ApplicationController {
     	weightChangeText.setText("With this, you will gain " 
     	+ mainTracker.convertWeightChange(caloriesConsumption) +" kg per month");	
     }
-    
+
     @FXML 
     void searchItem(ActionEvent event){
     	if (event.getSource() == exerciseSearchButton) {
@@ -611,7 +621,6 @@ public class ApplicationController {
 			
 			VBox root = loader.load(new FileInputStream(name:"src/application/ChartView.fxml"));
 			ChartWindowController chartController = loader.getController();
-			chartController.createPieChart();
 			Stage chartWindow = new Stage();
 			Scene scene = new Scene(root, 600, 420);
 			

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.paint.*?>
 <?import javafx.collections.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.*?>
@@ -49,7 +50,7 @@
          <children>
             <Pane prefHeight="278.0" prefWidth="550.0">
                <children>
-                  <VBox layoutY="-43.0" prefHeight="332.0" prefWidth="160.0">
+                  <VBox layoutY="-65.0" prefHeight="354.0" prefWidth="160.0">
                      <cursor>
                         <Cursor fx:constant="DEFAULT" />
                      </cursor>
@@ -90,6 +91,7 @@
                               <Insets left="50.0" top="5.0" />
                            </VBox.margin>
                         </Button>
+                        <Text fx:id="errorToDoText" fill="#ff0101" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="154.0" />
                      </children>
                   </VBox>
                   <Line endX="20.0" layoutX="73.0" layoutY="68.0" rotate="90.0" startX="153.0" />
@@ -98,7 +100,7 @@
                         <Text layoutX="17.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter your sleep hours of last week" wrappingWidth="235.13671875" />
                         <VBox fx:id="sleepTrackerRoot" layoutX="20.0" layoutY="35.0" prefHeight="165.0" prefWidth="235.0">
                            <children>
-                              <Text fx:id="sleepResult" boundsType="LOGICAL_VERTICAL_CENTER" strokeType="OUTSIDE" strokeWidth="0.0" textOrigin="BOTTOM" wrappingWidth="182.0" />
+                              <Text fx:id="sleepResult" boundsType="LOGICAL_VERTICAL_CENTER" fill="#061180" strokeType="OUTSIDE" strokeWidth="0.0" textOrigin="BOTTOM" wrappingWidth="182.0" />
                            </children>
                         </VBox>
                         <Button fx:id="sleepTrackerResultButton" layoutX="92.0" layoutY="257.0" mnemonicParsing="false" onAction="#getSleepResult" prefHeight="16.0" prefWidth="92.0" text="Get Result" />
@@ -106,16 +108,15 @@
                   </Pane>
                   <Pane fx:id="exercisePane" layoutX="159.0" layoutY="-4.0" prefHeight="304.0" prefWidth="271.0" visible="false">
                      <children>
-                        <Text fx:id="exerciseOptionText" layoutX="13.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="What type of activities do you prefer?" textAlignment="CENTER" visible="false" wrappingWidth="244.13671875" />
                         <VBox layoutX="7.0" layoutY="54.0" prefHeight="220.0" prefWidth="256.0">
                            <children>
                               <HBox prefHeight="25.0" prefWidth="256.0">
                                  <children>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Choose an exercise: " wrappingWidth="91.13671875">
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Choose an exercise: " wrappingWidth="111.13671875">
                                        <HBox.margin>
                                           <Insets top="5.0" />
                                        </HBox.margin></Text>
-                                    <ChoiceBox fx:id="exerciseChoiceBox" onAction="#getInfo" prefHeight="25.0" prefWidth="144.0">
+                                    <ComboBox fx:id="exerciseComboBox" editable="true" onAction="#getInfo" prefHeight="25.0" prefWidth="52.0">
                                     	<items>
 											<FXCollections fx:factory="observableArrayList">
 												<String fx:value="Running" />
@@ -139,7 +140,12 @@
                                        <HBox.margin>
                                           <Insets top="5.0" />
                                        </HBox.margin>
-                                    </ChoiceBox>
+                                    </ComboBox>
+                                    <Button fx:id="exerciseSearchButton" mnemonicParsing="false" onAction="#searchItem" prefHeight="25.0" prefWidth="71.0" text="Search" textAlignment="CENTER">
+                                       <HBox.margin>
+                                          <Insets left="5.0" top="5.0" />
+                                       </HBox.margin>
+                                    </Button>
                                  </children>
                               </HBox>
                               <Text fx:id="activitiesInfoText" strokeType="OUTSIDE" strokeWidth="0.0" text="Info:" visible="false" wrappingWidth="253.13671875">
@@ -189,7 +195,6 @@
                                     <Insets />
                                  </opaqueInsets>
                               </HBox>
-                              <HBox prefHeight="55.0" prefWidth="256.0" />
                            </children>
                         </VBox>
                      </children>
@@ -201,7 +206,7 @@
                               <HBox prefHeight="31.0" prefWidth="256.0">
                                  <children>
                                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Choose your meal: " wrappingWidth="96.13671875" />
-                                    <ChoiceBox fx:id="mealChoiceBox"  onAction="#getMealInfo" prefWidth="150.0">
+                                    <ComboBox fx:id="mealComboBox" editable="true" onAction="#getMealInfo" prefWidth="150.0">
                                     <items>
 											<FXCollections fx:factory="observableArrayList">
 												<String fx:value="Chicken" />
@@ -230,7 +235,7 @@
 												
 											</FXCollections>
 										</items>
-                                    </ChoiceBox>
+                                    </ComboBox>
                                  </children>
                               </HBox>
                               <Text fx:id="mealInfoText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" visible="false" wrappingWidth="253.13671875" />
@@ -239,34 +244,6 @@
                                     <Insets left="70.0" />
                                  </VBox.margin>
                               </Button>
-                              <HBox layoutX="10.0" layoutY="66.0" prefHeight="35.0" prefWidth="256.0">
-                                 <children>
-                                    <Button fx:id="chickenButton" mnemonicParsing="false" onAction="#getMealInfo" prefHeight="18.0" prefWidth="75.0" text="Chicken" visible="false">
-                                       <opaqueInsets>
-                                          <Insets />
-                                       </opaqueInsets>
-                                       <HBox.margin>
-                                          <Insets left="10.0" top="15.0" />
-                                       </HBox.margin>
-                                    </Button>
-                                    <Button fx:id="porkButton" layoutX="20.0" layoutY="40.0" mnemonicParsing="false" onAction="#getMealInfo" prefHeight="18.0" prefWidth="75.0" text="Pork" visible="false">
-                                       <opaqueInsets>
-                                          <Insets />
-                                       </opaqueInsets>
-                                       <HBox.margin>
-                                          <Insets left="5.0" top="15.0" />
-                                       </HBox.margin>
-                                    </Button>
-                                    <Button fx:id="beefButton" layoutX="108.0" layoutY="40.0" mnemonicParsing="false" onAction="#getMealInfo" prefHeight="18.0" prefWidth="75.0" text="Beef" visible="false">
-                                       <opaqueInsets>
-                                          <Insets />
-                                       </opaqueInsets>
-                                       <HBox.margin>
-                                          <Insets left="5.0" top="15.0" />
-                                       </HBox.margin>
-                                    </Button>
-                                 </children>
-                              </HBox>
                               <Text fx:id="sleepMealDes" strokeType="OUTSIDE" strokeWidth="0.0" text="Try to include at least 1 food below in your daily meal menu to improve your sleep quality" visible="false" wrappingWidth="254.13671875">
                                  <VBox.margin>
                                     <Insets top="10.0" />

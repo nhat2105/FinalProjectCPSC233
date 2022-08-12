@@ -6,16 +6,20 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.VBox?>
 
-
 <VBox prefHeight="420.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ChartWindowController">
    <children>
-      <LineChart fx:id="sleepLineChart" prefHeight="371.0" prefWidth="600.0" title="Sleep Hours of This Week">
-        <xAxis>
-          <CategoryAxis side="BOTTOM" />
-        </xAxis>
-        <yAxis>
-          <NumberAxis side="LEFT" />
-        </yAxis>
-      </LineChart>
+      <Pane prefHeight="479.0" prefWidth="600.0">
+         <children>
+            <LineChart fx:id="sleepLineChart" prefHeight="371.0" prefWidth="600.0" title="Sleep Hours of This Week" visible="false">
+              <xAxis>
+                <CategoryAxis side="BOTTOM" />
+              </xAxis>
+              <yAxis>
+                <NumberAxis side="LEFT" />
+              </yAxis>
+            </LineChart>
+            <PieChart fx:id="mealPieChart" layoutX="70.0" layoutY="19.0" prefHeight="333.0" prefWidth="460.0" title="Your Meal Proportion" />
+         </children>
+      </Pane>
    </children>
 </VBox>
