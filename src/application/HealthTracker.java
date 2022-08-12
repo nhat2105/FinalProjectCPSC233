@@ -7,6 +7,28 @@ public class HealthTracker{
 	private double userWeight, userHeight;
 	double userBMI, userCalories;
 	ArrayList<Activities> toDoList = new ArrayList<Activities>();
+	private String[] exerciseList = {"Running", "Jogging", "Swimming", "Push up", "Squat",
+			"Cycling", "Weight lifting", "Pulling up", "Tennis", "Basketball", "Soccer",
+			"Rugby", "Badminton", "Volleyball", "Crunches"};
+	
+	/**
+	Map<String, Double> exerciseDictionary = new HashMap<String, Double>();
+	
+	private Double[] exerciseValue = {6.0375*userWeight, *userWeight, 250, "Push up", 240,
+			"Cycling", "Weight lifting", "Pulling up", "Tennis", 274, 300,
+			317, 114, 298, 214};
+	ArrayList<Double> exerciseCaloriesValues = new ArrayList<Double>();
+	//Table for meal
+	*/
+	
+	boolean inExerciseList(String exerciseName) {
+		for (int i = 0; i < exerciseList.length; i++) {
+			if (exerciseList[i].equalsIgnoreCase(exerciseName)) {
+				return true;
+			}
+		}
+		return false;
+	}
 	
 	/**
 	 * The method below takes a string as a parameter and validate whether
@@ -18,7 +40,8 @@ public class HealthTracker{
 	 * @param lowerBound represents the minimum value the double converted from stringInput should be
 	 * @return error message, empty if stringInput is error-free
 	 */
-	public String validateInput(String stringInput, int upperBound, int lowerBound) {
+	
+	public void validateInput(String stringInput, int upperBound, int lowerBound) throws InvalidInputException {
 		
     	//counter to keep track of '.' char
     	int counter = 0;
@@ -26,7 +49,7 @@ public class HealthTracker{
     	for (char c: stringInput.toCharArray()) {
     		//if a character is not a digit, display the error message
     		if (!Character.isDigit(c) && c != '.') {
-    			return ("Don't include character such as: " + c + 
+    			throw new InvalidInputException("Don't include character such as: " + c + 
     					", only the numerical number");
     			
     		}
@@ -36,21 +59,16 @@ public class HealthTracker{
     		}
     		//if there are more than 1 dot, it is an invalid decimal
     		if (counter > 1) {
-    			return "Invalid value entered. Decimal should only include 1 dot";
+    			throw new InvalidInputException("Invalid value entered. Decimal should only include 1 dot");
     		}
     	}
     	
     	/* Verify whether the project grade input was in a valid range
     	 If not it will be 0 */
     	if (Double.parseDouble(stringInput) < lowerBound || Double.parseDouble(stringInput) > upperBound ) {//hours of 7 days
-    		return ("Error. Value entered should be in between " + lowerBound + " and " + upperBound);
-    	}
-		return "";
-		
+    		throw new InvalidInputException("Error. Value entered should be in between " + lowerBound + " and " + upperBound);
 	}
-
-	public void getUserChart() {
-		//open a new window later and pop up a pie chart in their
+		
 	}
 	
 	
@@ -98,14 +116,14 @@ public class HealthTracker{
 		String errorMessage = "";
 		if (toDoList.size() >= 10) {
 			errorMessage = "This list is full";
-			System.out.println(errorMessage);
+			errorMessage = "This list is full";
 		}
 		for (Activities existingAct: toDoList) {
 			if (existingAct.getCode() == a.getCode()) {
-				errorMessage = "Already in your to do list";
-				System.out.println(errorMessage);
+				errorMessage = "This is already in your list";
 				break;
 			}	
+		
 		}
 		if (errorMessage == "") {
 			toDoList.add(a);
@@ -153,11 +171,11 @@ public class HealthTracker{
 	public String getFoodSuggestion() {
 		String matchActivities = "";
 		String healthStatus = this.getHealthStatus(getUserBMI());
-		if (healthStatus.contains("under")){
+		if (healthStatus.contains(s:"under")){
 			matchActivities = "Beef, nut";
 			return matchActivities;
 		}
-		else if (healthStatus.contains("over")){
+		else if (healthStatus.contains(s:"over")){
 			matchActivities = "Vegetable, fruit";
 			return matchActivities;
 		}
@@ -168,11 +186,11 @@ public class HealthTracker{
 		public String getExerciseSuggestion() {
 			String matchActivities = "";
 			String healthStatus = this.getHealthStatus(getUserBMI());
-			if (healthStatus.contains("under")){
+			if (healthStatus.contains(s:"under")){
 				matchActivities = "Jogging, squat";
 				return matchActivities;
 			}
-			else if (healthStatus.contains("over")){
+			else if (healthStatus.contains(s:"over")){
 				matchActivities = "Swimming, running";
 				return matchActivities;
 			}
@@ -190,8 +208,8 @@ public class HealthTracker{
 				//Since to do list shows index starts with 1
 				if ((index+1) == Integer.parseInt(indexToRemove)) {
 					toDoList.remove(a);
-					if (a.getType() == "meal") {
-						addCalories(-a.getCaloriesInfo());
+					if (a.getType().equals("meal")) {
+						addCalories(-1 * a.getCaloriesInfo());
 					}
 					else if (a.getType() == "exercise") {
 						addCalories(a.getCaloriesInfo());
