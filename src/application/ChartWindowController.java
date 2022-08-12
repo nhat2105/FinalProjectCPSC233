@@ -9,6 +9,7 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.TextField;
+
 public class ChartWindowController {
 	@FXML
 	private LineChart<String, Number> sleepLineChart;
@@ -26,10 +27,6 @@ public class ChartWindowController {
 		}
 		
 		sleepLineChart.getData().add(sleepSeries);
-		
-	}
-
-	public void createBarChart() {
 	}
 
 	public void createPieChart(ArrayList<String> mealGroupList) {
