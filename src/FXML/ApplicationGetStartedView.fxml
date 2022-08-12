@@ -53,17 +53,12 @@
             </TextField>
          </children>
       </HBox>
-      <Text fx:id="heightErrorText" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="404.13671875">
+      <Text fx:id="hweightErrorText" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="404.13671875">
          <VBox.margin>
             <Insets left="100.0" />
          </VBox.margin>
       </Text>
-      <Text fx:id="weightErrorText" layoutX="110.0" layoutY="301.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="404.13671875">
-         <VBox.margin>
-            <Insets left="100.0" top="10.0" />
-         </VBox.margin>
-      </Text>
-      <Button fx:id="BMIButton" mnemonicParsing="false" onAction="#getStart" prefHeight="28.0" prefWidth="115.0" text="Let's Get Started!">
+      <Button fx:id="getStartButton" mnemonicParsing="false" onAction="#getStart" prefHeight="28.0" prefWidth="115.0" text="Let's Get Started!">
          <VBox.margin>
             <Insets left="250.0" top="10.0" />
          </VBox.margin>

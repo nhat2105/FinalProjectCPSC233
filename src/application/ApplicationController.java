@@ -52,11 +52,11 @@ public class ApplicationController {
 	
 	//Error text
 	@FXML
-	private Text weightErrorText, heightErrorText, errorToDoText;
+	private Text hweightErrorText, errorToDoText;
 	
 	//Result button
     @FXML
-    private Button sleepTrackerResultButton, calculateBMIButton;
+    private Button sleepTrackerResultButton;
 
    //Input text
     @FXML
@@ -80,7 +80,7 @@ public class ApplicationController {
 
     //Feature button
     @FXML
-    private Button sleepTrackerButton, exerciseButton, BMIButton, mealsButton, removeItemButton;
+    private Button sleepTrackerButton, exerciseButton, getStartButton, mealsButton, removeItemButton;
 
     //Pane
     @FXML
@@ -95,21 +95,21 @@ public class ApplicationController {
 
     //The function below takes in user inputs for their height and weights
     @FXML
-    void getStart(ActionEvent event) throws FileNotFoundException, IOException {
+    void getStart(ActionEvent event) throws FileNotFoundException, IOException{
     	//Validate input first
-    	String errorFreeHeightInput = mainTracker.validateInput(userHeightInput.getText(), 215, 1);
-    	String errorFreeWeightInput = mainTracker.validateInput(userWeightInput.getText(), 130, 1);
-    	if (errorFreeHeightInput == "" && errorFreeWeightInput == "") {
-	    	this.userHeight = userHeightInput.getText();
-	    	this.userWeight = userWeightInput.getText();
-	    	mainTracker.setUserHeight(this.userHeight);
-	    	mainTracker.setUserWeight(this.userWeight);
-	    	switchScene("Main View");
-    	}
-    	else {
-    		weightErrorText.setText(errorFreeWeightInput);
-    		heightErrorText.setText(errorFreeHeightInput);
-    	}
+    	try {
+			mainTracker.validateInput(userHeightInput.getText(), 215, 1);
+			mainTracker.validateInput(userWeightInput.getText(), 130, 1);
+			this.userHeight = userHeightInput.getText();
+			mainTracker.setUserHeight(this.userHeight);
+			this.userWeight = userWeightInput.getText();
+			mainTracker.setUserWeight(this.userWeight);
+		    switchScene("Main View");
+			
+		} catch (InvalidInputException iie) {
+			hweightErrorText.setText(iie.getMessage());		
+		}
+    	
     }
 
     
@@ -124,7 +124,7 @@ public class ApplicationController {
     private void switchScene(String view) throws FileNotFoundException, IOException {
 		if (view.equalsIgnoreCase("Main View")) {
 			FXMLLoader loader = new FXMLLoader();
-			VBox root = loader.load(new FileInputStream("src/application/ApplicationView.fxml"));
+			VBox root = loader.load(new FileInputStream("src/FXML/ApplicationView.fxml"));
 			
 			//The below codes pass data (user's weight and height )between scenes
 			ApplicationController mainController = loader.getController();
@@ -147,24 +147,22 @@ public class ApplicationController {
 	*/
 	@FXML
 	public void getSleepResult(ActionEvent e) {
-		
-		
+		boolean errorFree = true;
 		//Create new sleep tracker
 		sleepTracker = new SleepTracker();
 
 		//Validate input
-		String errorFreeInput = "";
 		for (TextField sleepInput: allSleepInputsTextFields) {
-			errorFreeInput = "";
-			errorFreeInput = mainTracker.validateInput(sleepInput.getText(), 24, 0);
-			if (errorFreeInput != "") {
-				sleepResult.setText(errorFreeInput);
-				break;
+			try {
+				mainTracker.validateInput(sleepInput.getText(), 24, 0);		
+				
+			} catch (InvalidInputException e1) {
+				errorFree = false;
+				sleepResult.setText(e1.getMessage());
 			}
+			
 		}
-		
-		//If input is valid, display the result for sleep status
-		if (errorFreeInput == "") {
+		if (errorFree) {
 			String sleepHoursTrack = sleepTracker.getSleepResult(allSleepInputsTextFields);
 			sleepResult.setText(sleepHoursTrack);
 			sleepResult.setVisible(true);
@@ -174,15 +172,9 @@ public class ApplicationController {
 				healthStatusText.setVisible(true);
 			}
 		}
-	
+		
 		
 	}
-	
-	/*
-	 * The function below opens and function the exercise
-		suggestion feature when the right button is clicked
-	*/
-
     
     /**
      * The function below turns on the right for the 
@@ -540,11 +532,9 @@ public class ApplicationController {
     }
    
     //TODO final touch
-    //Display error of adding to to-do list on the screen
-    //Error handling for all inputs -> fix using try-catch block
     //Add comments on each function
-    //clean up and rearrangement of folders inside the project
     //Include function which user can find max or min calories consumption and such
+    //Sleep disorder function (if any entry is higher than 12 or lower than 1)
     //Hashmap for the catalog
     //Search bar for these choice box items
     
@@ -554,8 +544,8 @@ public class ApplicationController {
     	Meal foodToAdd = new Meal(meal.getCode(), meal.getCaloriesInfo(), "meal", meal.getProteinInfo());
     	mealGroupList.add(meal.getMealGroup());
     	String errorFree = mainTracker.addToTodo(foodToAdd);
-    	if (errorFree == "")mainTracker.addCalories(foodToAdd.getCaloriesInfo());
-    	else errorToDoText.setText(errorFree);
+    	mainTracker.addCalories(foodToAdd.getCaloriesInfo());
+    	errorToDoText.setText(errorFree);
     	toDoDisplay.setText(mainTracker.getToDoList());
     	removeToDoText.setVisible(true);
     	removeItemButton.setVisible(true);
@@ -570,8 +560,13 @@ public class ApplicationController {
     @FXML
     void removeItemFromToDo(ActionEvent e) {
     	String indexToRemove = removeItemTextField.getText();
-    	String errorFree = mainTracker.validateInput(indexToRemove, mainTracker.getToDoSize(), 0);
-    	if (errorFree == "")mainTracker.remove(indexToRemove);
+    	try {
+			mainTracker.validateInput(indexToRemove, mainTracker.getToDoSize(), 1);
+			mainTracker.remove(indexToRemove);
+			errorToDoText.setText("");
+		} catch (InvalidInputException e1) {
+			errorToDoText.setText(e1.getMessage());
+		}
     	//Update the scene
     	toDoDisplay.setText(mainTracker.getToDoList());
     	int caloriesConsumption = (int)mainTracker.getCaloriesConsumption();
@@ -586,7 +581,7 @@ public class ApplicationController {
     	Exercises exerciseToAdd = new Exercises(exercises.getCode(), exercises.getCaloriesInfo(), "exercise");
     	String errorFree = mainTracker.addToTodo(exerciseToAdd);
     	if (errorFree == "")mainTracker.addCalories(-exerciseToAdd.getCaloriesInfo());
-    	else errorToDoText.setText(errorFree);
+    	errorToDoText.setText(errorFree);
     	toDoDisplay.setText(mainTracker.getToDoList());
     	removeToDoText.setVisible(true);
     	removeItemButton.setVisible(true);
@@ -616,7 +611,7 @@ public class ApplicationController {
     	try {
 			FXMLLoader loader = new FXMLLoader();
 			
-			VBox root = loader.load(new FileInputStream("src/application/ChartView.fxml"));
+			VBox root = loader.load(new FileInputStream("src/FXML/ChartView.fxml"));
 			ChartWindowController chartController = loader.getController();
 			Stage chartWindow = new Stage();
 			Scene scene = new Scene(root, 600, 420);
