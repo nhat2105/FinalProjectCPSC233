@@ -30,11 +30,11 @@ public class ApplicationController {
 	private String userHeight = "0", userWeight = "0";
 	
 	//User and interface interaction control
-	HealthTracker mainTracker = new HealthTracker();
-	SleepTracker sleepTracker;
-	Exercises exercises = new Exercises("none", 0, "exercise");
-	Meal meal = new Meal("none", 0, "meal", 0);
-	ArrayList<String> mealGroupList = new ArrayList<String>();
+	private HealthTracker mainTracker = new HealthTracker();
+	private SleepTracker sleepTracker;
+	private Exercises exercises = new Exercises("none", 0, "exercise");
+	private Meal meal = new Meal("none", 0, "meal", 0);
+	private ArrayList<String> mealGroupList = new ArrayList<String>();
 
 	//ComboBox
 	@FXML

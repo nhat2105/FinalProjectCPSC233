@@ -6,8 +6,8 @@ import javafx.scene.control.TextField;
 
 public class SleepTracker {
 	//Instances for sleep tracker
-	double sleepHours, sleepHoursEveryday;
-	String sleepStatus;
+	private double sleepHours, sleepHoursEveryday;
+	private String sleepStatus;
 	
 	/**
 	 * This method returns the sleep result based on all

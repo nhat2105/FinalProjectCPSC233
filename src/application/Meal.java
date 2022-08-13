@@ -3,7 +3,7 @@ package application;
 public class Meal extends Activities {
 	//Instances include protein information
 	//and meal group for meal proportion
-	String mealGroup ="";
+	private String mealGroup ="";
 	private double protein = 0;
 	
 	//Lists for catalog info
