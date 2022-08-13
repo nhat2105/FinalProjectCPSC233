@@ -127,7 +127,7 @@ public class ApplicationController {
     * from that scene to the main scene also
     */
     private void switchScene(String view) throws FileNotFoundException, IOException {
-		if (view.equalsIgnoreCase(anotherString:"Main View")) {
+		if (view.equalsIgnoreCase("Main View")) {
 			FXMLLoader loader = new FXMLLoader();
 			VBox root = loader.load(new FileInputStream("src/application/ApplicationView.fxml"));
 			
@@ -201,7 +201,7 @@ public class ApplicationController {
 		sleepTrackerPane.setStyle(""
 				+ "-fx-background-color:lightgray; "
 				);
-		if (sceneCode.equals(anObject:"Sleep Tracker")) {
+		if (sceneCode.equals("Sleep Tracker")) {
 			//The below code turn off other feature's interface
 			exercisePane.setVisible(false);
 			mealPane.setVisible(false);
@@ -230,7 +230,7 @@ public class ApplicationController {
 				
 			}
 		}
-		else if (sceneCode.contains(s:"inExercises")) {
+		else if (sceneCode.contains("inExercises")) {
 			appName.setText("Exercise Recommendation");
 			exercisePane.setVisible(true);
 			healthStatusText.setVisible(true);
@@ -245,14 +245,14 @@ public class ApplicationController {
 			}
 			
 			//This feature is turned on based on the and also sleep results
-			if (sceneCode.contains("much") || sceneCode.contains(s:"little")) {// this indicates user had used sleep tracker
+			if (sceneCode.contains("much") || sceneCode.contains("little")) {// this indicates user had used sleep tracker
 				yogaButton.setVisible(true);
 				aerobicsButton.setVisible(true);
 				meditationButton.setVisible(true);
 				sleepActDescription.setVisible(true);
 				sleepActDescription2.setVisible(true);
 			}
-			if (!sceneCode.contains(s:"much") && !sceneCode.contains(s:"little")) { //turn off when user has good sleep
+			if (!sceneCode.contains("much") && !sceneCode.contains("little")) { //turn off when user has good sleep
 				yogaButton.setVisible(false);
 				aerobicsButton.setVisible(false);
 				meditationButton.setVisible(false);
@@ -272,21 +272,21 @@ public class ApplicationController {
 			appName.setText("Meal Suggestion");
 			mealPane.setVisible(true);
 			healthStatusText.setVisible(true);
-			if (sceneCode.contains(s:"opening")) {//If it is still the main screen
+			if (sceneCode.contains("opening")) {//If it is still the main screen
 				mealInfoText.setVisible(false);
 				addToMenuButton.setVisible(false);
 				
 			}
 			//Turn on scene depends on sleep status
 			
-			if (sceneCode.contains(s:"much") || sceneCode.contains(s:"little")) {
+			if (sceneCode.contains("much") || sceneCode.contains("little")) {
 				sleepMealDes.setVisible(true);
 				milkButton.setVisible(true);
 				teaButton.setVisible(true);
 				fruitButton.setVisible(true);
 			}
 			//Turn off suggestion for sleep if user has good sleep
-			else if (!sceneCode.contains(s:"much") && !sceneCode.contains(s:"little")) {
+			else if (!sceneCode.contains("much") && !sceneCode.contains("little")) {
 				sleepMealDes.setVisible(false);
 				milkButton.setVisible(false);
 				teaButton.setVisible(false);
@@ -370,88 +370,88 @@ public class ApplicationController {
     		proteinInfo = 0.1;
     		
     	}
-    	if (mealCode.equals(anObject:"Vegetable")) {
+    	if (mealCode.equals("Vegetable")) {
     		caloriesInfo = 65;
     		proteinInfo = 2.9;
     		mealGroup = "green";
     	}
-    	if (mealCode.equals(anObject:"Soup")){
+    	if (mealCode.equals("Soup")){
     		caloriesInfo = 42;
     		proteinInfo = 4;
     		
     	}
-    	if (mealCode.equals(anObject:"Seed")) {
+    	if (mealCode.equals("Seed")) {
     		caloriesInfo = 559;
     		proteinInfo = 30;
     		mealGroup = "protein";
     	}
-    	if (mealCode.equals(anObject:"Chicken")) {
+    	if (mealCode.equals("Chicken")) {
     		caloriesInfo = 239;
     		proteinInfo = 27;
     		mealGroup = "meat";
     	}
-    	if (mealCode.equals(anObject:"Beef")) {
+    	if (mealCode.equals("Beef")) {
     		caloriesInfo = 250;
     		proteinInfo = 26;
     		mealGroup = "meat";
     	}
-    	if (mealCode.equals(anObject:"Pork")) {
+    	if (mealCode.equals("Pork")) {
     		caloriesInfo = 242;
     		proteinInfo = 27;
     		mealGroup = "meat";
     	}
-    	if (mealCode.equals(anObject:"Rice")) {
+    	if (mealCode.equals("Rice")) {
     		caloriesInfo = 130;
     		proteinInfo = 2.7;
     		mealGroup = "protein";
     	}
-    	if (mealCode.equals(anObject:"Muffin")) {
+    	if (mealCode.equals("Muffin")) {
     		caloriesInfo = 377;
     		proteinInfo = 4.5;
     		mealGroup = "dessert";
     	}
-    	if (mealCode.equals(anObject:"Pie")) {
+    	if (mealCode.equals("Pie")) {
     		caloriesInfo = 237;
     		proteinInfo = 1.9;
     		mealGroup = "dessert";
     	}
-    	if (mealCode.equals(anObject:"Pizza")) {
+    	if (mealCode.equals("Pizza")) {
     		caloriesInfo = 266;
     		proteinInfo = 11;
     		mealGroup = "protein";
     	}
-    	if (mealCode.equals(anObject:"Hamburger")) {
+    	if (mealCode.equals("Hamburger")) {
     		caloriesInfo = 332;
     		proteinInfo = 17;
     		mealGroup = "protein";
     	}
-    	if (mealCode.equals(anObject:"Sushi")) {
+    	if (mealCode.equals("Sushi")) {
     		caloriesInfo = 90;
     		proteinInfo = 2.9;
     		mealGroup = "protein";
     	}
-    	if (mealCode.equals(anObject:"Salmon")) {
+    	if (mealCode.equals("Salmon")) {
     		caloriesInfo = 208;
     		proteinInfo = 20;
     		mealGroup = "seafood";
     	}
-    	if (mealCode.equals(anObject:"Shrimp")) {
+    	if (mealCode.equals("Shrimp")) {
     		caloriesInfo = 24;
     		proteinInfo = 2.9;
     		mealGroup = "seafood";
     	}
-    	if (mealCode.equals(anObject:"Noodles")) {
+    	if (mealCode.equals("Noodles")) {
     		caloriesInfo = 138;
     		proteinInfo = 4.5;
     		mealGroup = "protein";
     	}
-    	if (mealCode.equals(anObject:"Apple juice")) {
+    	if (mealCode.equals("Apple juice")) {
     		caloriesInfo = 46;
     		proteinInfo = 0.1;
     		mealGroup = "green";
         
     	}
-    	if (mealCode.equals(anObject:"Lemonade")) {
+    	if (mealCode.equals("Lemonade")) {
     		caloriesInfo = 40;
     		proteinInfo = .4;
     		mealGroup = "green";
@@ -564,7 +564,7 @@ public class ApplicationController {
     	try {
 			FXMLLoader loader = new FXMLLoader();
 			
-			VBox root = loader.load(new FileInputStream(name:"src/application/ChartView.fxml"));
+			VBox root = loader.load(new FileInputStream("src/application/ChartView.fxml"));
 			ChartWindowController chartController = loader.getController();
 			Stage chartWindow = new Stage();
 			Scene scene = new Scene(root, 600, 420);
