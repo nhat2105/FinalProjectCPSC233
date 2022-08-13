@@ -201,7 +201,7 @@
                                  <children>
                                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Choose your meal: " wrappingWidth="96.13671875" />
                                     <ComboBox fx:id="mealComboBox" editable="true" onAction="#getMealInfo" prefHeight="25.0" prefWidth="82.0">
-                                    <items>
+                                    	<items>
 											<FXCollections fx:factory="observableArrayList">
 												<String fx:value="Chicken" />
 												<String fx:value="Pork" />
@@ -216,8 +216,7 @@
 												<String fx:value="Pizza" />
 												<String fx:value="Hamburger" />
 												<String fx:value="Sushi" />
-												<String fx:value="Shrimp" />
-												
+												<String fx:value="Shrimp" />		
 												<String fx:value="Noodles" />
 												<String fx:value="Spaghetti" />
 												<String fx:value="Apple juice" />
@@ -225,8 +224,6 @@
 												<String fx:value="Watermelon" />
 												<String fx:value="Lemonade" />
 												<String fx:value="Mango" />
-											
-												
 											</FXCollections>
 										</items>
                                     </ComboBox>
