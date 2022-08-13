@@ -5,19 +5,15 @@ import java.util.ArrayList;
 import javafx.scene.control.TextField;
 
 public class SleepTracker {
-	
+	//Instances for sleep tracker
 	double sleepHours, sleepHoursEveryday;
 	String sleepStatus;
 	
-	//Will try later so that whenever it
-	//switches back to the main screen, the input
-	//still saves
-	
 	/**
-	 * The method below returns the sleep result based on 
-	 * sleepInput the user entered
-	 * @param sleepInput String representation of user's hours of sleeps in a week
-	 * @return sleep status in terms of string
+	 * This method returns the sleep result based on all
+	 * sleep inputs user entered
+	 * @param allSleepInputs an array list of all sleep inputs of user's sleep in a week
+	 * @return sleep status as String
 	 */
 	public String getSleepResult(ArrayList<TextField> allSleepInputs) {
 		for (TextField sleepInput: allSleepInputs) {
