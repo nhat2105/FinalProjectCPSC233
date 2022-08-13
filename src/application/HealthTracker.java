@@ -7,35 +7,7 @@ public class HealthTracker{
 	private double userWeight, userHeight;
 	double userBMI, userCalories;
 	ArrayList<Activities> toDoList = new ArrayList<Activities>();
-	private String[] exerciseList = {"Running", "Jogging", "Swimming", "Push up", "Squat",
-			"Cycling", "Weight lifting", "Pulling up", "Tennis", "Basketball", "Soccer",
-			"Rugby", "Badminton", "Volleyball", "Crunches"};
 	
-	/**
-	Map<String, Double> exerciseDictionary = new HashMap<String, Double>();
-	
-	private Double[] exerciseValue = {6.0375*userWeight, *userWeight, 250, "Push up", 240,
-			"Cycling", "Weight lifting", "Pulling up", "Tennis", 274, 300,
-			317, 114, 298, 214};
-	ArrayList<Double> exerciseCaloriesValues = new ArrayList<Double>();
-	//Table for meal
-	*/
-	
-	boolean inExerciseList(String exerciseName) {
-		for (int i = 0; i < exerciseList.length; i++) {
-			if (exerciseList[i].equalsIgnoreCase(exerciseName)) {
-				return true;
-			}
-		}
-		return false;
-	}
-	
-	/**
-	
-	ArrayList<Double> exerciseCaloriesValues = new ArrayList<Double>();
-	//Table for meal
-	*/
-
 	
 	/**
 	 * The method below takes a string as a parameter and validate whether
@@ -174,11 +146,11 @@ public class HealthTracker{
 	public String getFoodSuggestion() {
 		String matchActivities = "";
 		String healthStatus = this.getHealthStatus(getUserBMI());
-		if (healthStatus.contains(s:"under")){
+		if (healthStatus.contains("under")){
 			matchActivities = "Beef, nut";
 			return matchActivities;
 		}
-		else if (healthStatus.contains(s:"over")){
+		else if (healthStatus.contains("over")){
 			matchActivities = "Vegetable, fruit";
 			return matchActivities;
 		}
@@ -189,11 +161,11 @@ public class HealthTracker{
 		public String getExerciseSuggestion() {
 			String matchActivities = "";
 			String healthStatus = this.getHealthStatus(getUserBMI());
-			if (healthStatus.contains(s:"under")){
+			if (healthStatus.contains("under")){
 				matchActivities = "Jogging, squat";
 				return matchActivities;
 			}
-			else if (healthStatus.contains(s:"over")){
+			else if (healthStatus.contains("over")){
 				matchActivities = "Swimming, running";
 				return matchActivities;
 			}
