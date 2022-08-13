@@ -13,6 +13,11 @@ public class Meal extends Activities {
 		setProteinInfo(protein);
 	}
 	
+	public Meal(Meal another) {
+		super(another);
+		this.setProteinInfo(another.getProteinInfo());
+	}
+
 	//Setters and getters for protein and meal group
 	public double getProteinInfo() {
 		return this.protein;
@@ -36,3 +41,4 @@ public class Meal extends Activities {
 		return "In your meal: " + getCode();
 	}
 }
+

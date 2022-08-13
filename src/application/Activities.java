@@ -11,6 +11,13 @@ public class Activities{
 		setType(type);
 	}
 	
+	public Activities(Activities toCopy) {
+		this.type = toCopy.getType();
+		this.calories = toCopy.getCaloriesInfo();
+		this.actCode = toCopy.getCode();
+		
+	}
+
 	public double getCaloriesInfo() {
 		return calories;
 	}
