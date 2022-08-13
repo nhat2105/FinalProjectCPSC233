@@ -354,143 +354,33 @@ public class ApplicationController {
     void getMealInfo(ActionEvent ae) {
     	addToMenuButton.setVisible(true);
     	String mealCode = "";
-    	String mealGroup = "";
-    	double caloriesInfo = 0;
-    	double proteinInfo = 0;
     	if (ae.getSource() == mealComboBox)mealCode = (String) mealComboBox.getValue();
     	if (ae.getSource() == fruitButton) {
-    		mealCode = "fruit";
-    		caloriesInfo = 71;
-    		proteinInfo = 0.3;
-    		mealGroup = "green";
+    		mealCode = "Fruit";
     	}
     	if (ae.getSource() == milkButton) {
-    		mealCode = "milk";
-    		caloriesInfo = 42;
-    		proteinInfo = 3.4;
+    		mealCode = "Milk";
     		
     	}
     	if (ae.getSource() == teaButton) {
-    		mealCode = "tea";
-    		caloriesInfo = 1;
-    		proteinInfo = 0.1;
-    		
+    		mealCode = "Tea";
     	}
-    	if (mealCode.equals("Vegetable")) {
-    		caloriesInfo = 65;
-    		proteinInfo = 2.9;
-    		mealGroup = "green";
-    	}
-    	if (mealCode.equals("Soup")){
-    		caloriesInfo = 42;
-    		proteinInfo = 4;
-    		
-    	}
-    	if (mealCode.equals("Seed")) {
-    		caloriesInfo = 559;
-    		proteinInfo = 30;
-    		mealGroup = "protein";
-    	}
-    	if (mealCode.equals("Chicken")) {
-    		caloriesInfo = 239;
-    		proteinInfo = 27;
-    		mealGroup = "meat";
-    	}
-    	if (mealCode.equals("Beef")) {
-    		caloriesInfo = 250;
-    		proteinInfo = 26;
-    		mealGroup = "meat";
-    	}
-    	if (mealCode.equals("Pork")) {
-    		caloriesInfo = 242;
-    		proteinInfo = 27;
-    		mealGroup = "meat";
-    	}
-    	if (mealCode.equals("Rice")) {
-    		caloriesInfo = 130;
-    		proteinInfo = 2.7;
-    		mealGroup = "protein";
-    	}
-    	if (mealCode.equals("Muffin")) {
-    		caloriesInfo = 377;
-    		proteinInfo = 4.5;
-    		mealGroup = "dessert";
-    	}
-    	if (mealCode.equals("Pie")) {
-    		caloriesInfo = 237;
-    		proteinInfo = 1.9;
-    		mealGroup = "dessert";
-    	}
-    	if (mealCode.equals("Pizza")) {
-    		caloriesInfo = 266;
-    		proteinInfo = 11;
-    		mealGroup = "protein";
-    	}
-    	if (mealCode.equals("Hamburger")) {
-    		caloriesInfo = 332;
-    		proteinInfo = 17;
-    		mealGroup = "protein";
-    	}
-    	if (mealCode.equals("Sushi")) {
-    		caloriesInfo = 90;
-    		proteinInfo = 2.9;
-    		mealGroup = "protein";
-    	}
-    	if (mealCode.equals("Salmon")) {
-    		caloriesInfo = 208;
-    		proteinInfo = 20;
-    		mealGroup = "seafood";
-    	}
-    	if (mealCode.equals("Shrimp")) {
-    		caloriesInfo = 24;
-    		proteinInfo = 2.9;
-    		mealGroup = "seafood";
-    	}
-    	if (mealCode.equals("Noodles")) {
-    		caloriesInfo = 138;
-    		proteinInfo = 4.5;
-    		mealGroup = "protein";
-    	}
-    	if (mealCode.equals("Apple juice")) {
-    		caloriesInfo = 46;
-    		proteinInfo = 0.1;
-    		mealGroup = "green";
-        
-    	}
-    	if (mealCode.equals("Lemonade")) {
-    		caloriesInfo = 40;
-    		proteinInfo = .4;
-    		mealGroup = "green";
-
-    	}
-    	if (mealCode.equals("Peach")) {
-    		caloriesInfo = 39;
-    		proteinInfo = .6;
-    		mealGroup = "green";
-
-    	}
-    	if (mealCode.equals("Watermelon")) {
-    		caloriesInfo = 30;
-    		proteinInfo = .6;
-    		mealGroup = "green";
-
-    	}
-    	if (mealCode.equals("Mango")) {
-    		caloriesInfo = 70;
-    		proteinInfo = .8;
-    		mealGroup = "green";
-
-    	}
-    	meal.setCode(mealCode);
-    	meal.setProteinInfo(proteinInfo);
-    	meal.setCalories(caloriesInfo);
-    	meal.setMealGroup(mealGroup);
-		mealInfoText.setText("Info: " + meal.getInfo() + ". Pressed the button below to add to your activities list");
+		mealInfoText.setText(getMealInfo(mealCode));
     	mealInfoText.setVisible(true);
     }
+    String getMealInfo(String code){
+    	meal.setCode(code);
+    	meal.setCalories(meal.getCaloriesInfo(code)); 
+    	meal.setMealGroup(meal.getMealGroupInfo(code));
+    	meal.setProteinInfo(meal.getProteinInfo(code));
+    	if (code == "notFound") {
+    		return "Item not found";
+    	}
+		return ("Info: " + meal.getInfo() + ". Pressed the button below to add to your activities list");
+    	
+    }
 
-    //TODO final touch
-    //List for the catalog
+  //TODO final touch
     //Include function which user can find max or min calories consumption and such
     //Sleep disorder function (if any entry is higher than 12 or lower than 1)
 
