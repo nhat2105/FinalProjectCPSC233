@@ -23,7 +23,21 @@ public class Exercises extends Activities {
 	public Exercises(String code, double calories, String type) {
 		super(code, calories, type);
 	}
-	
+	//Copy constructor
+	public Exercises(Exercises another) {
+		super(another);
+	}
+	//The method below get activity information based on
+	//the catalog information, with argument passed as userWeight
+    String getActivityInfo(String code, double userWeight){
+    	setCode(code);
+    	setCaloriesInfo(getExerciseCalories(code, userWeight)); 
+    	if (code == "notFound") {
+    		return "Item not found";
+    	}
+		return ("Info: " + getInfo() + ". Pressed the button below to add to your activities list");
+    	
+    }
 	//boolean to get whether an exercise is in exercise catalog
 	boolean inExerciseList(String exerciseName) {
 		for (int i = 0; i < exerciseList.length; i++) {
