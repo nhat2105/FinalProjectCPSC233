@@ -9,6 +9,13 @@ public class HealthTracker{
 	ArrayList<Activities> toDoList = new ArrayList<Activities>();
 	
 	/**
+	
+	ArrayList<Double> exerciseCaloriesValues = new ArrayList<Double>();
+	//Table for meal
+	*/
+
+	
+	/**
 	 * The method below takes a string as a parameter and validate whether
 	 * it is a valid number to be converted into a double, it returns the 
 	 * error message of how it is invalid, if it is valid then error message will
@@ -18,17 +25,15 @@ public class HealthTracker{
 	 * @param lowerBound represents the minimum value the double converted from stringInput should be
 	 * @return error message, empty if stringInput is error-free
 	 */
-	public String validateInput(String stringInput, int upperBound, int lowerBound) {
-		
+	public void validateInput(String stringInput, int upperBound, int lowerBound) throws InvalidInputException{
     	//counter to keep track of '.' char
     	int counter = 0;
     	//check to see if entered value is numeric
     	for (char c: stringInput.toCharArray()) {
     		//if a character is not a digit, display the error message
     		if (!Character.isDigit(c) && c != '.') {
-    			return ("Don't include character such as: " + c + 
+    			throw new InvalidInputException("Don't include character such as: " + c + 
     					", only the numerical number");
-    			
     		}
     		//if there is a dot, increase the tracking counter
     		if (c == '.') {
@@ -36,23 +41,17 @@ public class HealthTracker{
     		}
     		//if there are more than 1 dot, it is an invalid decimal
     		if (counter > 1) {
-    			return "Invalid value entered. Decimal should only include 1 dot";
+    			throw new InvalidInputException("Invalid value entered. Decimal should only include 1 dot");
     		}
     	}
     	
     	/* Verify whether the project grade input was in a valid range
     	 If not it will be 0 */
     	if (Double.parseDouble(stringInput) < lowerBound || Double.parseDouble(stringInput) > upperBound ) {//hours of 7 days
-    		return ("Error. Value entered should be in between " + lowerBound + " and " + upperBound);
+    		throw new InvalidInputException("Error. Value entered should be in between " + lowerBound + " and " + upperBound);
     	}
-		return "";
 		
 	}
-
-	public void getUserChart() {
-		//open a new window later and pop up a pie chart in their
-	}
-	
 	
 	//Setter and getter for user weight input
 	double getUserWeight() {
@@ -98,12 +97,10 @@ public class HealthTracker{
 		String errorMessage = "";
 		if (toDoList.size() >= 10) {
 			errorMessage = "This list is full";
-			System.out.println(errorMessage);
 		}
 		for (Activities existingAct: toDoList) {
 			if (existingAct.getCode() == a.getCode()) {
-				errorMessage = "Already in your to do list";
-				System.out.println(errorMessage);
+				errorMessage = "This is already in your list";
 				break;
 			}	
 		}
