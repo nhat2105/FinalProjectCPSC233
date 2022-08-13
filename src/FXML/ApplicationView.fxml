@@ -116,7 +116,7 @@
                                        <HBox.margin>
                                           <Insets top="5.0" />
                                        </HBox.margin></Text>
-                                    <ComboBox fx:id="exerciseComboBox" editable="true" onAction="#getInfo" prefHeight="25.0" prefWidth="52.0">
+                                    <ComboBox fx:id="exerciseComboBox" editable="true" onAction="#getInfo" prefHeight="25.0" prefWidth="75.0">
                                     	<items>
 											<FXCollections fx:factory="observableArrayList">
 												<String fx:value="Running" />
@@ -141,7 +141,7 @@
                                           <Insets top="5.0" />
                                        </HBox.margin>
                                     </ComboBox>
-                                    <Button fx:id="exerciseSearchButton" mnemonicParsing="false" onAction="#searchItem" prefHeight="25.0" prefWidth="71.0" text="Search" textAlignment="CENTER">
+                                    <Button fx:id="exerciseSearchButton" mnemonicParsing="false" onAction="#searchItem" prefHeight="25.0" prefWidth="66.0" text="Search" textAlignment="CENTER">
                                        <HBox.margin>
                                           <Insets left="5.0" top="5.0" />
                                        </HBox.margin>
@@ -153,7 +153,7 @@
                                     <Insets />
                                  </VBox.margin>
                               </Text>
-                              <Button fx:id="addActListButton" mnemonicParsing="false" onAction="#addExerciseToList" prefHeight="25.0" prefWidth="133.0" text="Add to to do list" visible="false">
+                              <Button fx:id="addActListButton" mnemonicParsing="false" onAction="#addToList" prefHeight="25.0" prefWidth="133.0" text="Add to to do list" visible="false">
                                  <VBox.margin>
                                     <Insets left="60.0" />
                                  </VBox.margin>
@@ -206,7 +206,7 @@
                               <HBox prefHeight="31.0" prefWidth="256.0">
                                  <children>
                                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Choose your meal: " wrappingWidth="96.13671875" />
-                                    <ComboBox fx:id="mealComboBox" editable="true" onAction="#getMealInfo" prefWidth="150.0">
+                                    <ComboBox fx:id="mealComboBox" editable="true" onAction="#getMealInfo" prefHeight="25.0" prefWidth="82.0">
                                     <items>
 											<FXCollections fx:factory="observableArrayList">
 												<String fx:value="Chicken" />
@@ -236,10 +236,15 @@
 											</FXCollections>
 										</items>
                                     </ComboBox>
+                                    <Button fx:id="menuSearchButton" mnemonicParsing="false" onAction="#searchItem" prefHeight="25.0" prefWidth="71.0" text="Search">
+                                       <HBox.margin>
+                                          <Insets left="5.0" />
+                                       </HBox.margin>
+                                    </Button>
                                  </children>
                               </HBox>
                               <Text fx:id="mealInfoText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" visible="false" wrappingWidth="253.13671875" />
-                              <Button fx:id="addToMenuButton" mnemonicParsing="false" onAction="#addFoodToMenu" prefHeight="25.0" prefWidth="102.0" text="Add to Menu" visible="false">
+                              <Button fx:id="addToMenuButton" mnemonicParsing="false" onAction="#addToList" prefHeight="25.0" prefWidth="102.0" text="Add to Menu" visible="false">
                                  <VBox.margin>
                                     <Insets left="70.0" />
                                  </VBox.margin>

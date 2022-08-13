@@ -66,11 +66,9 @@ public class ApplicationController {
 	
     //Meal buttons
 	@FXML
-	private Button vegetableButton, porkButton, beefButton, chickenButton, soupButton, seedButton;
-	@FXML
 	private Button milkButton, fruitButton, teaButton;
 	@FXML
-	private Button addToMenuButton;
+	private Button addToMenuButton, menuSearchButton;
 	
 	
 	//Data display text
@@ -315,8 +313,6 @@ public class ApplicationController {
     	}
     	
     }
- 
- 
     
     /*The following function get the information of 
      * each exercise
@@ -338,11 +334,18 @@ public class ApplicationController {
     	if (ae.getSource() == aerobicsButton) {
     		actCode = "Aerobics";
     	}
-    	exercises.setCode(actCode);
-    	exercises.setCaloriesInfo(exercises.getExerciseCalories(actCode, mainTracker.getUserWeight())); 
-    	
-		activitiesInfoText.setText("Info: " + exercises.getInfo() + ". Pressed the button below to add to your activities list");
+    	activitiesInfoText.setText(getActivityInfo(actCode));
     	activitiesInfoText.setVisible(true);
+    	
+    }
+    String getActivityInfo(String code){
+    	exercises.setCode(code);
+    	exercises.setCaloriesInfo(exercises.getExerciseCalories(code, mainTracker.getUserWeight())); 
+    	if (code == "notFound") {
+    		return "Item not found";
+    	}
+		return ("Info: " + exercises.getInfo() + ". Pressed the button below to add to your activities list");
+    	
     }
     /*The following function get the basic information of each
      * food in the meal feature
@@ -495,14 +498,29 @@ public class ApplicationController {
     //The method below adds food to todo list if user clicks
     //add to to-do list button
     @FXML
-    void addFoodToMenu(ActionEvent e) {
-    	//Create new food object to add in with information store in current meal variable
-    	Meal foodToAdd = new Meal(meal.getCode(), meal.getCaloriesInfo(), "meal", meal.getProteinInfo());
-    	mealGroupList.add(meal.getMealGroup());
-    	
+    void addToList(ActionEvent e) {
+    	Activities activityToAdd = null;
+    	if (e.getSource() == addToMenuButton) {
+        	//Create new food object to add in with information store in current meal object
+    		Meal foodToAdd = new Meal(meal);
+        	mealGroupList.add(meal.getMealGroup());
+        	activityToAdd = foodToAdd;
+    	}
+    	else if(e.getSource() == addActListButton) {
+    		//Create new exercise object to add with information store in current exercises object
+    		Exercises exerciseToAdd = new Exercises(exercises);
+    		activityToAdd = exerciseToAdd;
+    	}
     	//If added, change calories consumption info
-    	String errorFree = mainTracker.addToTodo(foodToAdd);
-    	if (errorFree == "") mainTracker.addCalories(foodToAdd.getCaloriesInfo());
+    	String errorFree = mainTracker.addToTodo(activityToAdd);
+    	if (errorFree == "") {
+    		if (activityToAdd.getType() == "meal") {
+    			mainTracker.addCalories(activityToAdd.getCaloriesInfo());
+    		}
+    		else {
+    			mainTracker.addCalories(-activityToAdd.getCaloriesInfo());
+    		}
+    	}
     	
     	//Display the to-do list interface
     	errorToDoText.setText(errorFree);
@@ -541,40 +559,41 @@ public class ApplicationController {
     	
     	    	
     }
-    //The method below adds an exercise to the list
-    @FXML
-    void addExerciseToList(ActionEvent e) {
-    	//Create new exercise to add, information is the same as current exercises information
-    	Exercises exerciseToAdd = new Exercises(exercises.getCode(), exercises.getCaloriesInfo(), "exercise");
-    	String errorFree = mainTracker.addToTodo(exerciseToAdd);
-    	//if added, update calories consumption information
-    	if (errorFree == "")mainTracker.addCalories(-exerciseToAdd.getCaloriesInfo());
-    	errorToDoText.setText(errorFree);
-    	
-    	//Display to do list
-    	toDoDisplay.setText(mainTracker.getToDoList());
-    	removeToDoText.setVisible(true);
-    	removeItemButton.setVisible(true);
-    	removeItemTextField.setVisible(true);
-    	
-    	//Update information of user's calories consumption
-    	int caloriesConsumption = (int)mainTracker.getCaloriesConsumption();
-    	caloriesConsumptionText.setText("Total calories: " + caloriesConsumption);
-    	weightChangeText.setText("With this, you will gain " 
-    	+ mainTracker.convertWeightChange(caloriesConsumption) +" kg per month");	
-    }
 
+    //The method below allows user to search an item in the catalog
     @FXML 
     void searchItem(ActionEvent event){
     	if (event.getSource() == exerciseSearchButton) {
-    		/**
-    		if (mainTracker.inExerciseList(exerciseComboBox.getValue())) {
-    			exercises.setCode(exerciseComboBox.getValue());
-    			//Not quite done
-    			//exercises.setCalories(120);
+    		if (!exercises.inExerciseList(exerciseComboBox.getValue())) {
+    			//If not found, display error message
+    			addActListButton.setVisible(false);
+    			activitiesInfoText.setText("Couldn't find this exercise in catalog");
+    			
     		}
-    		*/
+    		else {
+    			//If found, display info
+    			activitiesInfoText.setText(getActivityInfo(exerciseComboBox.getValue()));
+    			activitiesInfoText.setVisible(true);
+        		
+        	}
     	}
+    	/**
+    	if (event.getSource() == menuSearchButton) {
+    		if (!meal.inMealList(mealComboBox.getValue())) {
+    			//If not found, display error message
+    			addActListButton.setVisible(false);
+    			activitiesInfoText.setText("Couldn't find this exercise in catalog");
+    			
+    		}
+    		else {
+    			//If found, display info
+    			activitiesInfoText.setText(getActivityInfo(exerciseComboBox.getValue()));
+    			activitiesInfoText.setVisible(true);
+        		
+        	}
+    	}
+    	*/
+    	
     }
     //The method below opens a new chart window
     @FXML
@@ -601,8 +620,5 @@ public class ApplicationController {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-    	
-    
-    }
-   
+    }   
 }
