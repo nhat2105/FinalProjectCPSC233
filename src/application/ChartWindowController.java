@@ -11,16 +11,20 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.TextField;
 
 public class ChartWindowController {
+	//FXML instances
 	@FXML
 	private LineChart<String, Number> sleepLineChart;
 	@FXML
 	private PieChart mealPieChart; 
 	
-	public void createLineChart(ArrayList<TextField> allSleepInputs) {//take some inputs from other window, then create it
+	//This method takes in all user sleep inputs in one week and create a line
+	//chart based on that information
+	public void createLineChart(ArrayList<TextField> allSleepInputs) {
 		sleepLineChart.setVisible(true);
 		mealPieChart.setVisible(false);
 		XYChart.Series<String, Number> sleepSeries = new XYChart.Series<String, Number>();
 		int dayNumber = 1;
+		//Loop through the Array List and set information accordingly
 		for (TextField sleepInput: allSleepInputs) {
 			sleepSeries.getData().add(new XYChart.Data<String, Number>("Day " + dayNumber, Double.parseDouble(sleepInput.getText())));
 			dayNumber++;
@@ -28,10 +32,13 @@ public class ChartWindowController {
 		
 		sleepLineChart.getData().add(sleepSeries);
 	}
-
+	//The method below creates a pie chart for user's meal proportion
+	//based on a group list
 	public void createPieChart(ArrayList<String> mealGroupList) {
+		//turn off other charts, turn on this chart
 		sleepLineChart.setVisible(false);
 		mealPieChart.setVisible(true);
+		//Loop through the array list and add counter for each value
 		int dessertValue = 0, seafoodValue = 0, meatValue = 0, proteinValue=0, greenValue = 0;
 		for (String s: mealGroupList) {
 			if (s.equals("green")) {
@@ -50,6 +57,7 @@ public class ChartWindowController {
 				meatValue++;
 			}
 		}
+		//Create a pie chart accordingly from the data passed
 		ObservableList<PieChart.Data> pieData = FXCollections.observableArrayList(
 				new PieChart.Data("Fruit and Vegetable", greenValue),
 				new PieChart.Data("Seafood", seafoodValue),

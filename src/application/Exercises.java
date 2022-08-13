@@ -1,6 +1,7 @@
 package application;
 
 public class Exercises extends Activities {
+	//Lists for catalog and their data
 	private String[] exerciseList = {"Running", "Jogging", "Swimming", "Push up", "Squat",
 			"Cycling", "Weight lifting", "Pulling up", "Tennis", "Basketball", "Soccer",
 			"Rugby", "Badminton", "Volleyball", "Crunches", "Yoga", "Meditation", "Aerobics"};
@@ -17,10 +18,13 @@ public class Exercises extends Activities {
 		
 	}
 	
+	//Constructor with parameters to set name, calories consumption
+	//and type of exercise in that order
 	public Exercises(String code, double calories, String type) {
 		super(code, calories, type);
 	}
 	
+	//boolean to get whether an exercise is in exercise catalog
 	boolean inExerciseList(String exerciseName) {
 		for (int i = 0; i < exerciseList.length; i++) {
 			if (exerciseList[i].equalsIgnoreCase(exerciseName)) {
@@ -30,7 +34,7 @@ public class Exercises extends Activities {
 		return false;
 	}
 	
-
+	//Setter for calories info
 	public void setCaloriesInfo(double caloriesInfo) {
 		this.calories = caloriesInfo;
 	}
@@ -39,6 +43,7 @@ public class Exercises extends Activities {
 	String getInfo() {
 		return "This activity consumes " + getCaloriesInfo() + " calories in 30 minutes for you";
 	}
+	//String representation of exercise name
 	public String toString() {
 		return "Your activity: " + getCode();
 	}
