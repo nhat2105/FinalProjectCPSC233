@@ -7,6 +7,28 @@ public class HealthTracker{
 	private double userWeight, userHeight;
 	double userBMI, userCalories;
 	ArrayList<Activities> toDoList = new ArrayList<Activities>();
+	private String[] exerciseList = {"Running", "Jogging", "Swimming", "Push up", "Squat",
+			"Cycling", "Weight lifting", "Pulling up", "Tennis", "Basketball", "Soccer",
+			"Rugby", "Badminton", "Volleyball", "Crunches"};
+	
+	/**
+	Map<String, Double> exerciseDictionary = new HashMap<String, Double>();
+	
+	private Double[] exerciseValue = {6.0375*userWeight, *userWeight, 250, "Push up", 240,
+			"Cycling", "Weight lifting", "Pulling up", "Tennis", 274, 300,
+			317, 114, 298, 214};
+	ArrayList<Double> exerciseCaloriesValues = new ArrayList<Double>();
+	//Table for meal
+	*/
+	
+	boolean inExerciseList(String exerciseName) {
+		for (int i = 0; i < exerciseList.length; i++) {
+			if (exerciseList[i].equalsIgnoreCase(exerciseName)) {
+				return true;
+			}
+		}
+		return false;
+	}
 	
 	/**
 	
@@ -52,6 +74,7 @@ public class HealthTracker{
     	}
 		
 	}
+
 	
 	//Setter and getter for user weight input
 	double getUserWeight() {
@@ -103,6 +126,7 @@ public class HealthTracker{
 				errorMessage = "This is already in your list";
 				break;
 			}	
+		
 		}
 		if (errorMessage == "") {
 			toDoList.add(a);
@@ -150,11 +174,11 @@ public class HealthTracker{
 	public String getFoodSuggestion() {
 		String matchActivities = "";
 		String healthStatus = this.getHealthStatus(getUserBMI());
-		if (healthStatus.contains("under")){
+		if (healthStatus.contains(s:"under")){
 			matchActivities = "Beef, nut";
 			return matchActivities;
 		}
-		else if (healthStatus.contains("over")){
+		else if (healthStatus.contains(s:"over")){
 			matchActivities = "Vegetable, fruit";
 			return matchActivities;
 		}
@@ -165,11 +189,11 @@ public class HealthTracker{
 		public String getExerciseSuggestion() {
 			String matchActivities = "";
 			String healthStatus = this.getHealthStatus(getUserBMI());
-			if (healthStatus.contains("under")){
+			if (healthStatus.contains(s:"under")){
 				matchActivities = "Jogging, squat";
 				return matchActivities;
 			}
-			else if (healthStatus.contains("over")){
+			else if (healthStatus.contains(s:"over")){
 				matchActivities = "Swimming, running";
 				return matchActivities;
 			}
