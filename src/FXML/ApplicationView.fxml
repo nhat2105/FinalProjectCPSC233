@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.media.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.collections.FXCollections?>
+
+<VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ApplicationController">
+   <children>
+      <MenuBar>
+        <menus>
+          <Menu mnemonicParsing="false" text="Charts">
+            <items>
+              <MenuItem fx:id="mealChart" mnemonicParsing="false" onAction="#openChartWindow" text="Meal Chart" />
+                  <MenuItem fx:id="sleepChart" mnemonicParsing="false" onAction="#openChartWindow" text="Sleep Chart" />
+                  <MenuItem mnemonicParsing="false" text="Import Chart" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Choose a feature that you would like to use" textAlignment="CENTER" wrappingWidth="166.927734375">
+         <font>
+            <Font size="16.0" />
+         </font>
+         <VBox.margin>
+            <Insets left="425.0" top="20.0" />
+         </VBox.margin>
+      </Text>
+      <Text fx:id="appName" strokeType="OUTSIDE" strokeWidth="0.0" text="Main Screen" textAlignment="CENTER" wrappingWidth="235.13671875">
+         <VBox.margin>
+            <Insets left="180.0" />
+         </VBox.margin>
+      </Text>
+      <HBox prefHeight="286.0" prefWidth="600.0">
+         <children>
+            <Pane prefHeight="278.0" prefWidth="550.0">
+               <children>
+                  <VBox layoutY="-65.0" prefHeight="354.0" prefWidth="160.0">
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                     <children>
+                    
+      
+                        <Text fill="#0815ff" strokeType="OUTSIDE" strokeWidth="2.0" text="Your To Do List" textAlignment="CENTER" wrappingWidth="120.13671875">
+                           <VBox.margin>
+                              <Insets left="20.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="suggestionText" fill="#ff6200" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="157.13671875" />
+                        <Text fx:id="caloriesConsumptionText" strokeType="OUTSIDE" strokeWidth="0.0" text="Total calories:" textAlignment="CENTER" wrappingWidth="156.13671875" />
+                        <Text fx:id="weightChangeText" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="159.13671875" />
+                        <Text fx:id="toDoDisplay" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="157.13671875" />
+                        <HBox prefHeight="20.0" prefWidth="160.0">
+                           <children>
+                              <Text fx:id="removeToDoText" strokeType="OUTSIDE" strokeWidth="0.0" text="Item number:" textAlignment="CENTER" visible="false">
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </Text>
+                              <TextField fx:id="removeItemTextField" prefHeight="25.0" prefWidth="54.0" visible="false">
+                                 <HBox.margin>
+                                    <Insets left="5.0" />
+                                 </HBox.margin>
+                              </TextField>
+                           </children>
+                        </HBox>
+                        <Button fx:id="removeItemButton" mnemonicParsing="false" onAction="#removeItemFromToDo" text="Remove" textAlignment="CENTER" visible="false">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <VBox.margin>
+                              <Insets left="50.0" top="5.0" />
+                           </VBox.margin>
+                        </Button>
+                        <Text fx:id="errorToDoText" fill="#ff0101" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="154.0" />
+                     </children>
+                  </VBox>
+                  <Line endX="20.0" layoutX="73.0" layoutY="68.0" rotate="90.0" startX="153.0" />
+                  <Pane fx:id="sleepTrackerPane" layoutX="160.0" layoutY="1.0" prefHeight="289.0" prefWidth="271.0" visible="false">
+                     <children>
+                        <Text layoutX="17.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter your sleep hours of last week" wrappingWidth="235.13671875" />
+                        <VBox fx:id="sleepTrackerRoot" layoutX="20.0" layoutY="35.0" prefHeight="165.0" prefWidth="235.0">
+                           <children>
+                              <Text fx:id="sleepResult" boundsType="LOGICAL_VERTICAL_CENTER" fill="#061180" strokeType="OUTSIDE" strokeWidth="0.0" textOrigin="BOTTOM" wrappingWidth="182.0" />
+                           </children>
+                        </VBox>
+                        <Button fx:id="sleepTrackerResultButton" layoutX="92.0" layoutY="257.0" mnemonicParsing="false" onAction="#getSleepResult" prefHeight="16.0" prefWidth="92.0" text="Get Result" />
+                     </children>
+                  </Pane>
+                  <Pane fx:id="exercisePane" layoutX="159.0" layoutY="-4.0" prefHeight="304.0" prefWidth="271.0" visible="false">
+                     <children>
+                        <VBox layoutX="7.0" layoutY="54.0" prefHeight="220.0" prefWidth="256.0">
+                           <children>
+                              <HBox prefHeight="25.0" prefWidth="256.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Choose an exercise: " wrappingWidth="111.13671875">
+                                       <HBox.margin>
+                                          <Insets top="5.0" />
+                                       </HBox.margin></Text>
+                                    <ComboBox fx:id="exerciseComboBox" editable="true" onAction="#getInfo" prefHeight="25.0" prefWidth="52.0">
+                                    	<items>
+											<FXCollections fx:factory="observableArrayList">
+												<String fx:value="Running" />
+												<String fx:value="Jogging" />
+												<String fx:value="Swimming" />
+												<String fx:value="Push up" />
+												<String fx:value="Squat" />
+												<String fx:value="Cycling" />
+												<String fx:value="Weight lifting" />
+												<String fx:value="Pulling up" />
+												<String fx:value="Tennis" />
+												<String fx:value="Soccer" />
+												<String fx:value="Basketball" />
+												<String fx:value="Rugby" />
+												<String fx:value="Volleyball" />
+												<String fx:value="Badminton" />
+												<String fx:value="Crunches" />
+												
+											</FXCollections>
+										</items>
+                                       <HBox.margin>
+                                          <Insets top="5.0" />
+                                       </HBox.margin>
+                                    </ComboBox>
+                                    <Button fx:id="exerciseSearchButton" mnemonicParsing="false" onAction="#searchItem" prefHeight="25.0" prefWidth="71.0" text="Search" textAlignment="CENTER">
+                                       <HBox.margin>
+                                          <Insets left="5.0" top="5.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                              <Text fx:id="activitiesInfoText" strokeType="OUTSIDE" strokeWidth="0.0" text="Info:" visible="false" wrappingWidth="253.13671875">
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </Text>
+                              <Button fx:id="addActListButton" mnemonicParsing="false" onAction="#addExerciseToList" prefHeight="25.0" prefWidth="133.0" text="Add to to do list" visible="false">
+                                 <VBox.margin>
+                                    <Insets left="60.0" />
+                                 </VBox.margin>
+                              </Button>
+                              <Text fx:id="sleepActDescription" boundsType="LOGICAL_VERTICAL_CENTER" strokeType="OUTSIDE" strokeWidth="0.0" text="Try to do at least one activity below for 15" textAlignment="CENTER" visible="false" wrappingWidth="253.13671875">
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </Text>
+                              <Text fx:id="sleepActDescription2" boundsType="LOGICAL_VERTICAL_CENTER" strokeType="OUTSIDE" strokeWidth="0.0" text="to 30 minutes every day to improve your sleep" textAlignment="CENTER" visible="false" wrappingWidth="253.13671875" />
+                              <HBox layoutX="10.0" layoutY="50.0" prefHeight="35.0" prefWidth="256.0">
+                                 <children>
+                                    <Button fx:id="yogaButton" mnemonicParsing="false" onAction="#getInfo" prefHeight="18.0" prefWidth="75.0" text="Yoga" visible="false">
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                       <HBox.margin>
+                                          <Insets left="10.0" top="15.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="meditationButton" layoutX="20.0" layoutY="40.0" mnemonicParsing="false" onAction="#getInfo" prefHeight="18.0" prefWidth="75.0" text="Meditation" visible="false">
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                       <HBox.margin>
+                                          <Insets left="5.0" top="15.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="aerobicsButton" layoutX="108.0" layoutY="40.0" mnemonicParsing="false" onAction="#getInfo" prefHeight="18.0" prefWidth="75.0" text="Aerobics" visible="false">
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                       <HBox.margin>
+                                          <Insets left="5.0" top="15.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </Pane>
+                  <Pane fx:id="mealPane" layoutX="160.0" layoutY="1.0" prefHeight="304.0" prefWidth="271.0" visible="false">
+                     <children>
+                        <VBox layoutX="7.0" layoutY="54.0" prefHeight="220.0" prefWidth="256.0">
+                           <children>
+                              <HBox prefHeight="31.0" prefWidth="256.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Choose your meal: " wrappingWidth="96.13671875" />
+                                    <ComboBox fx:id="mealComboBox" editable="true" onAction="#getMealInfo" prefWidth="150.0">
+                                    <items>
+											<FXCollections fx:factory="observableArrayList">
+												<String fx:value="Chicken" />
+												<String fx:value="Pork" />
+												<String fx:value="Beef" />
+												<String fx:value="Soup" />
+												<String fx:value="Vegetable" />
+												<String fx:value="Seed" />
+												<String fx:value="Rice" />
+												<String fx:value="Muffin" />
+												<String fx:value="Pie" />
+												<String fx:value="Salmon" />
+												<String fx:value="Pizza" />
+												<String fx:value="Hamburger" />
+												<String fx:value="Sushi" />
+												<String fx:value="Shrimp" />
+												
+												<String fx:value="Noodles" />
+												<String fx:value="Spaghetti" />
+												<String fx:value="Apple juice" />
+												<String fx:value="Peach juice" />
+												<String fx:value="Watermelon" />
+												<String fx:value="Lemonade" />
+												<String fx:value="Mango" />
+											
+												
+											</FXCollections>
+										</items>
+                                    </ComboBox>
+                                 </children>
+                              </HBox>
+                              <Text fx:id="mealInfoText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" visible="false" wrappingWidth="253.13671875" />
+                              <Button fx:id="addToMenuButton" mnemonicParsing="false" onAction="#addFoodToMenu" prefHeight="25.0" prefWidth="102.0" text="Add to Menu" visible="false">
+                                 <VBox.margin>
+                                    <Insets left="70.0" />
+                                 </VBox.margin>
+                              </Button>
+                              <Text fx:id="sleepMealDes" strokeType="OUTSIDE" strokeWidth="0.0" text="Try to include at least 1 food below in your daily meal menu to improve your sleep quality" visible="false" wrappingWidth="254.13671875">
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </Text>
+                              <HBox layoutX="10.0" layoutY="50.0" prefHeight="35.0" prefWidth="256.0">
+                                 <children>
+                                    <Button fx:id="teaButton" mnemonicParsing="false" onAction="#getMealInfo" prefHeight="18.0" prefWidth="75.0" text="Tea" visible="false">
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                       <HBox.margin>
+                                          <Insets left="10.0" top="15.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="fruitButton" layoutX="20.0" layoutY="40.0" mnemonicParsing="false" onAction="#getMealInfo" prefHeight="18.0" prefWidth="75.0" text="Fruit" visible="false">
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                       <HBox.margin>
+                                          <Insets left="5.0" top="15.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="milkButton" layoutX="108.0" layoutY="40.0" mnemonicParsing="false" onAction="#getMealInfo" prefHeight="18.0" prefWidth="75.0" text="Milk" visible="false">
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                       <HBox.margin>
+                                          <Insets left="5.0" top="15.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </Pane>
+               </children>
+            </Pane>
+            <VBox prefHeight="278.0" prefWidth="281.0">
+               <children>
+                  <Button fx:id="exerciseButton" mnemonicParsing="false" onAction="#openFeature" prefHeight="17.0" prefWidth="165.0" text="Exercise Recommendation">
+                     <VBox.margin>
+                        <Insets right="5.0" top="20.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button fx:id="mealsButton" mnemonicParsing="false" onAction="#openFeature" prefHeight="0.0" prefWidth="165.0" text="Meals Suggestion">
+                     <VBox.margin>
+                        <Insets right="5.0" top="20.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button fx:id="sleepTrackerButton" mnemonicParsing="false" onAction="#openFeature" prefHeight="0.0" prefWidth="165.0" text="Sleep Tracker" textAlignment="CENTER">
+                     <VBox.margin>
+                        <Insets right="5.0" top="20.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <Text fx:id="healthStatusText" strokeType="OUTSIDE" strokeWidth="0.0" text="Health Status:" visible="false" wrappingWidth="235.13671875" />
+   </children>
+	
+</VBox>

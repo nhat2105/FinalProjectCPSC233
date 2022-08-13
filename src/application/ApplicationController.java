@@ -21,13 +21,15 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class ApplicationController {
+	//Stage control
 	Stage applicationStage;
 
+	//User information control
 	String userSleepStatus;
 	private double userBMI = 0;
-
 	private String userHeight = "0", userWeight = "0";
 	
+	//User and interface interaction control
 	HealthTracker mainTracker = new HealthTracker();
 	SleepTracker sleepTracker;
 	Exercises exercises = new Exercises("none", 0, "exercise");
@@ -52,11 +54,11 @@ public class ApplicationController {
 	
 	//Error text
 	@FXML
-	private Text weightErrorText, heightErrorText, errorToDoText;
+	private Text hweightErrorText, errorToDoText;
 	
 	//Result button
     @FXML
-    private Button sleepTrackerResultButton, calculateBMIButton;
+    private Button sleepTrackerResultButton;
 
    //Input text
     @FXML
@@ -80,7 +82,7 @@ public class ApplicationController {
 
     //Feature button
     @FXML
-    private Button sleepTrackerButton, exerciseButton, BMIButton, mealsButton, removeItemButton;
+    private Button sleepTrackerButton, exerciseButton, getStartButton, mealsButton, removeItemButton;
 
     //Pane
     @FXML
@@ -93,29 +95,31 @@ public class ApplicationController {
     //For sleep inputs control
     ArrayList<TextField> allSleepInputsTextFields = new ArrayList<TextField>();
 
-	private String s;
-
     //The function below takes in user inputs for their height and weights
     @FXML
-    void getStart(ActionEvent event) throws FileNotFoundException, IOException {
+    void getStart(ActionEvent event) throws FileNotFoundException, IOException{
     	//Validate input first
     	try {
-    		mainTracker.validateInput(userHeightInput.getText(), 215, 1);
+    		//if valid, store information in setters and getters 
+    		//of main tracker
+			mainTracker.validateInput(userHeightInput.getText(), 215, 1);
 			mainTracker.validateInput(userWeightInput.getText(), 130, 1);
 			this.userHeight = userHeightInput.getText();
 			mainTracker.setUserHeight(this.userHeight);
 			this.userWeight = userWeightInput.getText();
 			mainTracker.setUserWeight(this.userWeight);
-	    	switchScene("Main View");
-    	} catch (InvalidInputExceptioniie) {
-			hweightErrorText.setText(iie.getMessage());
-    	}
-    }
+
+		    switchScene("Main View");
+			
+		    //If not valid, throw exception
+		} catch (InvalidInputException iie) {
+			hweightErrorText.setText(iie.getMessage());		
+		}
+   }
 
     
     /**
     * @param view (switch to main view)
-     * @param  
     * @throws FileNotFoundException
     * @throws IOException
     * The function below switches the view from get started view to the main
@@ -123,9 +127,9 @@ public class ApplicationController {
     * from that scene to the main scene also
     */
     private void switchScene(String view) throws FileNotFoundException, IOException {
-		if (view.equalsIgnoreCase(anotherString:"Main View")) {
+		if (view.equalsIgnoreCase("Main View")) {
 			FXMLLoader loader = new FXMLLoader();
-			VBox root = loader.load(new FileInputStream("src/application/ApplicationView.fxml"));
+			VBox root = loader.load(new FileInputStream("src/FXML/ApplicationView.fxml"));
 			
 			//The below codes pass data (user's weight and height )between scenes
 			ApplicationController mainController = loader.getController();
@@ -134,6 +138,7 @@ public class ApplicationController {
 			mainController.userWeight = (String.valueOf(mainTracker.getUserWeight()));	
 			mainController.userBMI = mainTracker.getUserWeight()/ ((mainTracker.getUserHeight()/100)*(mainTracker.getUserHeight()/100));
 	    	
+			//Switch scene to main application view
 			Scene scene = new Scene(root, 600, 420);
 			
 	    	applicationStage.setScene(scene);
@@ -149,22 +154,21 @@ public class ApplicationController {
 	@FXML
 	public void getSleepResult(ActionEvent e) {
 		boolean errorFree = true;
-		
-		 //Create new sleep tracker
 		sleepTracker = new SleepTracker();
 
 		//Validate input
 		for (TextField sleepInput: allSleepInputsTextFields) {
 			try {
-				mainTracker.validateInput(sleepInput.getText(), 24, 0, 0);
-				
+				mainTracker.validateInput(sleepInput.getText(), 24, 0);		
+			//if not valid, throw exception	
 			} catch (InvalidInputException e1) {
 				errorFree = false;
-				sleepResult.setText(e1.getMessage());;
-			    
+				sleepResult.setText(e1.getMessage());
+
 			}
+			
 		}
-		
+		//if error free, get result and display it
 		if (errorFree) {
 			String sleepHoursTrack = sleepTracker.getSleepResult(allSleepInputsTextFields);
 			sleepResult.setText(sleepHoursTrack);
@@ -175,13 +179,11 @@ public class ApplicationController {
 				healthStatusText.setVisible(true);
 			}
 		}
-	
+		
 		
 	}
-	
-	/*
-	 * The function below turns on the right for the 
-     * right feature, determined by the String sceneCode
+    
+    /**
      * The function below turns on the right for the 
      * right feature, determined by the String sceneCode
      * passed as the argument
@@ -200,7 +202,7 @@ public class ApplicationController {
 		sleepTrackerPane.setStyle(""
 				+ "-fx-background-color:lightgray; "
 				);
-		if (sceneCode.equals(anObject:"Sleep Tracker")) {
+		if (sceneCode.equals("Sleep Tracker")) {
 			//The below code turn off other feature's interface
 			exercisePane.setVisible(false);
 			mealPane.setVisible(false);
@@ -215,7 +217,8 @@ public class ApplicationController {
 			
 			sleepTrackerPane.setVisible(true);
 			
-			
+			//create 7 entries for user's input of sleep hours
+			//in a week
 			for (int i = 0; i < 7; i++) {
 				HBox sleepInputRow = new HBox();
 				Label sleepInputLabel = new Label("Day " + (i+1)+ ": ");
@@ -229,7 +232,8 @@ public class ApplicationController {
 				
 			}
 		}
-		else if (sceneCode.contains(s:"inExercises")) {
+		//Turn on exercise feature
+		else if (sceneCode.contains("inExercises")) {
 			appName.setText("Exercise Recommendation");
 			exercisePane.setVisible(true);
 			healthStatusText.setVisible(true);
@@ -244,14 +248,14 @@ public class ApplicationController {
 			}
 			
 			//This feature is turned on based on the and also sleep results
-			if (sceneCode.contains("much") || sceneCode.contains(s:"little")) {// this indicates user had used sleep tracker
+			if (sceneCode.contains("much") || sceneCode.contains("little")) {// this indicates user had used sleep tracker
 				yogaButton.setVisible(true);
 				aerobicsButton.setVisible(true);
 				meditationButton.setVisible(true);
 				sleepActDescription.setVisible(true);
 				sleepActDescription2.setVisible(true);
 			}
-			if (!sceneCode.contains(s:"much") && !sceneCode.contains(s:"little")) { //turn off when user has good sleep
+			if (!sceneCode.contains("much") && !sceneCode.contains("little")) { //turn off when user has good sleep
 				yogaButton.setVisible(false);
 				aerobicsButton.setVisible(false);
 				meditationButton.setVisible(false);
@@ -260,7 +264,7 @@ public class ApplicationController {
 			}
 			
 	}
-		
+		//Turn on meal feature
 		else if (sceneCode.contains("inMeal")) {
 			//Turn off other features
 			sleepTrackerPane.setVisible(false);
@@ -271,21 +275,21 @@ public class ApplicationController {
 			appName.setText("Meal Suggestion");
 			mealPane.setVisible(true);
 			healthStatusText.setVisible(true);
-			if (sceneCode.contains(s:"opening")) {//If it is still the main screen
+			if (sceneCode.contains("opening")) {//If it is still the main screen
 				mealInfoText.setVisible(false);
 				addToMenuButton.setVisible(false);
 				
 			}
 			//Turn on scene depends on sleep status
 			
-			if (sceneCode.contains(s:"much") || sceneCode.contains(s:"little")) {
+			if (sceneCode.contains("much") || sceneCode.contains("little")) {
 				sleepMealDes.setVisible(true);
 				milkButton.setVisible(true);
 				teaButton.setVisible(true);
 				fruitButton.setVisible(true);
 			}
 			//Turn off suggestion for sleep if user has good sleep
-			else if (!sceneCode.contains(s:"much") && !sceneCode.contains(s:"little")) {
+			else if (!sceneCode.contains("much") && !sceneCode.contains("little")) {
 				sleepMealDes.setVisible(false);
 				milkButton.setVisible(false);
 				teaButton.setVisible(false);
@@ -315,88 +319,33 @@ public class ApplicationController {
  
     
     /*The following function get the information of 
-     * each exercise and each user's weight
+     * each exercise
      */
     @FXML
     void getInfo(ActionEvent ae) {
     	String actCode = "";
-    	double caloriesInfo = 0;
     	addActListButton.setVisible(true);
     	if (ae.getSource() == exerciseComboBox) {
     		actCode = ((String) exerciseComboBox.getValue());
     	}
-		if (actCode.equals(anObject:"Running")) {
-    		//this activity also based on weight, averagely calculate by the formula below
-    		caloriesInfo = (11.5 * 3.5 * mainTracker.getUserWeight()/200)*30;
-    	}
-    	else if (actCode.equals(anObject:"Swimming")) {
-    		caloriesInfo = 250;
-    	}
-    	else if (actCode.equals(anObject:"Jogging")) {
-    		//similar to running
-    		caloriesInfo = (5 * 3.5 * mainTracker.getUserWeight()/200)*30;
-    	}
-    	else if (actCode.equals(anObject:"Cycling")) {
-    		//formula provided to calculate cycling calories burned
-    		caloriesInfo = 7.2 * mainTracker.getUserWeight() * 0.0175 * 30;
-    	}
-    	else if (actCode.equals(anObject:"Squat")) {
-    		caloriesInfo = 240;
-    	}
-    	else if (actCode.equals(anObject:"Push up")) {
-    		caloriesInfo = 210;
-    	}
-    	else if (actCode.equals(anObject:"Weight lifting")) {
-    		//this activity depends on weight
-    		caloriesInfo = mainTracker.getUserWeight()* 4.8 * 0.0175 * 30 ;
-    	}
-    	else if (actCode.equals(anObject:"Pulling up")) {
-    		//this activity depends on weight
-    		caloriesInfo = mainTracker.getUserWeight()* 3.8 * 0.0175 * 30 ;
-    	}
-    	else if (actCode.equals(anObject:"Tennis")) {
-    		//this activity depends on weight
-    		caloriesInfo = mainTracker.getUserWeight()* 8 * 0.0175 * 30 ;
-    	}
-    	else if (actCode.equals(anObject:"Soccer")) {
-    		caloriesInfo = 300;
-    	}
-    	else if (actCode.equals(anObject:"Volleyball")) {
-    		caloriesInfo = 298;
-    	}
-    	else if (actCode.equals(anObject:"Basketball")) {
-    		caloriesInfo = 274;
-    	}
-    	else if (actCode.equals(anObject:"Rugby")) {
-    		caloriesInfo = 317;
-    	}
-    	else if (actCode.equals(v"Badminton")) {
-    		caloriesInfo = 114;
-    	}
-    	else if (actCode.equals(anObject:"Crunches")) {
-    		caloriesInfo = 214;
-    	}
 
     	if (ae.getSource() == yogaButton) {
-    		actCode = "yoga";
-    		caloriesInfo = 100;
+    		actCode = "Yoga";
     	}
     	if (ae.getSource() == meditationButton) {
-    		actCode = "meditation";
-    		caloriesInfo = 35;
+    		actCode = "Meditation";
     	}
     	if (ae.getSource() == aerobicsButton) {
-    		actCode = "aerobics";
-    		caloriesInfo = 85;
+    		actCode = "Aerobics";
     	}
     	exercises.setCode(actCode);
-    	exercises.setCaloriesInfo(caloriesInfo); 
+    	exercises.setCaloriesInfo(exercises.getExerciseCalories(actCode, mainTracker.getUserWeight())); 
     	
 		activitiesInfoText.setText("Info: " + exercises.getInfo() + ". Pressed the button below to add to your activities list");
     	activitiesInfoText.setVisible(true);
     }
     /*The following function get the basic information of each
-     * food in the meal panel
+     * food in the meal feature
      */
     @FXML
     void getMealInfo(ActionEvent ae) {
@@ -424,88 +373,88 @@ public class ApplicationController {
     		proteinInfo = 0.1;
     		
     	}
-    	if (mealCode.equals(anObject:"Vegetable")) {
+    	if (mealCode.equals("Vegetable")) {
     		caloriesInfo = 65;
     		proteinInfo = 2.9;
     		mealGroup = "green";
     	}
-    	if (mealCode.equals(anObject:"Soup")){
+    	if (mealCode.equals("Soup")){
     		caloriesInfo = 42;
     		proteinInfo = 4;
     		
     	}
-    	if (mealCode.equals(anObject:"Seed")) {
+    	if (mealCode.equals("Seed")) {
     		caloriesInfo = 559;
     		proteinInfo = 30;
     		mealGroup = "protein";
     	}
-    	if (mealCode.equals(anObject:"Chicken")) {
+    	if (mealCode.equals("Chicken")) {
     		caloriesInfo = 239;
     		proteinInfo = 27;
     		mealGroup = "meat";
     	}
-    	if (mealCode.equals(anObject:"Beef")) {
+    	if (mealCode.equals("Beef")) {
     		caloriesInfo = 250;
     		proteinInfo = 26;
     		mealGroup = "meat";
     	}
-    	if (mealCode.equals(anObject:"Pork")) {
+    	if (mealCode.equals("Pork")) {
     		caloriesInfo = 242;
     		proteinInfo = 27;
     		mealGroup = "meat";
     	}
-    	if (mealCode.equals(anObject:"Rice")) {
+    	if (mealCode.equals("Rice")) {
     		caloriesInfo = 130;
     		proteinInfo = 2.7;
     		mealGroup = "protein";
     	}
-    	if (mealCode.equals(anObject:"Muffin")) {
+    	if (mealCode.equals("Muffin")) {
     		caloriesInfo = 377;
     		proteinInfo = 4.5;
     		mealGroup = "dessert";
     	}
-    	if (mealCode.equals(anObject:"Pie")) {
+    	if (mealCode.equals("Pie")) {
     		caloriesInfo = 237;
     		proteinInfo = 1.9;
     		mealGroup = "dessert";
     	}
-    	if (mealCode.equals(anObject:"Pizza")) {
+    	if (mealCode.equals("Pizza")) {
     		caloriesInfo = 266;
     		proteinInfo = 11;
     		mealGroup = "protein";
     	}
-    	if (mealCode.equals(anObject:"Hamburger")) {
+    	if (mealCode.equals("Hamburger")) {
     		caloriesInfo = 332;
     		proteinInfo = 17;
     		mealGroup = "protein";
     	}
-    	if (mealCode.equals(anObject:"Sushi")) {
+    	if (mealCode.equals("Sushi")) {
     		caloriesInfo = 90;
     		proteinInfo = 2.9;
     		mealGroup = "protein";
     	}
-    	if (mealCode.equals(anObject:"Salmon")) {
+    	if (mealCode.equals("Salmon")) {
     		caloriesInfo = 208;
     		proteinInfo = 20;
     		mealGroup = "seafood";
     	}
-    	if (mealCode.equals(anObject:"Shrimp")) {
+    	if (mealCode.equals("Shrimp")) {
     		caloriesInfo = 24;
     		proteinInfo = 2.9;
     		mealGroup = "seafood";
     	}
-    	if (mealCode.equals(anObject:"Noodles")) {
+    	if (mealCode.equals("Noodles")) {
     		caloriesInfo = 138;
     		proteinInfo = 4.5;
     		mealGroup = "protein";
     	}
-    	if (mealCode.equals(anObject:"Apple juice")) {
+    	if (mealCode.equals("Apple juice")) {
     		caloriesInfo = 46;
     		proteinInfo = 0.1;
     		mealGroup = "green";
         
     	}
-    	if (mealCode.equals(anObject:"Lemonade")) {
+    	if (mealCode.equals("Lemonade")) {
     		caloriesInfo = 40;
     		proteinInfo = .4;
     		mealGroup = "green";
@@ -531,50 +480,59 @@ public class ApplicationController {
     	}
     	meal.setCode(mealCode);
     	meal.setProteinInfo(proteinInfo);
-    	meal.setCaloriesInfo(caloriesInfo);
+    	meal.setCalories(caloriesInfo);
     	meal.setMealGroup(mealGroup);
 		mealInfoText.setText("Info: " + meal.getInfo() + ". Pressed the button below to add to your activities list");
     	mealInfoText.setVisible(true);
     }
 
     //TODO final touch
-    //Add comments on each function
-    //clean up and rearrangement of folders inside the project
+    //List for the catalog
     //Include function which user can find max or min calories consumption and such
     //Sleep disorder function (if any entry is higher than 12 or lower than 1)
-    //Hashmap for the catalog
-    //Search bar for these choice box items
 
     
+    //The method below adds food to todo list if user clicks
+    //add to to-do list button
     @FXML
     void addFoodToMenu(ActionEvent e) {
+    	//Create new food object to add in with information store in current meal variable
     	Meal foodToAdd = new Meal(meal.getCode(), meal.getCaloriesInfo(), "meal", meal.getProteinInfo());
     	mealGroupList.add(meal.getMealGroup());
+    	
+    	//If added, change calories consumption info
     	String errorFree = mainTracker.addToTodo(foodToAdd);
-    	if (errorFree == "")mainTracker.addCalories(foodToAdd.getCaloriesInfo());
-    	else errorToDoText.setText(errorFree);
+    	if (errorFree == "") mainTracker.addCalories(foodToAdd.getCaloriesInfo());
+    	
+    	//Display the to-do list interface
+    	errorToDoText.setText(errorFree);
     	toDoDisplay.setText(mainTracker.getToDoList());
     	removeToDoText.setVisible(true);
     	removeItemButton.setVisible(true);
     	removeItemTextField.setVisible(true);
     	
+    	//Calculate calories consumption and display the information
     	int caloriesConsumption = (int)mainTracker.getCaloriesConsumption();
     	caloriesConsumptionText.setText("Total calories: " + caloriesConsumption);
     	weightChangeText.setText("After a month, you will gain " 
     	+ mainTracker.convertWeightChange(caloriesConsumption) + " kg per month");
     
     }
+    //The method remove an item from to-do list when the button is clicked
     @FXML
     void removeItemFromToDo(ActionEvent e) {
+    	//get user input
     	String indexToRemove = removeItemTextField.getText();
     	try {
+    		//if valid, remove item from todo
 			mainTracker.validateInput(indexToRemove, mainTracker.getToDoSize(), 1);
 			mainTracker.remove(indexToRemove);
 			errorToDoText.setText("");
+		//otherwise display error message
 		} catch (InvalidInputException e1) {
 			errorToDoText.setText(e1.getMessage());
 		}
-    	//Update the scene
+    	//Update the scene includes user's consumption information
     	toDoDisplay.setText(mainTracker.getToDoList());
     	int caloriesConsumption = (int)mainTracker.getCaloriesConsumption();
     	caloriesConsumptionText.setText("Total calories "+ String.valueOf(caloriesConsumption));
@@ -583,18 +541,23 @@ public class ApplicationController {
     	
     	    	
     }
+    //The method below adds an exercise to the list
     @FXML
     void addExerciseToList(ActionEvent e) {
+    	//Create new exercise to add, information is the same as current exercises information
     	Exercises exerciseToAdd = new Exercises(exercises.getCode(), exercises.getCaloriesInfo(), "exercise");
     	String errorFree = mainTracker.addToTodo(exerciseToAdd);
+    	//if added, update calories consumption information
     	if (errorFree == "")mainTracker.addCalories(-exerciseToAdd.getCaloriesInfo());
     	errorToDoText.setText(errorFree);
-
+    	
+    	//Display to do list
     	toDoDisplay.setText(mainTracker.getToDoList());
     	removeToDoText.setVisible(true);
     	removeItemButton.setVisible(true);
     	removeItemTextField.setVisible(true);
     	
+    	//Update information of user's calories consumption
     	int caloriesConsumption = (int)mainTracker.getCaloriesConsumption();
     	caloriesConsumptionText.setText("Total calories: " + caloriesConsumption);
     	weightChangeText.setText("With this, you will gain " 
@@ -613,28 +576,27 @@ public class ApplicationController {
     		*/
     	}
     }
-    
+    //The method below opens a new chart window
     @FXML
     void openChartWindow(ActionEvent event) {
     	try {
+    		//Load new window
 			FXMLLoader loader = new FXMLLoader();
 			
-			VBox root = loader.load(new FileInputStream(name:"src/application/ChartView.fxml"));
+			VBox root = loader.load(new FileInputStream("src/FXML/ChartView.fxml"));
 			ChartWindowController chartController = loader.getController();
 			Stage chartWindow = new Stage();
 			Scene scene = new Scene(root, 600, 420);
-			
+			//Create chart accordingly to what feature clicked was
 			if (event.getSource() == mealChart) {
 	    		chartController.createPieChart(mealGroupList);		
 	    	}
 	    	else if (event.getSource() == sleepChart) {
 	    		chartController.createLineChart(allSleepInputsTextFields);
 	    	}
-	    	
+	    	//Show new window with new chart data
 			chartWindow.setScene(scene);
 			chartWindow.setTitle("Chart Window");
-			
-			
 			chartWindow.show();
 		} catch(Exception e) {
 			e.printStackTrace();

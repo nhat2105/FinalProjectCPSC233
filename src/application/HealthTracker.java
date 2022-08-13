@@ -3,32 +3,11 @@ package application;
 import java.util.ArrayList;
 
 public class HealthTracker{
-	
+	//Instances to work with include user's information 
 	private double userWeight, userHeight;
 	double userBMI, userCalories;
 	ArrayList<Activities> toDoList = new ArrayList<Activities>();
-	private String[] exerciseList = {"Running", "Jogging", "Swimming", "Push up", "Squat",
-			"Cycling", "Weight lifting", "Pulling up", "Tennis", "Basketball", "Soccer",
-			"Rugby", "Badminton", "Volleyball", "Crunches"};
 	
-	/**
-	Map<String, Double> exerciseDictionary = new HashMap<String, Double>();
-	
-	private Double[] exerciseValue = {6.0375*userWeight, *userWeight, 250, "Push up", 240,
-			"Cycling", "Weight lifting", "Pulling up", "Tennis", 274, 300,
-			317, 114, 298, 214};
-	ArrayList<Double> exerciseCaloriesValues = new ArrayList<Double>();
-	//Table for meal
-	*/
-	
-	boolean inExerciseList(String exerciseName) {
-		for (int i = 0; i < exerciseList.length; i++) {
-			if (exerciseList[i].equalsIgnoreCase(exerciseName)) {
-				return true;
-			}
-		}
-		return false;
-	}
 	
 	/**
 	 * The method below takes a string as a parameter and validate whether
@@ -38,11 +17,9 @@ public class HealthTracker{
 	 * @param stringInput represents the input user put in
 	 * @param upperBound represents the max value of the double converted from stringInput should be
 	 * @param lowerBound represents the minimum value the double converted from stringInput should be
-	 * @return error message, empty if stringInput is error-free
+	 * @throws InvalidInputException for invalid inputs and error message included,
 	 */
-	
-	public void validateInput(String stringInput, int upperBound, int lowerBound) throws InvalidInputException {
-		
+	public void validateInput(String stringInput, int upperBound, int lowerBound) throws InvalidInputException{
     	//counter to keep track of '.' char
     	int counter = 0;
     	//check to see if entered value is numeric
@@ -51,7 +28,6 @@ public class HealthTracker{
     		if (!Character.isDigit(c) && c != '.') {
     			throw new InvalidInputException("Don't include character such as: " + c + 
     					", only the numerical number");
-    			
     		}
     		//if there is a dot, increase the tracking counter
     		if (c == '.') {
@@ -67,10 +43,10 @@ public class HealthTracker{
     	 If not it will be 0 */
     	if (Double.parseDouble(stringInput) < lowerBound || Double.parseDouble(stringInput) > upperBound ) {//hours of 7 days
     		throw new InvalidInputException("Error. Value entered should be in between " + lowerBound + " and " + upperBound);
-	}
+    	}
 		
 	}
-	
+
 	
 	//Setter and getter for user weight input
 	double getUserWeight() {
@@ -97,6 +73,7 @@ public class HealthTracker{
 			this.userHeight = 0;
 		}
 	}
+	//setter and getter for user BMI 
 	void setUserBMI(double BMI) {
 		this.userBMI = BMI;
 	}
@@ -104,21 +81,25 @@ public class HealthTracker{
 		return this.userBMI;
 	}
 
-
+	//The method below updates user's data when their information changes
 	public void updateUserData(String userHeight, String userWeight, double userBMI) {
 		this.setUserBMI(userBMI);
 		this.setUserHeight(userHeight);
 		this.setUserWeight(userWeight);
 		
 	}
-
+	//The method below adds an Activities a into the to do list
+	//It will return an error message if not added successfully
 	public String addToTodo(Activities a) {
 		String errorMessage = "";
+		//Max size of to do list is 10
 		if (toDoList.size() >= 10) {
 			errorMessage = "This list is full";
-			errorMessage = "This list is full";
 		}
+		//Loop through the to do list
 		for (Activities existingAct: toDoList) {
+			//If activity is already in the list, it cannot be
+			//added twice
 			if (existingAct.getCode() == a.getCode()) {
 				errorMessage = "This is already in your list";
 				break;
@@ -131,7 +112,8 @@ public class HealthTracker{
 		return errorMessage;
 	}
 	
-	
+	//String representation of to do list
+	//Format: index. Activity name
 	public String getToDoList() {
 		String result = "";
 		int index = 1;
@@ -142,6 +124,7 @@ public class HealthTracker{
 		}
 		return result;
 	}
+	//get user weight status based on their BMI
 	public String getHealthStatus(double BMI) {
 		if (BMI >= 25) {
 			return "overWeight";
@@ -153,29 +136,34 @@ public class HealthTracker{
 			return "normal";
 		}
 	}
-
+	
+	//getter for calories consumption
 	public double getCaloriesConsumption() {
 		return this.userCalories;
 	}
 
-
+	//setter for calories consumption, 
+	//calories consumption is cumulative 
 	public void addCalories(double calories) {
 		this.userCalories += calories;
 		
 	}
+	//the method below change calories changes into
+	//kg changes in weight
 	public int convertWeightChange(double calories) {
 		return (int)calories * 30/7716;
 	}
 
-
+	//the method below get food suggestion for user based
+	//on their weight status
 	public String getFoodSuggestion() {
 		String matchActivities = "";
 		String healthStatus = this.getHealthStatus(getUserBMI());
-		if (healthStatus.contains(s:"under")){
+		if (healthStatus.contains("under")){
 			matchActivities = "Beef, nut";
 			return matchActivities;
 		}
-		else if (healthStatus.contains(s:"over")){
+		else if (healthStatus.contains("over")){
 			matchActivities = "Vegetable, fruit";
 			return matchActivities;
 		}
@@ -183,14 +171,16 @@ public class HealthTracker{
 			return "";
 		}
 	}
+	//The method below get exerciseSuggestion based on their 
+	//weight status
 		public String getExerciseSuggestion() {
 			String matchActivities = "";
 			String healthStatus = this.getHealthStatus(getUserBMI());
-			if (healthStatus.contains(s:"under")){
+			if (healthStatus.contains("under")){
 				matchActivities = "Jogging, squat";
 				return matchActivities;
 			}
-			else if (healthStatus.contains(s:"over")){
+			else if (healthStatus.contains("over")){
 				matchActivities = "Swimming, running";
 				return matchActivities;
 			}
@@ -198,15 +188,20 @@ public class HealthTracker{
 				return "";
 			}
 	}
+		//get to do list current size
 		public int getToDoSize() {
 			return toDoList.size();
 		}
-
+		//The method below remove an item from to do list
+		//based on their index in the list
 		public void remove(String indexToRemove) {
 			int index = 0;
 			for (Activities a: toDoList) {
 				//Since to do list shows index starts with 1
 				if ((index+1) == Integer.parseInt(indexToRemove)) {
+					/*if this is the right index, remove the 
+					item and change calories consumption accordingly
+					*/
 					toDoList.remove(a);
 					if (a.getType().equals("meal")) {
 						addCalories(-1 * a.getCaloriesInfo());

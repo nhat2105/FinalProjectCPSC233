@@ -17,6 +17,7 @@ public class Meal extends Activities {
 		super(another);
 		this.setProteinInfo(another.getProteinInfo());
 	}
+
 	//Setters and getters for protein and meal group
 	public double getProteinInfo() {
 		return this.protein;

@@ -24,6 +24,12 @@ public class Exercises extends Activities {
 		super(another);
 	}
 	
+	
+	//Constructor with parameters to set name, calories consumption
+	//and type of exercise in that order
+	public Exercises(String code, double calories, String type) {
+		super(code, calories, type);
+	}
 	//boolean to get whether an exercise is in exercise catalog
 	boolean inExerciseList(String exerciseName) {
 		for (int i = 0; i < exerciseList.length; i++) {
