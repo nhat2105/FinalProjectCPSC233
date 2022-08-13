@@ -23,12 +23,6 @@
             <items>
               <MenuItem fx:id="mealChart" mnemonicParsing="false" onAction="#openChartWindow" text="Meal Chart" />
                   <MenuItem fx:id="sleepChart" mnemonicParsing="false" onAction="#openChartWindow" text="Sleep Chart" />
-                  <MenuItem mnemonicParsing="false" text="Import Chart" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
             </items>
           </Menu>
         </menus>
