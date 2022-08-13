@@ -45,23 +45,25 @@ public class Meal extends Activities {
 			}
 			return "";
 		}
-	
-	//Constructor with parameters to set name, calories consumption, type of
-	//activities and protein information of meal in that order
-	public Meal(String code, double calories, String type, double protein) {
-		super(code, calories, type);
-		setProteinInfo(protein);
-	}
-	
-	public Meal(Meal another) {
-		super(another);
-		this.setProteinInfo(another.getProteinInfo());
-	}
+		
+		//Constructor with parameters to set name, calories consumption, type of
+		//activities and protein information of meal in that order
+		public Meal(String code, double calories, String type, double protein) {
+			super(code, calories, type);
+			setProtein(protein);
+		}
+		
+			
+		
+		public Meal(Meal another) {
+			super(another);
+			this.setProtein(another.getProtein());
+		}
 
 	//Setters and getters for protein and meal group
-	public double getProteinInfo() {
+	public double getProtein() {
 		return this.protein;
-	} 
+	}
 	public void setProteinInfo(double protein) {//protein per 100g for now
 		this.protein = protein;
 	}
@@ -74,7 +76,7 @@ public class Meal extends Activities {
 	
 	//String representation of get information method
 	public String getInfo() {
-		return "Per 100 gram of this food contains " + getProteinInfo() + "g of protein and " + super.getCaloriesInfo() + " calories";
+		return "Per 100 gram of this food contains " + getProtein() + "g of protein and " + super.getCaloriesInfo() + " calories";
 	}
 	//String representation of this activity's name
 	public String toString() {

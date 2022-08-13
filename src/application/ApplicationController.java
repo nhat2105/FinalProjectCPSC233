@@ -66,11 +66,9 @@ public class ApplicationController {
 	
     //Meal buttons
 	@FXML
-	private Button vegetableButton, porkButton, beefButton, chickenButton, soupButton, seedButton;
-	@FXML
 	private Button milkButton, fruitButton, teaButton;
 	@FXML
-	private Button addToMenuButton;
+	private Button addToMenuButton, menuSearchButton;
 	
 	
 	//Data display text
@@ -315,8 +313,6 @@ public class ApplicationController {
     	}
     	
     }
- 
- 
     
     /*The following function get the information of 
      * each exercise
@@ -338,11 +334,18 @@ public class ApplicationController {
     	if (ae.getSource() == aerobicsButton) {
     		actCode = "Aerobics";
     	}
-    	exercises.setCode(actCode);
-    	exercises.setCaloriesInfo(exercises.getExerciseCalories(actCode, mainTracker.getUserWeight())); 
-    	
-		activitiesInfoText.setText("Info: " + exercises.getInfo() + ". Pressed the button below to add to your activities list");
+    	activitiesInfoText.setText(getActivityInfo(actCode));
     	activitiesInfoText.setVisible(true);
+    	
+    }
+    String getActivityInfo(String code){
+    	exercises.setCode(code);
+    	exercises.setCaloriesInfo(exercises.getExerciseCalories(code, mainTracker.getUserWeight())); 
+    	if (code == "notFound") {
+    		return "Item not found";
+    	}
+		return ("Info: " + exercises.getInfo() + ". Pressed the button below to add to your activities list");
+    	
     }
     /*The following function get the basic information of each
      * food in the meal feature
@@ -369,7 +372,7 @@ public class ApplicationController {
     	meal.setCode(code);
     	meal.setCalories(meal.getCaloriesInfo(code)); 
     	meal.setMealGroup(meal.getMealGroupInfo(code));
-    	meal.setProtein(meal.setProteinInfo(code));
+    	meal.setProtein(meal.getProteinInfo(code));
     	if (code == "notFound") {
     		return "Item not found";
     	}
@@ -377,9 +380,7 @@ public class ApplicationController {
     	
     }
 
-
-    //TODO final touch
-    //List for the catalog
+  //TODO final touch
     //Include function which user can find max or min calories consumption and such
     //Sleep disorder function (if any entry is higher than 12 or lower than 1)
 

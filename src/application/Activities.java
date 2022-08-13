@@ -13,12 +13,13 @@ public class Activities{
 	
 	public Activities(Activities toCopy) {
 		this.type = toCopy.getType();
-		this.calories = toCopy.getCaloriesInfo(actCode);
+		this.calories = toCopy.getCaloriesInfo();
 		this.actCode = toCopy.getCode();
 		
 	}
 
-	public double getCaloriesInfo(String code) {
+
+	public double getCaloriesInfo() {
 		return calories;
 	}
 	//The function below returns user weight status
@@ -38,11 +39,6 @@ public class Activities{
 	}
 	protected void setCalories(double caloriesAmount) {
 		this.calories = caloriesAmount;
-	}
-
-	public String getCaloriesInfo() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 	
 }
