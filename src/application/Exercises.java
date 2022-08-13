@@ -20,6 +20,13 @@ public class Exercises extends Activities {
 	
 	//Constructor with parameters to set name, calories consumption
 	//and type of exercise in that order
+	public Exercises(Exercises another) {
+		super(another);
+	}
+	
+	
+	//Constructor with parameters to set name, calories consumption
+	//and type of exercise in that order
 	public Exercises(String code, double calories, String type) {
 		super(code, calories, type);
 	}

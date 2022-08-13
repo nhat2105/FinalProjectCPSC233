@@ -12,6 +12,7 @@ public class Activities{
 		setCalories(calories);
 		setType(type);
 	}
+
 	//Copy constructor
 	public Activities(Activities toCopy) {
 		this.type = toCopy.getType();

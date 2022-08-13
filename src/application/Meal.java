@@ -70,6 +70,7 @@ public class Meal extends Activities {
 		return this.protein;
 	} 
 	public void setProtein(double protein) {//protein per 100g for now
+
 		this.protein = protein;
 	}
 	public void setMealGroup(String group) {
@@ -94,5 +95,6 @@ public class Meal extends Activities {
 	//String representation of this activity's name
 	public String toString() {
 		return "In your meal: " + getCode();
-	}
+	}	
 }
+
