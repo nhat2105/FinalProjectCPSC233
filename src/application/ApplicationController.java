@@ -372,7 +372,7 @@ public class ApplicationController {
     	meal.setCode(code);
     	meal.setCalories(meal.getCaloriesInfo(code)); 
     	meal.setMealGroup(meal.getMealGroupInfo(code));
-    	meal.setProteinInfo(meal.getProteinInfo(code));
+    	meal.setProtein(meal.getProteinInfo(code));
     	if (code == "notFound") {
     		return "Item not found";
     	}
@@ -485,7 +485,13 @@ public class ApplicationController {
     	*/
     	
     }
-    //The method below opens a new chart window
+    private String getActivityInfo(String value) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	//The method below opens a new chart window
     @FXML
     void openChartWindow(ActionEvent event) {
     	try {

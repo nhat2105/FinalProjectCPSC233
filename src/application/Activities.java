@@ -18,6 +18,7 @@ public class Activities{
 		
 	}
 
+
 	public double getCaloriesInfo() {
 		return calories;
 	}

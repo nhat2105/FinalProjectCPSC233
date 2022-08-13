@@ -50,16 +50,16 @@ public class Meal extends Activities {
 		//activities and protein information of meal in that order
 		public Meal(String code, double calories, String type, double protein) {
 			super(code, calories, type);
-			setProteinInfo(protein);
+			setProtein(protein);
 		}
 		
 			
 		
 		public Meal(Meal another) {
 			super(another);
-			this.setProteinInfo(another.getProtein());
+			this.setProtein(another.getProtein());
 		}
-		
+
 	//Setters and getters for protein and meal group
 	public double getProtein() {
 		return this.protein;
@@ -82,5 +82,20 @@ public class Meal extends Activities {
 	public String toString() {
 		return "In your meal: " + getCode();
 	}
+
+	
+
+	public Object setProteinInfo(String code) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void setProtein(Object setProteinInfo) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+	
 }
 
