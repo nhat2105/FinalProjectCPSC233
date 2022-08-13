@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class HealthTracker{
 	//Instances to work with include user's information 
 	private double userWeight, userHeight;
-	double userBMI, userCalories;
+	private double userBMI, userCalories;
 	ArrayList<Activities> toDoList = new ArrayList<Activities>();
 	
 	

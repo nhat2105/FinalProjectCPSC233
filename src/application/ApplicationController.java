@@ -30,11 +30,11 @@ public class ApplicationController {
 	private String userHeight = "0", userWeight = "0";
 	
 	//User and interface interaction control
-	HealthTracker mainTracker = new HealthTracker();
-	SleepTracker sleepTracker;
-	Exercises exercises = new Exercises("none", 0, "exercise");
-	Meal meal = new Meal("none", 0, "meal", 0);
-	ArrayList<String> mealGroupList = new ArrayList<String>();
+	private HealthTracker mainTracker = new HealthTracker();
+	private SleepTracker sleepTracker;
+	private Exercises exercises = new Exercises("none", 0, "exercise");
+	private Meal meal = new Meal("none", 0, "meal", 0);
+	private ArrayList<String> mealGroupList = new ArrayList<String>();
 
 	//ComboBox
 	@FXML
@@ -231,7 +231,7 @@ public class ApplicationController {
 			}
 		}
 		//Turn on exercise feature
-		else if (sceneCode.contains("inExercises")) {
+		else if (sceneCode.contains("Exercises")) {
 			appName.setText("Exercise Recommendation");
 			exercisePane.setVisible(true);
 			healthStatusText.setVisible(true);
@@ -240,10 +240,8 @@ public class ApplicationController {
 			//Turn off other features
 			sleepTrackerPane.setVisible(false);
 			mealPane.setVisible(false);
-			
-			if (sceneCode.contains("opening")) {
-				activitiesInfoText.setVisible(false);
-			}
+			activitiesInfoText.setVisible(false);
+
 			
 			//This feature is turned on based on the and also sleep results
 			if (sceneCode.contains("much") || sceneCode.contains("little")) {// this indicates user had used sleep tracker
@@ -263,7 +261,7 @@ public class ApplicationController {
 			
 	}
 		//Turn on meal feature
-		else if (sceneCode.contains("inMeal")) {
+		else if (sceneCode.contains("Meal")) {
 			//Turn off other features
 			sleepTrackerPane.setVisible(false);
 			exercisePane.setVisible(false);
@@ -273,11 +271,9 @@ public class ApplicationController {
 			appName.setText("Meal Suggestion");
 			mealPane.setVisible(true);
 			healthStatusText.setVisible(true);
-			if (sceneCode.contains("opening")) {//If it is still the main screen
-				mealInfoText.setVisible(false);
-				addToMenuButton.setVisible(false);
+			mealInfoText.setVisible(false);
+			addToMenuButton.setVisible(false);
 				
-			}
 			//Turn on scene depends on sleep status
 			
 			if (sceneCode.contains("much") || sceneCode.contains("little")) {
@@ -303,10 +299,10 @@ public class ApplicationController {
     @FXML
     void openFeature(ActionEvent ae) {
     	if (ae.getSource() == exerciseButton) {
-        	turnOnScene("inExercisesopening" + userSleepStatus);
+        	turnOnScene("Exercises" + userSleepStatus);
     	}
     	if (ae.getSource() == mealsButton) {
-    		turnOnScene("inMealopening" + userSleepStatus);
+    		turnOnScene("Meal" + userSleepStatus);
     	}
     	if (ae.getSource() == sleepTrackerButton) {
     		turnOnScene("Sleep Tracker");
@@ -334,19 +330,11 @@ public class ApplicationController {
     	if (ae.getSource() == aerobicsButton) {
     		actCode = "Aerobics";
     	}
-    	activitiesInfoText.setText(getActivityInfo(actCode));
+    	activitiesInfoText.setText(exercises.getActivityInfo(actCode, mainTracker.getUserWeight()));
     	activitiesInfoText.setVisible(true);
     	
     }
-    String getActivityInfo(String code){
-    	exercises.setCode(code);
-    	exercises.setCaloriesInfo(exercises.getExerciseCalories(code, mainTracker.getUserWeight())); 
-    	if (code == "notFound") {
-    		return "Item not found";
-    	}
-		return ("Info: " + exercises.getInfo() + ". Pressed the button below to add to your activities list");
-    	
-    }
+
     /*The following function get the basic information of each
      * food in the meal feature
      */
@@ -365,25 +353,9 @@ public class ApplicationController {
     	if (ae.getSource() == teaButton) {
     		mealCode = "Tea";
     	}
-		mealInfoText.setText(getMealInfo(mealCode));
+		  mealInfoText.setText(meal.getMealInfo(mealCode));
     	mealInfoText.setVisible(true);
     }
-    String getMealInfo(String code){
-    	meal.setCode(code);
-    	meal.setCalories(meal.getCaloriesInfo(code)); 
-    	meal.setMealGroup(meal.getMealGroupInfo(code));
-    	meal.setProtein(meal.getProteinInfo(code));
-    	if (code == "notFound") {
-    		return "Item not found";
-    	}
-		return ("Info: " + meal.getInfo() + ". Pressed the button below to add to your activities list");
-    	
-    }
-
-  //TODO final touch
-    //Include function which user can find max or min calories consumption and such
-    //Sleep disorder function (if any entry is higher than 12 or lower than 1)
-
     
     //The method below adds food to todo list if user clicks
     //add to to-do list button
@@ -454,35 +426,33 @@ public class ApplicationController {
     @FXML 
     void searchItem(ActionEvent event){
     	if (event.getSource() == exerciseSearchButton) {
+
     		if (!exercises.inExerciseList(exerciseComboBox.getValue())) {
     			//If not found, display error message
-    			addActListButton.setVisible(false);
     			activitiesInfoText.setText("Couldn't find this exercise in catalog");
-    			
+    			addActListButton.setVisible(false);
     		}
     		else {
     			//If found, display info
-    			activitiesInfoText.setText(getActivityInfo(exerciseComboBox.getValue()));
+    			activitiesInfoText.setText(exercises.getActivityInfo(exerciseComboBox.getValue(), mainTracker.getUserWeight()));
     			activitiesInfoText.setVisible(true);
         		
         	}
     	}
-    	/**
-    	if (event.getSource() == menuSearchButton) {
-    		if (!meal.inMealList(mealComboBox.getValue())) {
+    	else if (event.getSource() == menuSearchButton) {
+    		if (!meal.inMenuList(mealComboBox.getValue())) {
     			//If not found, display error message
-    			addActListButton.setVisible(false);
-    			activitiesInfoText.setText("Couldn't find this exercise in catalog");
+    			addToMenuButton.setVisible(false);
+    			mealInfoText.setText("Couldn't find this food in catalog");
     			
     		}
     		else {
     			//If found, display info
-    			activitiesInfoText.setText(getActivityInfo(exerciseComboBox.getValue()));
-    			activitiesInfoText.setVisible(true);
+    			mealInfoText.setText(meal.getMealInfo(mealComboBox.getValue()));
+    			mealInfoText.setVisible(true);
         		
         	}
     	}
-    	*/
     	
     }
     private String getActivityInfo(String value) {
