@@ -129,7 +129,7 @@ public class ApplicationController {
     private void switchScene(String view) throws FileNotFoundException, IOException {
 		if (view.equalsIgnoreCase("Main View")) {
 			FXMLLoader loader = new FXMLLoader();
-			VBox root = loader.load(new FileInputStream("src/application/ApplicationView.fxml"));
+			VBox root = loader.load(new FileInputStream("src/FXML/ApplicationView.fxml"));
 			
 			//The below codes pass data (user's weight and height )between scenes
 			ApplicationController mainController = loader.getController();
@@ -488,7 +488,6 @@ public class ApplicationController {
     //Add comments on each function
     //Include function which user can find max or min calories consumption and such
     //Sleep disorder function (if any entry is higher than 12 or lower than 1)
-    //Hashmap for the catalog
 
     
     @FXML
@@ -564,7 +563,7 @@ public class ApplicationController {
     	try {
 			FXMLLoader loader = new FXMLLoader();
 			
-			VBox root = loader.load(new FileInputStream("src/application/ChartView.fxml"));
+			VBox root = loader.load(new FileInputStream("src/FXML/ChartView.fxml"));
 			ChartWindowController chartController = loader.getController();
 			Stage chartWindow = new Stage();
 			Scene scene = new Scene(root, 600, 420);
