@@ -52,11 +52,11 @@ public class ApplicationController {
 	
 	//Error text
 	@FXML
-	private Text weightErrorText, heightErrorText, errorToDoText;
+	private Text hweightErrorText, errorToDoText;
 	
 	//Result button
     @FXML
-    private Button sleepTrackerResultButton, calculateBMIButton;
+    private Button sleepTrackerResultButton;
 
    //Input text
     @FXML
@@ -80,7 +80,7 @@ public class ApplicationController {
 
     //Feature button
     @FXML
-    private Button sleepTrackerButton, exerciseButton, BMIButton, mealsButton, removeItemButton;
+    private Button sleepTrackerButton, exerciseButton, getStartButton, mealsButton, removeItemButton;
 
     //Pane
     @FXML
@@ -97,20 +97,24 @@ public class ApplicationController {
 
     //The function below takes in user inputs for their height and weights
     @FXML
-    void getStart(ActionEvent event) throws FileNotFoundException, IOException {
+    void getStart(ActionEvent event) throws FileNotFoundException, IOException{
     	//Validate input first
     	try {
-    		mainTracker.validateInput(userHeightInput.getText(), 215, 1);
+
+			mainTracker.validateInput(userHeightInput.getText(), 215, 1);
+
 			mainTracker.validateInput(userWeightInput.getText(), 130, 1);
 			this.userHeight = userHeightInput.getText();
 			mainTracker.setUserHeight(this.userHeight);
 			this.userWeight = userWeightInput.getText();
 			mainTracker.setUserWeight(this.userWeight);
-	    	switchScene("Main View");
-    	} catch (InvalidInputExceptioniie) {
-			hweightErrorText.setText(iie.getMessage());
-    	}
-    }
+
+		    switchScene("Main View");
+			
+		} catch (InvalidInputException iie) {
+			hweightErrorText.setText(iie.getMessage());		
+		}
+   }
 
     
     /**
@@ -149,22 +153,21 @@ public class ApplicationController {
 	@FXML
 	public void getSleepResult(ActionEvent e) {
 		boolean errorFree = true;
-		
-		 //Create new sleep tracker
 		sleepTracker = new SleepTracker();
 
 		//Validate input
 		for (TextField sleepInput: allSleepInputsTextFields) {
 			try {
-				mainTracker.validateInput(sleepInput.getText(), 24, 0, 0);
+				mainTracker.validateInput(sleepInput.getText(), 24, 0);		
 				
 			} catch (InvalidInputException e1) {
 				errorFree = false;
-				sleepResult.setText(e1.getMessage());;
-			    
+				sleepResult.setText(e1.getMessage());
+
 			}
+			
 		}
-		
+
 		if (errorFree) {
 			String sleepHoursTrack = sleepTracker.getSleepResult(allSleepInputsTextFields);
 			sleepResult.setText(sleepHoursTrack);
@@ -175,13 +178,11 @@ public class ApplicationController {
 				healthStatusText.setVisible(true);
 			}
 		}
-	
+		
 		
 	}
-	
-	/*
-	 * The function below turns on the right for the 
-     * right feature, determined by the String sceneCode
+    
+    /**
      * The function below turns on the right for the 
      * right feature, determined by the String sceneCode
      * passed as the argument
@@ -320,77 +321,22 @@ public class ApplicationController {
     @FXML
     void getInfo(ActionEvent ae) {
     	String actCode = "";
-    	double caloriesInfo = 0;
     	addActListButton.setVisible(true);
     	if (ae.getSource() == exerciseComboBox) {
     		actCode = ((String) exerciseComboBox.getValue());
     	}
-		if (actCode.equals(anObject:"Running")) {
-    		//this activity also based on weight, averagely calculate by the formula below
-    		caloriesInfo = (11.5 * 3.5 * mainTracker.getUserWeight()/200)*30;
-    	}
-    	else if (actCode.equals(anObject:"Swimming")) {
-    		caloriesInfo = 250;
-    	}
-    	else if (actCode.equals(anObject:"Jogging")) {
-    		//similar to running
-    		caloriesInfo = (5 * 3.5 * mainTracker.getUserWeight()/200)*30;
-    	}
-    	else if (actCode.equals(anObject:"Cycling")) {
-    		//formula provided to calculate cycling calories burned
-    		caloriesInfo = 7.2 * mainTracker.getUserWeight() * 0.0175 * 30;
-    	}
-    	else if (actCode.equals(anObject:"Squat")) {
-    		caloriesInfo = 240;
-    	}
-    	else if (actCode.equals(anObject:"Push up")) {
-    		caloriesInfo = 210;
-    	}
-    	else if (actCode.equals(anObject:"Weight lifting")) {
-    		//this activity depends on weight
-    		caloriesInfo = mainTracker.getUserWeight()* 4.8 * 0.0175 * 30 ;
-    	}
-    	else if (actCode.equals(anObject:"Pulling up")) {
-    		//this activity depends on weight
-    		caloriesInfo = mainTracker.getUserWeight()* 3.8 * 0.0175 * 30 ;
-    	}
-    	else if (actCode.equals(anObject:"Tennis")) {
-    		//this activity depends on weight
-    		caloriesInfo = mainTracker.getUserWeight()* 8 * 0.0175 * 30 ;
-    	}
-    	else if (actCode.equals(anObject:"Soccer")) {
-    		caloriesInfo = 300;
-    	}
-    	else if (actCode.equals(anObject:"Volleyball")) {
-    		caloriesInfo = 298;
-    	}
-    	else if (actCode.equals(anObject:"Basketball")) {
-    		caloriesInfo = 274;
-    	}
-    	else if (actCode.equals(anObject:"Rugby")) {
-    		caloriesInfo = 317;
-    	}
-    	else if (actCode.equals(v"Badminton")) {
-    		caloriesInfo = 114;
-    	}
-    	else if (actCode.equals(anObject:"Crunches")) {
-    		caloriesInfo = 214;
-    	}
 
     	if (ae.getSource() == yogaButton) {
-    		actCode = "yoga";
-    		caloriesInfo = 100;
+    		actCode = "Yoga";
     	}
     	if (ae.getSource() == meditationButton) {
-    		actCode = "meditation";
-    		caloriesInfo = 35;
+    		actCode = "Meditation";
     	}
     	if (ae.getSource() == aerobicsButton) {
-    		actCode = "aerobics";
-    		caloriesInfo = 85;
+    		actCode = "Aerobics";
     	}
     	exercises.setCode(actCode);
-    	exercises.setCaloriesInfo(caloriesInfo); 
+    	exercises.setCaloriesInfo(exercises.getExerciseCalories(actCode, mainTracker.getUserWeight())); 
     	
 		activitiesInfoText.setText("Info: " + exercises.getInfo() + ". Pressed the button below to add to your activities list");
     	activitiesInfoText.setVisible(true);
@@ -538,12 +484,11 @@ public class ApplicationController {
     }
 
     //TODO final touch
+    //List for the catalog
     //Add comments on each function
-    //clean up and rearrangement of folders inside the project
     //Include function which user can find max or min calories consumption and such
     //Sleep disorder function (if any entry is higher than 12 or lower than 1)
     //Hashmap for the catalog
-    //Search bar for these choice box items
 
     
     @FXML
@@ -551,8 +496,8 @@ public class ApplicationController {
     	Meal foodToAdd = new Meal(meal.getCode(), meal.getCaloriesInfo(), "meal", meal.getProteinInfo());
     	mealGroupList.add(meal.getMealGroup());
     	String errorFree = mainTracker.addToTodo(foodToAdd);
-    	if (errorFree == "")mainTracker.addCalories(foodToAdd.getCaloriesInfo());
-    	else errorToDoText.setText(errorFree);
+    	mainTracker.addCalories(foodToAdd.getCaloriesInfo());
+    	errorToDoText.setText(errorFree);
     	toDoDisplay.setText(mainTracker.getToDoList());
     	removeToDoText.setVisible(true);
     	removeItemButton.setVisible(true);

@@ -31,6 +31,13 @@ public class HealthTracker{
 	}
 	
 	/**
+	
+	ArrayList<Double> exerciseCaloriesValues = new ArrayList<Double>();
+	//Table for meal
+	*/
+
+	
+	/**
 	 * The method below takes a string as a parameter and validate whether
 	 * it is a valid number to be converted into a double, it returns the 
 	 * error message of how it is invalid, if it is valid then error message will
@@ -40,9 +47,7 @@ public class HealthTracker{
 	 * @param lowerBound represents the minimum value the double converted from stringInput should be
 	 * @return error message, empty if stringInput is error-free
 	 */
-	
-	public void validateInput(String stringInput, int upperBound, int lowerBound) throws InvalidInputException {
-		
+	public void validateInput(String stringInput, int upperBound, int lowerBound) throws InvalidInputException{
     	//counter to keep track of '.' char
     	int counter = 0;
     	//check to see if entered value is numeric
@@ -51,7 +56,6 @@ public class HealthTracker{
     		if (!Character.isDigit(c) && c != '.') {
     			throw new InvalidInputException("Don't include character such as: " + c + 
     					", only the numerical number");
-    			
     		}
     		//if there is a dot, increase the tracking counter
     		if (c == '.') {
@@ -67,10 +71,10 @@ public class HealthTracker{
     	 If not it will be 0 */
     	if (Double.parseDouble(stringInput) < lowerBound || Double.parseDouble(stringInput) > upperBound ) {//hours of 7 days
     		throw new InvalidInputException("Error. Value entered should be in between " + lowerBound + " and " + upperBound);
-	}
+    	}
 		
 	}
-	
+
 	
 	//Setter and getter for user weight input
 	double getUserWeight() {
@@ -115,7 +119,6 @@ public class HealthTracker{
 	public String addToTodo(Activities a) {
 		String errorMessage = "";
 		if (toDoList.size() >= 10) {
-			errorMessage = "This list is full";
 			errorMessage = "This list is full";
 		}
 		for (Activities existingAct: toDoList) {
