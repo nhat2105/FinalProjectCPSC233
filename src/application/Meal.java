@@ -1,6 +1,6 @@
 package application;
 
-public class Meal extends Activities {
+public class Meal extends Activity {
 	//Instances include protein information
 	//and meal group for meal proportion
 	private String mealGroup ="";
@@ -21,6 +21,7 @@ public class Meal extends Activities {
 			, "dessert", "dessert", "seafood", "protein", "protein", "protein", "seafood", "protein", "protein",
 			"green", "green", "green", "green", "green", "green", "dairy", "tea"
 	};
+	
 	boolean inMenuList(String itemName) {
 		for (int i = 0; i < mealList.length; i++) {
 			if (mealList[i].equalsIgnoreCase(itemName)) {
@@ -66,7 +67,7 @@ public class Meal extends Activities {
 	}
 	
 	//Setters and getters for protein and meal group
-	public double getProtein() {
+	public double getProtein() {                                                                     
 		return this.protein;
 	} 
 	public void setProtein(double protein) {//protein per 100g for now
@@ -85,12 +86,9 @@ public class Meal extends Activities {
     	setCalories(getCaloriesInfo(code)); 
     	setMealGroup(getMealGroupInfo(code));
     	setProtein(getProteinInfo(code));
-		return ("Info: " + getInfo() + ". Pressed the button below to add to your activities list");
+		return ("Info: Per 100 gram of this food contains " + getProtein() + "g of protein and " 
+    	+ super.getCaloriesInfo() + " calories" + ". Pressed the button below to add to your activities list");
     }
-	//String representation of get information method, get values based on current object value
-	public String getInfo() {
-		return "Per 100 gram of this food contains " + getProtein() + "g of protein and " + super.getCaloriesInfo() + " calories";
-	}
 	//String representation of this activity's name
 	public String toString() {
 		return "In your meal: " + getCode();

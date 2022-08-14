@@ -6,7 +6,7 @@ public class HealthTracker{
 	//Instances to work with include user's information 
 	private double userWeight, userHeight;
 	private double userBMI, userCalories;
-	ArrayList<Activities> toDoList = new ArrayList<Activities>();
+	private ArrayList<Activity> toDoList = new ArrayList<Activity>();
 	
 	
 	/**
@@ -52,7 +52,7 @@ public class HealthTracker{
 	double getUserWeight() {
 		return userWeight;
 	}
-	void setUserWeight(String userWeight) {
+	protected void setUserWeight(String userWeight) {
 		if (userWeight != null) {
 			this.userWeight = Double.parseDouble(userWeight);
 		}
@@ -65,7 +65,7 @@ public class HealthTracker{
 		return userHeight;
 	}
 
-	void setUserHeight(String userHeight) {
+	protected void setUserHeight(String userHeight) {
 		if (userHeight != null) { 
 			this.userHeight = Double.parseDouble(userHeight);
 		}
@@ -74,7 +74,7 @@ public class HealthTracker{
 		}
 	}
 	//setter and getter for user BMI 
-	void setUserBMI(double BMI) {
+	protected void setUserBMI(double BMI) {
 		this.userBMI = BMI;
 	}
 	double getUserBMI() {
@@ -90,14 +90,14 @@ public class HealthTracker{
 	}
 	//The method below adds an Activities a into the to do list
 	//It will return an error message if not added successfully
-	public String addToTodo(Activities a) {
+	public String addToTodo(Activity a) {
 		String errorMessage = "";
 		//Max size of to do list is 10
 		if (toDoList.size() >= 10) {
 			errorMessage = "This list is full";
 		}
 		//Loop through the to do list
-		for (Activities existingAct: toDoList) {
+		for (Activity existingAct: toDoList) {
 			//If activity is already in the list, it cannot be
 			//added twice
 			if (existingAct.getCode() == a.getCode()) {
@@ -118,7 +118,7 @@ public class HealthTracker{
 		String result = "";
 		int index = 1;
 		result += toDoList.size() + " things to do\n";
-		for (Activities a: toDoList) {
+		for (Activity a: toDoList) {
 			result += index + ". " + a.toString() + "\n";
 			index++;
 		}
@@ -138,13 +138,13 @@ public class HealthTracker{
 	}
 	
 	//getter for calories consumption
-	public double getCaloriesConsumption() {
+	public double getUserCaloriesConsumption() {
 		return this.userCalories;
 	}
 
 	//setter for calories consumption, 
 	//calories consumption is cumulative 
-	public void addCalories(double calories) {
+	public void addUserCaloriesConsumption(double calories) {
 		this.userCalories += calories;
 		
 	}
@@ -194,9 +194,9 @@ public class HealthTracker{
 		}
 		//The method below remove an item from to do list
 		//based on their index in the list
-		public void remove(String indexToRemove) {
+		public void removeFromToDo(String indexToRemove) {
 			int index = 0;
-			for (Activities a: toDoList) {
+			for (Activity a: toDoList) {
 				//Since to do list shows index starts with 1
 				if ((index+1) == Integer.parseInt(indexToRemove)) {
 					/*if this is the right index, remove the 
@@ -204,10 +204,10 @@ public class HealthTracker{
 					*/
 					toDoList.remove(a);
 					if (a.getType().equals("meal")) {
-						addCalories(-1 * a.getCaloriesInfo());
+						addUserCaloriesConsumption(-1 * a.getCaloriesInfo());
 					}
 					else if (a.getType().equals("exercise")) {
-						addCalories(a.getCaloriesInfo());
+						addUserCaloriesConsumption(a.getCaloriesInfo());
 					}
 					break;
 				}

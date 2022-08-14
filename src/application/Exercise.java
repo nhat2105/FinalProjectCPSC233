@@ -1,6 +1,6 @@
 package application;
 
-public class Exercises extends Activities {
+public class Exercise extends Activity {
 	//Lists for catalog and their data
 	private String[] exerciseList = {"Running", "Jogging", "Swimming", "Push up", "Squat",
 			"Cycling", "Weight lifting", "Pulling up", "Tennis", "Basketball", "Soccer",
@@ -20,22 +20,23 @@ public class Exercises extends Activities {
 	
 	//Constructor with parameters to set name, calories consumption
 	//and type of exercise in that order
-	public Exercises(String code, double calories, String type) {
+	public Exercise(String code, double calories, String type) {
 		super(code, calories, type);
 	}
 	//Copy constructor
-	public Exercises(Exercises another) {
+	public Exercise(Exercise another) {
 		super(another);
 	}
 	//The method below get activity information based on
 	//the catalog information, with argument passed as userWeight
     String getActivityInfo(String code, double userWeight){
     	setCode(code);
-    	setCaloriesInfo(getExerciseCalories(code, userWeight)); 
+    	setCalories(getExerciseCalories(code, userWeight)); 
     	if (code == "notFound") {
     		return "Item not found";
     	}
-		return ("Info: " + getInfo() + ". Pressed the button below to add to your activities list");
+		return ("Info: This activity consumes " + getCaloriesInfo() + " calories in 30 minutes for you" 
+    	 + ". Pressed the button below to add to your activities list");
     	
     }
 	//boolean to get whether an exercise is in exercise catalog
@@ -46,16 +47,6 @@ public class Exercises extends Activities {
 			}
 		}
 		return false;
-	}
-	
-	//Setter for calories info
-	public void setCaloriesInfo(double caloriesInfo) {
-		this.calories = caloriesInfo;
-	}
-
-	//String representation of get information
-	String getInfo() {
-		return "This activity consumes " + getCaloriesInfo() + " calories in 30 minutes for you";
 	}
 	//String representation of exercise name
 	public String toString() {
