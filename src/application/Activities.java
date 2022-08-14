@@ -1,20 +1,20 @@
 package application;
 
-public class Activities{
+public class Activity{
 	//Instances
 	protected double calories = 0;
 	private String actCode = "";
 	protected String type = "";
 	
 	//Constructor to set activity's code, calories, type in that respectively
-	public Activities(String code, double calories, String type) {
+	public Activity(String code, double calories, String type) {
 		setCode(code);
 		setCalories(calories);
 		setType(type);
 	}
 
 	//Copy constructor
-	public Activities(Activities toCopy) {
+	public Activity(Activity toCopy) {
 		this.type = toCopy.getType();
 		this.calories = toCopy.getCaloriesInfo();
 		this.actCode = toCopy.getCode();
