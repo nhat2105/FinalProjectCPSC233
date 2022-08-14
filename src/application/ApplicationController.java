@@ -232,7 +232,7 @@ public class ApplicationController {
 		}
 		//Turn on exercise feature
 		else if (sceneCode.contains("Exercises")) {
-			appName.setText("Exercise Recommendation");
+			appName.setText("Desgin Exercise List");
 			exercisePane.setVisible(true);
 			healthStatusText.setVisible(true);
 			addActListButton.setVisible(false);
@@ -268,7 +268,7 @@ public class ApplicationController {
 				
 			
 			//Turn on this feature
-			appName.setText("Meal Suggestion");
+			appName.setText("Design Your Meal");
 			mealPane.setVisible(true);
 			healthStatusText.setVisible(true);
 			mealInfoText.setVisible(false);
