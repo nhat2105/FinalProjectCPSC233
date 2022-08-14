@@ -100,7 +100,7 @@ public class HealthTracker{
 		for (Activity existingAct: toDoList) {
 			//If activity is already in the list, it cannot be
 			//added twice
-			if (existingAct.getCode() == a.getCode()) {
+			if (existingAct.getCode().equalsIgnoreCase(a.getCode())) {
 				errorMessage = "This is already in your list";
 				break;
 			}	
