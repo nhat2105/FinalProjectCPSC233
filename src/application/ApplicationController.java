@@ -455,11 +455,6 @@ public class ApplicationController {
     	}
     	
     }
-    private String getActivityInfo(String value) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 
 	//The method below opens a new chart window
     @FXML
