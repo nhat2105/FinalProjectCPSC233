@@ -1,6 +1,6 @@
 package application;
 
-public class Exercises extends Activities {
+public class Exercise extends Activity {
 	//Lists for catalog and their data
 	private String[] exerciseList = {"Running", "Jogging", "Swimming", "Push up", "Squat",
 			"Cycling", "Weight lifting", "Pulling up", "Tennis", "Basketball", "Soccer",
@@ -20,18 +20,18 @@ public class Exercises extends Activities {
 	
 	//Constructor with parameters to set name, calories consumption
 	//and type of exercise in that order
-	public Exercises(Exercises another) {
+	public Exercise(Exercise another) {
 		super(another);
 	}
 	
 	
 	//Constructor with parameters to set name, calories consumption
 	//and type of exercise in that order
-	public Exercises(String code, double calories, String type) {
+	public Exercise(String code, double calories, String type) {
 		super(code, calories, type);
 	}
 	//Copy constructor
-	public Exercises(Exercises another) {
+	public Exercise(Exercise another) {
 		super(another);
 	}
 	//The method below get activity information based on
