@@ -32,7 +32,7 @@ public class ApplicationController {
 	//User and interface interaction control
 	private HealthTracker mainTracker = new HealthTracker();
 	private SleepTracker sleepTracker;
-	private Exercises exercises = new Exercises("none", 0, "exercise");
+	private Exercise exercise = new Exercise("none", 0, "exercise");
 	private Meal meal = new Meal("none", 0, "meal", 0);
 	private ArrayList<String> mealGroupList = new ArrayList<String>();
 
@@ -314,7 +314,7 @@ public class ApplicationController {
      * each exercise
      */
     @FXML
-    void getInfo(ActionEvent ae) {
+    void getExerciseInfo(ActionEvent ae) {
     	String actCode = "";
     	addActListButton.setVisible(true);
     	if (ae.getSource() == exerciseComboBox) {
@@ -330,7 +330,7 @@ public class ApplicationController {
     	if (ae.getSource() == aerobicsButton) {
     		actCode = "Aerobics";
     	}
-    	activitiesInfoText.setText(exercises.getActivityInfo(actCode, mainTracker.getUserWeight()));
+    	activitiesInfoText.setText(exercise.getActivityInfo(actCode, mainTracker.getUserWeight()));
     	activitiesInfoText.setVisible(true);
     	
     }
@@ -361,7 +361,7 @@ public class ApplicationController {
     //add to to-do list button
     @FXML
     void addToList(ActionEvent e) {
-    	Activities activityToAdd = null;
+    	Activity activityToAdd = null;
     	if (e.getSource() == addToMenuButton) {
         	//Create new food object to add in with information store in current meal object
     		Meal foodToAdd = new Meal(meal);
@@ -370,17 +370,17 @@ public class ApplicationController {
     	}
     	else if(e.getSource() == addActListButton) {
     		//Create new exercise object to add with information store in current exercises object
-    		Exercises exerciseToAdd = new Exercises(exercises);
+    		Exercise exerciseToAdd = new Exercise(exercise);
     		activityToAdd = exerciseToAdd;
     	}
     	//If added, change calories consumption info
     	String errorFree = mainTracker.addToTodo(activityToAdd);
     	if (errorFree == "") {
     		if (activityToAdd.getType() == "meal") {
-    			mainTracker.addCalories(activityToAdd.getCaloriesInfo());
+    			mainTracker.addUserCaloriesConsumption(activityToAdd.getCaloriesInfo());
     		}
     		else {
-    			mainTracker.addCalories(-activityToAdd.getCaloriesInfo());
+    			mainTracker.addUserCaloriesConsumption(-activityToAdd.getCaloriesInfo());
     		}
     	}
     	
@@ -392,7 +392,7 @@ public class ApplicationController {
     	removeItemTextField.setVisible(true);
     	
     	//Calculate calories consumption and display the information
-    	int caloriesConsumption = (int)mainTracker.getCaloriesConsumption();
+    	int caloriesConsumption = (int)mainTracker.getUserCaloriesConsumption();
     	caloriesConsumptionText.setText("Total calories: " + caloriesConsumption);
     	weightChangeText.setText("After a month, you will gain " 
     	+ mainTracker.convertWeightChange(caloriesConsumption) + " kg per month");
@@ -406,7 +406,7 @@ public class ApplicationController {
     	try {
     		//if valid, remove item from todo
 			mainTracker.validateInput(indexToRemove, mainTracker.getToDoSize(), 1);
-			mainTracker.remove(indexToRemove);
+			mainTracker.removeFromToDo(indexToRemove);
 			errorToDoText.setText("");
 		//otherwise display error message
 		} catch (InvalidInputException e1) {
@@ -414,7 +414,7 @@ public class ApplicationController {
 		}
     	//Update the scene includes user's consumption information
     	toDoDisplay.setText(mainTracker.getToDoList());
-    	int caloriesConsumption = (int)mainTracker.getCaloriesConsumption();
+    	int caloriesConsumption = (int)mainTracker.getUserCaloriesConsumption();
     	caloriesConsumptionText.setText("Total calories "+ String.valueOf(caloriesConsumption));
     	weightChangeText.setText("After a month, you will gain " 
     	    	+ mainTracker.convertWeightChange(caloriesConsumption) + " kg per month");
@@ -427,14 +427,14 @@ public class ApplicationController {
     void searchItem(ActionEvent event){
     	if (event.getSource() == exerciseSearchButton) {
 
-    		if (!exercises.inExerciseList(exerciseComboBox.getValue())) {
+    		if (!exercise.inExerciseList(exerciseComboBox.getValue())) {
     			//If not found, display error message
     			activitiesInfoText.setText("Couldn't find this exercise in catalog");
     			addActListButton.setVisible(false);
     		}
     		else {
     			//If found, display info
-    			activitiesInfoText.setText(exercises.getActivityInfo(exerciseComboBox.getValue(), mainTracker.getUserWeight()));
+    			activitiesInfoText.setText(exercise.getActivityInfo(exerciseComboBox.getValue(), mainTracker.getUserWeight()));
     			activitiesInfoText.setVisible(true);
         		
         	}

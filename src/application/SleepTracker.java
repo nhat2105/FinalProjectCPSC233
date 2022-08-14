@@ -6,7 +6,7 @@ import javafx.scene.control.TextField;
 
 public class SleepTracker {
 	//Instances for sleep tracker
-	private double sleepHours, sleepHoursEveryday;
+	private double sleepHoursTotal, sleepHoursEveryday;
 	private String sleepStatus;
 	
 	/**
@@ -17,9 +17,9 @@ public class SleepTracker {
 	 */
 	public String getSleepResult(ArrayList<TextField> allSleepInputs) {
 		for (TextField sleepInput: allSleepInputs) {
-			sleepHours += Double.parseDouble(sleepInput.getText());
+			sleepHoursTotal += Double.parseDouble(sleepInput.getText());
 		}
-		sleepHoursEveryday = sleepHours/7;
+		sleepHoursEveryday = sleepHoursTotal/7;
 		
 		if (sleepHoursEveryday >= 9.5) {
 			sleepStatus = "too much";
@@ -40,6 +40,5 @@ public class SleepTracker {
 	public String getSleepStatus() {
 		return sleepStatus;
 	}
-	
-	
+
 }

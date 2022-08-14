@@ -18,12 +18,6 @@ public class Exercise extends Activity {
 		
 	}
 	
-	//Constructor with parameters to set name, calories consumption
-	//and type of exercise in that order
-	public Exercise(Exercise another) {
-		super(another);
-	}
-	
 	
 	//Constructor with parameters to set name, calories consumption
 	//and type of exercise in that order
@@ -38,11 +32,13 @@ public class Exercise extends Activity {
 	//the catalog information, with argument passed as userWeight
     String getActivityInfo(String code, double userWeight){
     	setCode(code);
-    	setCaloriesInfo(getExerciseCalories(code, userWeight)); 
+    	setCalories(getExerciseCalories(code, userWeight)); 
     	if (code == "notFound") {
     		return "Item not found";
     	}
-		return ("Info: " + getInfo() + ". Pressed the button below to add to your activities list");
+		return ("Info: This activity consumes " + getCaloriesInfo() + " calories in 30 minutes for you" 
+    	 + ". Pressed the button below to add to your activities list");
+
     	
     }
 	//boolean to get whether an exercise is in exercise catalog
@@ -53,19 +49,5 @@ public class Exercise extends Activity {
 			}
 		}
 		return false;
-	}
-	
-	//Setter for calories info
-	public void setCaloriesInfo(double caloriesInfo) {
-		this.calories = caloriesInfo;
-	}
-
-	//String representation of get information
-	String getInfo() {
-		return "This activity consumes " + getCaloriesInfo() + " calories in 30 minutes for you";
-	}
-	//String representation of exercise name
-	public String toString() {
-		return "Your activity: " + getCode();
 	}
 }
