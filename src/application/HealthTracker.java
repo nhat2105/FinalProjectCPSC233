@@ -92,8 +92,8 @@ public class HealthTracker{
 	//It will return an error message if not added successfully
 	public String addToTodo(Activity a) {
 		String errorMessage = "";
-		//Max size of to do list is 10
-		if (toDoList.size() >= 10) {
+		//Max size of to do list is 7
+		if (toDoList.size() >= 7) {
 			errorMessage = "This list is full";
 		}
 		//Loop through the to do list
