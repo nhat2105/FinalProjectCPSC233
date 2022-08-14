@@ -160,11 +160,11 @@ public class HealthTracker{
 		String matchActivities = "";
 		String healthStatus = this.getHealthStatus(getUserBMI());
 		if (healthStatus.contains("under")){
-			matchActivities = "Beef, nut";
+			matchActivities = "Beef, seed";
 			return matchActivities;
 		}
 		else if (healthStatus.contains("over")){
-			matchActivities = "Vegetable, fruit";
+			matchActivities = "Vegetable";
 			return matchActivities;
 		}
 		else {
