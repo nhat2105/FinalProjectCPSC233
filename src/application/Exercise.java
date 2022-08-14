@@ -18,6 +18,7 @@ public class Exercise extends Activity {
 		
 	}
 	
+	
 	//Constructor with parameters to set name, calories consumption
 	//and type of exercise in that order
 	public Exercise(String code, double calories, String type) {

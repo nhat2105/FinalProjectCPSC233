@@ -1,6 +1,7 @@
 package application;
 
 public class Activity{
+	
 	//Instances
 	protected double calories = 0;
 	private String actCode = "";
