@@ -353,7 +353,7 @@ public class ApplicationController {
     	if (ae.getSource() == teaButton) {
     		mealCode = "Tea";
     	}
-		mealInfoText.setText(meal.getMealInfo(mealCode));
+		  mealInfoText.setText(meal.getMealInfo(mealCode));
     	mealInfoText.setVisible(true);
     }
     
@@ -455,7 +455,13 @@ public class ApplicationController {
     	}
     	
     }
-    //The method below opens a new chart window
+    private String getActivityInfo(String value) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	//The method below opens a new chart window
     @FXML
     void openChartWindow(ActionEvent event) {
     	try {

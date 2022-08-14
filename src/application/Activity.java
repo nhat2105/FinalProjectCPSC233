@@ -1,7 +1,6 @@
 package application;
 
 public class Activity{
-	
 	//Instances
 	protected double calories = 0;
 	private String actCode = "";
@@ -13,6 +12,7 @@ public class Activity{
 		setCalories(calories);
 		setType(type);
 	}
+
 	//Copy constructor
 	public Activity(Activity toCopy) {
 		this.type = toCopy.getType();

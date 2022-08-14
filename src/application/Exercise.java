@@ -38,6 +38,7 @@ public class Exercise extends Activity {
     	}
 		return ("Info: This activity consumes " + getCaloriesInfo() + " calories in 30 minutes for you" 
     	 + ". Pressed the button below to add to your activities list");
+
     	
     }
 	//boolean to get whether an exercise is in exercise catalog
@@ -48,9 +49,5 @@ public class Exercise extends Activity {
 			}
 		}
 		return false;
-	}
-	//String representation of exercise name
-	public String toString() {
-		return "Your activity: " + getCode();
 	}
 }
