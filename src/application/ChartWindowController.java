@@ -16,9 +16,10 @@ public class ChartWindowController {
 	private LineChart<String, Number> sleepLineChart;
 	@FXML
 	private PieChart mealPieChart; 
-	
+		
 	//This method takes in all user sleep inputs in one week and create a line
 	//chart based on that information
+	//Cre (YouTube Channel): Cool IT Help
 	public void createLineChart(ArrayList<TextField> allSleepInputs) {
 		sleepLineChart.setVisible(true);
 		mealPieChart.setVisible(false);
@@ -34,6 +35,7 @@ public class ChartWindowController {
 	}
 	//The method below creates a pie chart for user's meal proportion
 	//based on a group list
+	//Cre (YouTube Channel): Professor Saad
 	public void createPieChart(ArrayList<String> mealGroupList) {
 		//turn off other charts, turn on this chart
 		sleepLineChart.setVisible(false);
