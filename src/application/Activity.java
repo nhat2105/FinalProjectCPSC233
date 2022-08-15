@@ -29,7 +29,7 @@ public class Activity{
 		return actCode;
 	}
 	//setter and getter for activity's type
-	public void setType(String typeOfAct) {
+	protected void setType(String typeOfAct) {
 		this.type = typeOfAct;
 	}
 	

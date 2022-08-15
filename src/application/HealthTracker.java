@@ -173,46 +173,45 @@ public class HealthTracker{
 	}
 	//The method below get exerciseSuggestion based on their 
 	//weight status
-		public String getExerciseSuggestion() {
-			String matchActivities = "";
-			String healthStatus = this.getHealthStatus(getUserBMI());
-			if (healthStatus.contains("under")){
-				matchActivities = "Jogging, squat";
-				return matchActivities;
-			}
-			else if (healthStatus.contains("over")){
-				matchActivities = "Swimming, running";
-				return matchActivities;
-			}
-			else {
-				return "";
-			}
+	public String getExerciseSuggestion() {
+		String matchActivities = "";
+		String healthStatus = this.getHealthStatus(getUserBMI());
+		if (healthStatus.contains("under")){
+			matchActivities = "Jogging, squat";
+			return matchActivities;
+		}
+		else if (healthStatus.contains("over")){
+			matchActivities = "Swimming, running";
+			return matchActivities;
+		}
+		else {
+			return "";
+		}
 	}
-		//get to do list current size
-		public int getToDoSize() {
-			return toDoList.size();
-		}
-		//The method below remove an item from to do list
-		//based on their index in the list
-		public void removeFromToDo(String indexToRemove) {
-			int index = 0;
-			for (Activity a: toDoList) {
-				//Since to do list shows index starts with 1
-				if ((index+1) == Integer.parseInt(indexToRemove)) {
-					/*if this is the right index, remove the 
-					item and change calories consumption accordingly
-					*/
-					toDoList.remove(a);
-					if (a.getType().equals("meal")) {
-						addUserCaloriesConsumption(-1 * a.getCaloriesInfo());
-					}
-					else if (a.getType().equals("exercise")) {
-						addUserCaloriesConsumption(a.getCaloriesInfo());
-					}
-					break;
+	//get to do list current size
+	public int getToDoSize() {
+		return toDoList.size();
+	}
+	//The method below remove an item from to do list
+	//based on their index in the list
+	public void removeFromToDo(String indexToRemove) {
+		int index = 0;
+		for (Activity a: toDoList) {
+			//Since to do list shows index starts with 1
+			if ((index+1) == Integer.parseInt(indexToRemove)) {
+				/*if this is the right index, remove the 
+				item and change calories consumption accordingly
+				*/
+				toDoList.remove(a);
+				if (a.getType().equals("meal")) {
+					addUserCaloriesConsumption(-1 * a.getCaloriesInfo());
 				}
-				index++;
+				else if (a.getType().equals("exercise")) {
+					addUserCaloriesConsumption(a.getCaloriesInfo());
+				}
+				break;
 			}
+			index++;
 		}
-		
+	}	
 }

@@ -107,7 +107,7 @@ public class ApplicationController {
 			this.userWeight = userWeightInput.getText();
 			mainTracker.setUserWeight(this.userWeight);
 
-		    switchScene("Main View");
+		    switchToMainScene();
 			
 		    //If not valid, throw exception
 		} catch (InvalidInputException iie) {
@@ -124,25 +124,23 @@ public class ApplicationController {
     * application function view. It passes data of user inputs (height and weight)
     * from that scene to the main scene also
     */
-    private void switchScene(String view) throws FileNotFoundException, IOException {
-		if (view.equalsIgnoreCase("Main View")) {
-			FXMLLoader loader = new FXMLLoader();
-			VBox root = loader.load(new FileInputStream("src/FXML/ApplicationView.fxml"));
+    private void switchToMainScene() throws FileNotFoundException, IOException {
+		FXMLLoader loader = new FXMLLoader();
+		VBox root = loader.load(new FileInputStream("src/FXML/ApplicationView.fxml"));
 			
-			//The below codes pass data (user's weight and height )between scenes
-			ApplicationController mainController = loader.getController();
+		//The below codes pass data (user's weight and height )between scenes
+		ApplicationController mainController = loader.getController();
 		
-			mainController.userHeight = (String.valueOf(mainTracker.getUserHeight()));
-			mainController.userWeight = (String.valueOf(mainTracker.getUserWeight()));	
-			mainController.userBMI = mainTracker.getUserWeight()/ ((mainTracker.getUserHeight()/100)*(mainTracker.getUserHeight()/100));
+		mainController.userHeight = (String.valueOf(mainTracker.getUserHeight()));
+		mainController.userWeight = (String.valueOf(mainTracker.getUserWeight()));	
+		mainController.userBMI = mainTracker.getUserWeight()/ ((mainTracker.getUserHeight()/100)*(mainTracker.getUserHeight()/100));
 	    	
-			//Switch scene to main application view
-			Scene scene = new Scene(root, 600, 420);
+		//Switch scene to main application view
+		Scene scene = new Scene(root, 600, 420);
 			
-	    	applicationStage.setScene(scene);
-	    	applicationStage.show();
+	    applicationStage.setScene(scene);
+	    applicationStage.show();
 	    	
-		}	
 	}
     
 	/*

@@ -70,11 +70,11 @@ public class Meal extends Activity {
 	public double getProtein() {                                                                     
 		return this.protein;
 	} 
-	public void setProtein(double protein) {//protein per 100g for now
+	protected void setProtein(double protein) {//protein per 100g for now
 
 		this.protein = protein;
 	}
-	public void setMealGroup(String group) {
+	protected void setMealGroup(String group) {
 		this.mealGroup = group;
 	}
 	public String getMealGroup() {

@@ -50,7 +50,7 @@ public class Exercise extends Activity {
 		}
 		return false;
 	}
-	public String toString() {
+   	public String toString() {
 		return "Your activity: " + getCode();
 	}
 }
